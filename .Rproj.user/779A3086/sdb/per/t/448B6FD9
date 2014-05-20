@@ -1,0 +1,16 @@
+{
+    "contents" : "section.slide.cover h2{\n\ttext-shadow: 3px 3px 5px black;\n\tmargin-bottom: 30px;\n\twhite-space: nowrap;  \n  font-size: 100px;\n}\n\nsection.slide.cover h3{\n  color: white;\n  text-shadow:  1px 1px 5px black;\n  font-size: 30px; \n  font-style: italic;\n  text-align: center;\n  margin-top: 250px;\n}\n\nblabla-img {\n  float: right;\n  max-height: 500px;\n  margin-right: 20px;\n  margin-left: 15px;\n  border: solid lightgray 1px;\n  border-radius: 10px;\n  padding: 3px;\n}\n\nq {\n  font-size: 150%;\n  font-style:italic;\n}",
+    "created" : 1400539978305.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "669659126",
+    "id" : "448B6FD9",
+    "lastKnownWriteTime" : 1400542620,
+    "path" : "~/workspace/defense-slides/assets/css/jeroen.css",
+    "project_path" : "assets/css/jeroen.css",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "css"
+}
