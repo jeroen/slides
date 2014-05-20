@@ -1,54 +1,67 @@
 ---
-title: Embedded Scientific Computing
-subtitle: A Scalable,Interoperable and Reproducible Approach toStatistical Software for Business and OpenScience
-author: Jeroen Ooms
-framework: shower
---- .cover #Cover
-
-## Embedded Scientific Computing
-
-![cover](campus.jpg)
-
-### A Scalable, Interoperable and Reproducible Approach to Statistical Software for Data-Driven Business and Open Science
-
-
+title       : Embedded Scientific Computing
+subtitle    : A reliable, scalable and reproducible approach to statistical software for data-driven business and open science
+author      : Jeroen Ooms
+job         : UCLA Statistics
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
 ---
 
 <!-- 
-Sys.setenv(LANG="EN")
 library(slidify)
 library(slidifyLibraries)
 -->
 
-## CRAN packages
+## The changing role of Statistical Software
 
-![total count](totalcount.png)
+<!-- 
+- fundamental change in the way analysis and vizualization methods get implemented 
+- central: observation that field is rapidly changing
+-->
 
-> - Who uses R packages?
-> - Who has created R packages?
-> - Exponential growth
-> - 5000 pkgs on CRAN as of Nov 2013
-> - More on BioConductor, Github, etc.
+![gears](gears.jpg)
+
+### Background and Motivation
+
+> - What and why
+> - Current Developments
+> - Implications for Statisticians
+
+### The Research
+
+> - Identify Problems
+> - Experiment with Approaches
+> - Suggestions and Recommendations
 
 ---
 
-## What is a dependency?
+## Current Developments
 
-```no-highlight
-Package: dplyr
-Type: Package
-Title: dplyr: a grammar of data manipulation
-Version: 0.1.1
-Author: Hadley Wickham <h.wickham@gmail.com>, Romain Francois <romain@r-enthusiasts.com>
-Maintainer: Hadley Wickham <h.wickham@gmail.com>
-Description: A fast, consistent tool for working with data frame like objects, both in
-  memory and out of memory.
-URL: https://github.com/hadley/dplyr
-Depends: R (>= 3.0.2)
-Imports: assertthat, utils, methods, Rcpp
-Suggests: hflights, RSQLite, RSQLite.extfuns, RMySQL, RPostgreSQL, data.table, 
-  bigrquery, testthat, Lahman, knitr, microbenchmark, ggplot2, mgcv
-```
+![datasharing](datasharing.jpg)
+
+### Internet
+ > - Scientific collaboration
+ > - Reproducibility, transparency, eduction
+ > - Data management and scaling
+ > - Browser-based graphics, UI
+ 
+### Growth of the field
+ > - Competition
+ > - Specialization of software
+
+---
+
+
+## What and Why
+
+<!-- 
+- Statistics and statisticians becoming more accessible is accompanied by interoperability of statistical software.
+-->
+
+![datasharing](datasharing.jpg)
+
 
 ---
 
