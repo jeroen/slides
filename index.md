@@ -7,6 +7,7 @@ framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
 widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
 ---
 
 <!-- 
@@ -54,215 +55,149 @@ library(slidifyLibraries)
 ---
 
 
-## What and Why
+## Interoperability
 
 <!-- 
 - Statistics and statisticians becoming more accessible is accompanied by interoperability of statistical software.
 -->
 
-![datasharing](datasharing.jpg)
-
-
----
-
-## Depencency Types:
-
-> - Dependencies between packages: `Depends`, `Imports`, `Suggests`, `Enhances`, `LinkingTo`.
-> - R, Sweave, knitr script depends on package: `library(ggplot2)`
-> - System/application embedded R functionality.
-
-## Dependency Relations
-
-> - Depends
-> - Reverse Depends
-> - Dependency Network (directed graph)
-> - Indirect Dependencies (transitivity)
+ > - Integrate statistical methods in upcoming technology for big data, vizualization
+ > - Develop specialized applications
+ > - Real-time analysis on live data in pipelines
+ > - Internet based data management and sharing
+ > - Online analysis and scientific collaboration
+ > - Transparency and accountability by reproducibility
+ > - Learning and teaching 
 
 ---
 
-## Reverse Dependency Count
+## Embedded Scientific Computing
 
-![reverse count](reversecount.png)
+### Purpose
 
-> - Some popular packages on CRAN
-> - 370 packages depend on MASS (Aug 2012)
-> - Counting recursive dependencies yields a different list (what would be on top?)
+Integrating statistical methods in third party software in a way that is:
 
----
+> - Reliable
+> - Scalable
+> - Practical
 
-## Depenency Conflicts
+### Research
 
-> - DLL Hell (&reg; Microsoft)
-> - R is in the same phase as Windows 98
-> - All dependency relationships are unversioned
-> - This assumes package versions are interchangable.
-> - They are not.
-> - Result: everything constantly breaks due to changes in dependencies.
+> - Identify problems
+> - Experiment with solutions
+> - Suggestions and recommendations
 
 ---
 
-## CRAN Policy
+## The Four Cornerstones
 
-<q> For a package update, please check that any packages depending on this one still pass R CMD check: it is especially expected that you will have checked your own packages. A listing of the reverse dependencies of the current version can be found on the CRAN web page for the package.</q>
+![puzzle](puzzle.jpg)
 
----
+### Core problems:
 
-## Policy Implications
+> - Interfacing statistical methods
+> - Security and resource control
+> - Data interchange
+> - Version management
 
-> - Package author responsible
-> - Basically forbids any breaking changes / refactoring / cleanup
-> - The more reverse dependencies a package accumulates, the harder it gets
-> - Packages accumulating more legacy code
-> - Popular packages get stuck completely
-> - Does not solve the actual problem
+### For each topic:
 
----
-
-## Problems
-
-> - Packages break due to changing dependencies
-> - R/Sweave/Knitr scripts unreliable
-> - Building software on R very difficult
-> - Reproducible research nearly impossible
-
-## Suggested Solutions
-
-> 1. Staged Distributions
-> 2. Versioning Dependency Relations
+> - What?
+> - Why is it a fundamental problem?
+> - Domain specific aspects
+> - My solution
 
 ---
 
-## Staged distributions
+## The Four Cornerstones
 
-![debian](debian.jpg)
+![puzzle](puzzle.jpg)
 
-> - Create software distributions
-> - Introduce a <i>Release Cycle</i>
-> - Ship a "frozen" library
-> - Common in FOSS communities
-> - Examples: GNU/Linux (e.g. Debian), Latex (e.g. MikTeX, TeXLive, etc)
+### Core problems:
 
----
+- <u><b>Interfacing statistical methods</b></u>
+- <u><b>Security and resource control</b></u>
+- Data interchange
+- Version management
 
-## Staging CRAN
+### For each topic:
 
-![logo](logo.png)
-
-> - R already has a release cycle!
-> - R has "release" and "devel" version.
-> - Currently this is limited to "base" and "recommended" packages
-> - Extend the release cycle to CRAN:
-> - Freeze a snapshot of cran for each release
-> - Push package updates only to -devel branch
+- What?
+- Why is it a fundamental problem?
+- Domain specific aspects
+- My solution
 
 ---
 
-## Staging CRAN
+## Security and resource control
 
-### Benefits:
+Most challenging piece
+Most innovative piece
+Solution is simple and very powerful
+Problem: prevent malicious use
 
-> - Every release of R has fixed library of packages
-> - Behavior of a given release of R is unambiguous
-> - Given the version of R, a script should work years later
-> - Pkg authors get freedom to implement breaking changes, cleanup
 
-### Disadvantages
 
-> - More conservative: users have packages that are a few months old.
-> - Requires organization of release cycle.
+## Mandatory Access Control
 
----
+RAppArmor: bindings security methods in `Linux`:
 
-## Versioning Dependency Relations
 
-![logonpm](npm.png)
+```r
+# Set 100M memory limit
+rlimit_as(100 * 1024 * 1024)
 
-> - NPM: JavaScript Community
-> - 60.000 NPM packages
-> - No quality control
-> - Stable development and deployment
-> - How?
+# Set 4 core limit
+rlimit_nproc(4)
 
----
-
-## Dependencies in NPM packages
-
-### Special syntax to declare dependencies:
-
-```no-highlight
-{ "dependencies" :
-  { "foo" : "1.0.0 - 2.9999.9999"
-  , "bar" : ">=1.0.2 <2.1.2"
-  , "baz" : ">1.0.2 <=2.3.4"
-  , "boo" : "2.0.1"
-  , "qux" : "<1.0.0 || >=2.3.1 <2.4.5 || >=2.5.2 <3.0.0"
-  , "asd" : "http://asdf.com/asdf.tar.gz"
-  , "til" : "~1.2"
-  , "elf" : "~1.2.3"
-  , "two" : "2.x"
-  , "thr" : "3.3.x"
-  }
-}
+# apply security profile
+aa_change_profile("my_secure_profile")
 ```
 
+
 ---
 
-## Private library of dependencies
+## Even better
 
-```no-highlight
-jeroen@ubuntu:~/Desktop$ npm install d3
-jeroen@ubuntu:~/Desktop$ npm list
-/home/jeroen/Desktop
-└─┬ d3@2.10.3
-  ├─┬ jsdom@0.2.14
-  │ ├─┬ contextify@0.1.3
-  │ │ └── bindings@1.0.0
-  │ ├── cssom@0.2.5
-  │ ├── htmlparser@1.7.6
-  │ └─┬ request@2.12.0
-  │   ├─┬ form-data@0.0.3
-  │   │ ├── async@0.1.9
-  │   │ └─┬ combined-stream@0.0.3
-  │   │   └── delayed-stream@0.0.5
-  │   └── mime@1.2.7
-  └── sizzle@1.1.0
+
+```r
+#Sandboxed evaluation
+eval.secure({
+  #arbitrary code
+  x <- rnorm(100)
+  mean(x)
+#With restrictions  
+}, profile="my_secure_profile", rlimit_as = 100 * 1024 * 1024, rlimit_nproc = 4)
 ```
 
----
 
-## Back to R
+Dynamic sandboxing with `eval.secure`:
 
-### Versioning dependencies in packages:
-
-```no-highlight
-Depends: ggplot2 ( == 0.9.8), Matrix ( == 1.0-*)
-```
-
-### Versioning dependencies in scripts:
-
-```no-highlight
-library(ggplot2, version="0.9.8")
-library(Matrix, version="1.0-*")
-library(MASS, version="*")
-```
+> 1. Create fork of the current process
+> 2. Apply limits and security profile
+> 3. Evaluate code in fork
+> 4. Retrieve output
+> 5. Kill fork (and children)
 
 ---
 
-## NPM Style Dependencies in R
+## Mandatory Access Control
 
-### Benefits
+### Major benefits for scientific computing
 
-> - Greatly improved reliability, reproduciblity
-> - Low maintenance repositories
+> - No need for complex user-role security policies
+> - Separate security concern from computing concerns
+> - Support for arbitrary code execution
+> - Fine grained control over hardware allocation
+> - Scale up to many users without sacrifing reliability
 
-### Drawbacks
 
-> - Requires support for multiple versions of a package in R session, library and repository.
-> - Support for concurrently loaded package versions requires some major changes in R.
-> - Probably not going to happen any time soon.
 
----
+--
 
-## The end.
+## Interfacing
 
-### Ideas? 
+- Interoperable
+- Separation of concerns
+- HTTP
+- State problem
