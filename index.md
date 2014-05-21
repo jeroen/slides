@@ -111,6 +111,11 @@ Integrating statistical methods in third party software in a way that is:
 
 ## The Four Cornerstones
 
+<!-- 
+First discuss implementation problems
+Then move towards more high level design choices
+-->
+
 ![puzzle](puzzle.jpg)
 
 ### Core problems:
@@ -131,12 +136,41 @@ Integrating statistical methods in third party software in a way that is:
 
 ## Security and resource control
 
-Most challenging piece
-Most innovative piece
-Solution is simple and very powerful
-Problem: prevent malicious use
+> - Most challenging piece
+> - Problem: controlling
+> - Traditional user-role based 
 
+### Domain specific problems:
 
+> - Use role based security infeasible
+> - Need for arbitrary code execution
+> - Control hardware resources
+
+---
+
+## Example security profile
+
+```no-highlight
+profile r-base {
+    #include <abstractions/base>
+    #include <abstractions/nameservice>
+    @{PROC}/[0-9]*/attr/current r,    
+
+    /bin/* rix,
+    /etc/R/* r,
+    /etc/fonts/** mr,
+    /etc/resolv.conf r,
+    /tmp/** rw,
+    /usr/bin/* rix,
+    /usr/lib/R/bin/* rix,
+    /usr/lib{,32,64}/** mr,
+    /usr/lib{,32,64}/R/bin/exec/R rix,
+    /usr/local/lib/R/** mr,
+    /usr/local/share/** mr,
+}
+```
+
+---
 
 ## Mandatory Access Control
 
@@ -144,30 +178,35 @@ RAppArmor: bindings security methods in `Linux`:
 
 
 ```r
-# Set 100M memory limit
-rlimit_as(100 * 1024 * 1024)
+#Set 100M memory limit
+> rlimit_as(100 * 1024 * 1024)
 
-# Set 4 core limit
-rlimit_nproc(4)
+#Set 4 core limit
+> rlimit_nproc(4)
 
-# apply security profile
-aa_change_profile("my_secure_profile")
+#apply security profile
+> aa_change_profile("my_secure_profile")
+
+#not allowed
+> list.files("/")
+character(0)
 ```
 
 
 ---
 
-## Even better
+## Dynamic Sanboxing with eval.secure
 
 
 ```r
 #Sandboxed evaluation
-eval.secure({
+> eval.secure({
   #arbitrary code
-  x <- rnorm(100)
+  x <- rnorm(3)
   mean(x)
 #With restrictions  
 }, profile="my_secure_profile", rlimit_as = 100 * 1024 * 1024, rlimit_nproc = 4)
+[1] 0.01563452
 ```
 
 
@@ -176,7 +215,7 @@ Dynamic sandboxing with `eval.secure`:
 > 1. Create fork of the current process
 > 2. Apply limits and security profile
 > 3. Evaluate code in fork
-> 4. Retrieve output
+> 4. Copy output to parent proc
 > 5. Kill fork (and children)
 
 ---
@@ -190,10 +229,9 @@ Dynamic sandboxing with `eval.secure`:
 > - Support for arbitrary code execution
 > - Fine grained control over hardware allocation
 > - Scale up to many users without sacrifing reliability
+> - Performance overhead neglectible  
 
-
-
---
+---
 
 ## Interfacing
 

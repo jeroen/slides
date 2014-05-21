@@ -189,7 +189,12 @@ library(slidifyLibraries)
     <h2>The Four Cornerstones</h2>
   </hgroup>
   <article data-timings="">
-    <p><img src="puzzle.jpg" alt="puzzle"></p>
+    <!-- 
+First discuss implementation problems
+Then move towards more high level design choices
+-->
+
+<p><img src="puzzle.jpg" alt="puzzle"></p>
 
 <h3>Core problems:</h3>
 
@@ -218,24 +223,19 @@ library(slidifyLibraries)
     <h2>Security and resource control</h2>
   </hgroup>
   <article data-timings="">
-    <p>Most challenging piece
-Most innovative piece
-Solution is simple and very powerful
-Problem: prevent malicious use</p>
+    <ul class = "build incremental">
+<li>Most challenging piece</li>
+<li>Problem: controlling</li>
+<li>Traditional user-role based </li>
+</ul>
 
-<h2>Mandatory Access Control</h2>
+<h3>Domain specific problems:</h3>
 
-<p>RAppArmor: bindings security methods in <code>Linux</code>:</p>
-
-<pre><code class="r"># Set 100M memory limit
-rlimit_as(100 * 1024 * 1024)
-
-# Set 4 core limit
-rlimit_nproc(4)
-
-# apply security profile
-aa_change_profile(&quot;my_secure_profile&quot;)
-</code></pre>
+<ul class = "build incremental">
+<li>Use role based security infeasible</li>
+<li>Need for arbitrary code execution</li>
+<li>Control hardware resources</li>
+</ul>
 
   </article>
   <!-- Presenter Notes -->
@@ -243,16 +243,70 @@ aa_change_profile(&quot;my_secure_profile&quot;)
 
 <slide class="" id="slide-8" style="background:;">
   <hgroup>
-    <h2>Even better</h2>
+    <h2>Example security profile</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="no-highlight">profile r-base {
+    #include &lt;abstractions/base&gt;
+    #include &lt;abstractions/nameservice&gt;
+    @{PROC}/[0-9]*/attr/current r,    
+
+    /bin/* rix,
+    /etc/R/* r,
+    /etc/fonts/** mr,
+    /etc/resolv.conf r,
+    /tmp/** rw,
+    /usr/bin/* rix,
+    /usr/lib/R/bin/* rix,
+    /usr/lib{,32,64}/** mr,
+    /usr/lib{,32,64}/R/bin/exec/R rix,
+    /usr/local/lib/R/** mr,
+    /usr/local/share/** mr,
+}
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Mandatory Access Control</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>RAppArmor: bindings security methods in <code>Linux</code>:</p>
+
+<pre><code class="r">#Set 100M memory limit
+&gt; rlimit_as(100 * 1024 * 1024)
+
+#Set 4 core limit
+&gt; rlimit_nproc(4)
+
+#apply security profile
+&gt; aa_change_profile(&quot;my_secure_profile&quot;)
+
+#not allowed
+&gt; list.files(&quot;/&quot;)
+character(0)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>Dynamic Sanboxing with eval.secure</h2>
   </hgroup>
   <article data-timings="">
     <pre><code class="r">#Sandboxed evaluation
-eval.secure({
+&gt; eval.secure({
   #arbitrary code
-  x &lt;- rnorm(100)
+  x &lt;- rnorm(3)
   mean(x)
 #With restrictions  
 }, profile=&quot;my_secure_profile&quot;, rlimit_as = 100 * 1024 * 1024, rlimit_nproc = 4)
+[1] 0.01563452
 </code></pre>
 
 <p>Dynamic sandboxing with <code>eval.secure</code>:</p>
@@ -261,7 +315,7 @@ eval.secure({
 <li>Create fork of the current process</li>
 <li>Apply limits and security profile</li>
 <li>Evaluate code in fork</li>
-<li>Retrieve output</li>
+<li>Copy output to parent proc</li>
 <li>Kill fork (and children)</li>
 </ol>
 
@@ -269,7 +323,7 @@ eval.secure({
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-9" style="background:;">
+<slide class="" id="slide-11" style="background:;">
   <hgroup>
     <h2>Mandatory Access Control</h2>
   </hgroup>
@@ -282,13 +336,19 @@ eval.secure({
 <li>Support for arbitrary code execution</li>
 <li>Fine grained control over hardware allocation</li>
 <li>Scale up to many users without sacrifing reliability</li>
+<li>Performance overhead neglectible<br></li>
 </ul>
 
-<h2></h2>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
 
-<h2>Interfacing</h2>
-
-<ul>
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Interfacing</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li>Interoperable</li>
 <li>Separation of concerns</li>
 <li>HTTP</li>
@@ -347,7 +407,7 @@ eval.secure({
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=8 title='Even better'>
+        data-slide=8 title='Example security profile'>
          8
       </a>
     </li>
@@ -355,6 +415,24 @@ eval.secure({
       <a href="#" target="_self" rel='tooltip' 
         data-slide=9 title='Mandatory Access Control'>
          9
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=10 title='Dynamic Sanboxing with eval.secure'>
+         10
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=11 title='Mandatory Access Control'>
+         11
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=12 title='Interfacing'>
+         12
       </a>
     </li>
   </ul>
