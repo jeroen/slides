@@ -36,11 +36,12 @@ library(slidifyLibraries)
 > - Experiment with Approaches
 > - Suggestions and Recommendations
 
+
+<!--
 ---
 
 ## Current Developments
 
-![datasharing](datasharing.jpg)
 
 ### Internet
  > - Scientific collaboration
@@ -51,6 +52,8 @@ library(slidifyLibraries)
 ### Growth of the field
  > - Competition
  > - Specialization of software
+ 
+-->
 
 ---
 
@@ -61,12 +64,16 @@ library(slidifyLibraries)
 - Statistics and statisticians becoming more accessible is accompanied by interoperability of statistical software.
 -->
 
- > - Integrate statistical methods in upcoming technology for big data, vizualization
- > - Develop specialized applications
- > - Real-time analysis on live data in pipelines
- > - Internet based data management and sharing
- > - Online analysis and scientific collaboration
- > - Transparency and accountability by reproducibility
+![gears](gears.jpg)
+
+ > - Integrate with upcoming technology 
+ > - Big data, vizualization
+ > - Specialized applications
+ > - Real-time analysis on live data
+ > - Internet based data management
+ > - Web based scientific collaboration
+ > - Online analysis and pipelines
+ > - Transparency and reproducibility
  > - Learning and teaching 
 
 ---
@@ -89,7 +96,7 @@ Integrating statistical methods in third party software in a way that is:
 
 ---
 
-## The Four Cornerstones
+## The Four Chapters
 
 ![puzzle](puzzle.jpg)
 
@@ -109,7 +116,7 @@ Integrating statistical methods in third party software in a way that is:
 
 ---
 
-## The Four Cornerstones
+## The Four Chapters
 
 <!-- 
 First discuss implementation problems
@@ -226,6 +233,105 @@ Dynamic sandboxing with `eval.secure`:
 > - Fine grained control over hardware allocation
 > - Scale up to many users without sacrifing reliability
 > - Performance overhead neglectible  
+
+---
+
+## Data Interchange
+
+> - Formats: `JSON`, `XML`, `Protocol Buffers`, etc
+> - Challenge: defining interface structure
+
+### Traditional Approach
+
+> - Tools to read and manipulate I/O data
+> - Schema's and documentation to define structure
+> - Schema languages don't wory very well for loosely defined structures
+> - Scientific computing languages are generally dynamically typed
+
+---
+
+## Alternative solution
+
+### Direct Mapping R <--> JSON
+
+- Simple conventions we can define a mapping between 
+
+
+
+---
+
+## Examples of JSON <--> R
+
+```{r echo=FALSE}
+library(jsonlite)
+```
+
+```{r eval=FALSE}
+#Random object
+x <- list(foo = matrix(1:8, nrow=2))
+
+#Convert to JSON
+json <- toJSON(x)
+cat(json)
+{ "foo" : [ [ 1, 3, 5, 7 ], [ 2, 4, 6, 8 ] ] }
+
+#Convert back to R
+y <- fromJSON(json)
+all.equal(x,y)
+[1] TRUE
+> print(y)
+$foo
+     [,1] [,2] [,3] [,4]
+[1,]    1    3    5    7
+[2,]    2    4    6    8
+```
+
+---
+
+## Examples of JSON <--> R
+
+```{r eval=FALSE, tidy=FALSE}
+> toJSON(iris[1:2,], pretty=T)
+[
+  {
+		"Sepal.Length" : 5.1,
+		"Sepal.Width" : 3.5,
+		"Petal.Length" : 1.4,
+		"Petal.Width" : 0.2,
+		"Species" : "setosa"
+	},
+	{
+		"Sepal.Length" : 4.9,
+		"Sepal.Width" : 3,
+		"Petal.Length" : 1.4,
+		"Petal.Width" : 0.2,
+		"Species" : "setosa"
+	}
+]
+```
+
+---
+
+## Limitations
+
+```{r eval=FALSE}
+#matrix
+> identical(volcano, fromJSON(toJSON(volcano)))
+[1] TRUE
+
+#data frame
+> identical(cars, fromJSON(toJSON(cars)))
+[1] TRUE
+
+#factors are coersed to strings
+> json <- toJSON(iris)
+> iris2 <- fromJSON(json)
+> all.equal(iris, iris2)
+   Component “Species”: 'current' is not a factor
+> iris2$Species <- as.factor(iris2$Species)
+> all.equal(iris, iris2)
+[1] TRUE
+```
 
 ---
 

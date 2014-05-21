@@ -74,38 +74,29 @@ library(slidifyLibraries)
 <li>Suggestions and Recommendations</li>
 </ul>
 
+<!--
+---
+
+## Current Developments
+
+
+### Internet
+ > - Scientific collaboration
+ > - Reproducibility, transparency, eduction
+ > - Data management and scaling
+ > - Browser-based graphics, UI
+ 
+### Growth of the field
+ > - Competition
+ > - Specialization of software
+ 
+-->
+
   </article>
   <!-- Presenter Notes -->
 </slide>
 
 <slide class="" id="slide-2" style="background:;">
-  <hgroup>
-    <h2>Current Developments</h2>
-  </hgroup>
-  <article data-timings="">
-    <p><img src="datasharing.jpg" alt="datasharing"></p>
-
-<h3>Internet</h3>
-
-<ul class = "build incremental">
-<li>Scientific collaboration</li>
-<li>Reproducibility, transparency, eduction</li>
-<li>Data management and scaling</li>
-<li>Browser-based graphics, UI</li>
-</ul>
-
-<h3>Growth of the field</h3>
-
-<ul class = "build incremental">
-<li>Competition</li>
-<li>Specialization of software</li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-3" style="background:;">
   <hgroup>
     <h2>Interoperability</h2>
   </hgroup>
@@ -114,13 +105,17 @@ library(slidifyLibraries)
 - Statistics and statisticians becoming more accessible is accompanied by interoperability of statistical software.
 -->
 
+<p><img src="gears.jpg" alt="gears"></p>
+
 <ul class = "build incremental">
-<li>Integrate statistical methods in upcoming technology for big data, vizualization</li>
-<li>Develop specialized applications</li>
-<li>Real-time analysis on live data in pipelines</li>
-<li>Internet based data management and sharing</li>
-<li>Online analysis and scientific collaboration</li>
-<li>Transparency and accountability by reproducibility</li>
+<li>Integrate with upcoming technology </li>
+<li>Big data, vizualization</li>
+<li>Specialized applications</li>
+<li>Real-time analysis on live data</li>
+<li>Internet based data management</li>
+<li>Web based scientific collaboration</li>
+<li>Online analysis and pipelines</li>
+<li>Transparency and reproducibility</li>
 <li>Learning and teaching </li>
 </ul>
 
@@ -128,7 +123,7 @@ library(slidifyLibraries)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-4" style="background:;">
+<slide class="" id="slide-3" style="background:;">
   <hgroup>
     <h2>Embedded Scientific Computing</h2>
   </hgroup>
@@ -155,9 +150,9 @@ library(slidifyLibraries)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-5" style="background:;">
+<slide class="" id="slide-4" style="background:;">
   <hgroup>
-    <h2>The Four Cornerstones</h2>
+    <h2>The Four Chapters</h2>
   </hgroup>
   <article data-timings="">
     <p><img src="puzzle.jpg" alt="puzzle"></p>
@@ -184,9 +179,9 @@ library(slidifyLibraries)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-6" style="background:;">
+<slide class="" id="slide-5" style="background:;">
   <hgroup>
-    <h2>The Four Cornerstones</h2>
+    <h2>The Four Chapters</h2>
   </hgroup>
   <article data-timings="">
     <!-- 
@@ -218,7 +213,7 @@ Then move towards more high level design choices
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-7" style="background:;">
+<slide class="" id="slide-6" style="background:;">
   <hgroup>
     <h2>Security and resource control</h2>
   </hgroup>
@@ -241,7 +236,7 @@ Then move towards more high level design choices
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-8" style="background:;">
+<slide class="" id="slide-7" style="background:;">
   <hgroup>
     <h2>Example security profile</h2>
   </hgroup>
@@ -269,7 +264,7 @@ Then move towards more high level design choices
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-9" style="background:;">
+<slide class="" id="slide-8" style="background:;">
   <hgroup>
     <h2>Mandatory Access Control</h2>
   </hgroup>
@@ -294,7 +289,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-10" style="background:;">
+<slide class="" id="slide-9" style="background:;">
   <hgroup>
     <h2>Dynamic Sanboxing with eval.secure</h2>
   </hgroup>
@@ -323,7 +318,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-11" style="background:;">
+<slide class="" id="slide-10" style="background:;">
   <hgroup>
     <h2>Mandatory Access Control</h2>
   </hgroup>
@@ -343,7 +338,128 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>Data Interchange</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul class = "build incremental">
+<li>Formats: <code>JSON</code>, <code>XML</code>, <code>Protocol Buffers</code>, etc</li>
+<li>Challenge: defining interface structure</li>
+</ul>
+
+<h3>Traditional Approach</h3>
+
+<ul class = "build incremental">
+<li>Tools to read and manipulate I/O data</li>
+<li>Schema&#39;s and documentation to define structure</li>
+<li>Schema languages don&#39;t wory very well for loosely defined structures</li>
+<li>Scientific computing languages are generally dynamically typed</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
 <slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Alternative solution</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>Direct Mapping R &lt;--&gt; JSON</h3>
+
+<ul>
+<li>Simple conventions we can define a mapping between </li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Examples of JSON &lt;--&gt; R</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">#Random object
+x &lt;- list(foo = matrix(1:8, nrow=2))
+
+#Convert to JSON
+json &lt;- toJSON(x)
+cat(json)
+{ &quot;foo&quot; : [ [ 1, 3, 5, 7 ], [ 2, 4, 6, 8 ] ] }
+
+#Convert back to R
+y &lt;- fromJSON(json)
+all.equal(x,y)
+[1] TRUE
+&gt; print(y)
+$foo
+     [,1] [,2] [,3] [,4]
+[1,]    1    3    5    7
+[2,]    2    4    6    8
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>Examples of JSON &lt;--&gt; R</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">&gt; toJSON(iris[1:2,], pretty=T)
+[
+  {
+        &quot;Sepal.Length&quot; : 5.1,
+        &quot;Sepal.Width&quot; : 3.5,
+        &quot;Petal.Length&quot; : 1.4,
+        &quot;Petal.Width&quot; : 0.2,
+        &quot;Species&quot; : &quot;setosa&quot;
+    },
+    {
+        &quot;Sepal.Length&quot; : 4.9,
+        &quot;Sepal.Width&quot; : 3,
+        &quot;Petal.Length&quot; : 1.4,
+        &quot;Petal.Width&quot; : 0.2,
+        &quot;Species&quot; : &quot;setosa&quot;
+    }
+]
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Limitations</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">#matrix
+&gt; identical(volcano, fromJSON(toJSON(volcano)))
+[1] TRUE
+
+#data frame
+&gt; identical(cars, fromJSON(toJSON(cars)))
+[1] TRUE
+
+#factors are coersed to strings
+&gt; json &lt;- toJSON(iris)
+&gt; iris2 &lt;- fromJSON(json)
+&gt; all.equal(iris, iris2)
+   Component “Species”: &#39;current&#39; is not a factor
+&gt; iris2$Species &lt;- as.factor(iris2$Species)
+&gt; all.equal(iris, iris2)
+[1] TRUE
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
   <hgroup>
     <h2>Interfacing</h2>
   </hgroup>
@@ -371,68 +487,92 @@ character(0)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='Current Developments'>
+        data-slide=2 title='Interoperability'>
          2
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=3 title='Interoperability'>
+        data-slide=3 title='Embedded Scientific Computing'>
          3
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=4 title='Embedded Scientific Computing'>
+        data-slide=4 title='The Four Chapters'>
          4
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=5 title='The Four Cornerstones'>
+        data-slide=5 title='The Four Chapters'>
          5
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=6 title='The Four Cornerstones'>
+        data-slide=6 title='Security and resource control'>
          6
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=7 title='Security and resource control'>
+        data-slide=7 title='Example security profile'>
          7
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=8 title='Example security profile'>
+        data-slide=8 title='Mandatory Access Control'>
          8
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=9 title='Mandatory Access Control'>
+        data-slide=9 title='Dynamic Sanboxing with eval.secure'>
          9
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=10 title='Dynamic Sanboxing with eval.secure'>
+        data-slide=10 title='Mandatory Access Control'>
          10
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=11 title='Mandatory Access Control'>
+        data-slide=11 title='Data Interchange'>
          11
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=12 title='Interfacing'>
+        data-slide=12 title='Alternative solution'>
          12
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=13 title='Examples of JSON &lt;--&gt; R'>
+         13
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=14 title='Examples of JSON &lt;--&gt; R'>
+         14
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=15 title='Limitations'>
+         15
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=16 title='Interfacing'>
+         16
       </a>
     </li>
   </ul>
