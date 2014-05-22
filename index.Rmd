@@ -44,9 +44,9 @@ library(slidifyLibraries)
 
 ## Definition
 
-![gears](gears.jpg)
-
 ### Embedded Scientific Computing
+
+![gears](gears.jpg)
 
  - Statistical methods as modules
  - Applications, pipelines
@@ -162,7 +162,7 @@ Want to turn academic software into production software
 
 ---
 
-## Research: Four Pillars
+## Research: Four cornerstones
 
 ![puzzle](puzzle.jpg)
 
@@ -182,7 +182,43 @@ Want to turn academic software into production software
 
 ---
 
-## This talk
+## Research: Four cornerstones
+
+![puzzle](puzzle.jpg)
+
+### Core problems:
+
+ 1. Interoperable Interfacing
+ 2. <b>Security and resource control</b>
+ 3. <b>Data Interchange</b>
+ 4. <b>Dependency Versioning</b>
+
+### For each topic:
+
+ - Identify and delineate problem
+ - Domain specific aspects
+ - Approaches
+ - My solution
+
+---
+
+## Research: Four cornerstones
+
+![puzzle](puzzle.jpg)
+
+### Core problems:
+
+ 1. <b>Interoperable Interfacing</b>
+ 2. Security and resource control
+ 3. Data Interchange
+ 4. Dependency Versioning
+
+### For each topic:
+
+ - Identify and delineate problem
+ - Domain specific aspects
+ - Approaches
+ - My solution
 
 ---
 
@@ -206,7 +242,11 @@ Want to turn academic software into production software
 
 ---
 
+## Part 1: Security
 
+![security-dude](security-dude.jpg)
+
+---
 
 ## Security and resource control
 
@@ -409,6 +449,12 @@ $foo
 - HTTP
 - State problem
 
+
+---
+
+![screenshot](screenshot.png)
+
+## Apps
 
 ---
 
