@@ -246,7 +246,7 @@ Want to turn academic software into production software
 
 ![security-dude](security-dude.jpg)
 
-
+---
 
 ## Security and resource control
 
