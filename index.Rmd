@@ -60,7 +60,7 @@ library(slidifyLibraries)
 
 ---
 
-## Interoperability
+## Increasing Need for Interoperability
 
 <!-- 
 - Statistics and statisticians becoming more accessible is accompanied by interoperability of statistical software.
@@ -242,7 +242,7 @@ Want to turn academic software into production software
 
 ---
 
-## Part 1: Security
+## Part 1: Security and Resource Control
 
 ![security-dude](security-dude.jpg)
 
@@ -250,15 +250,51 @@ Want to turn academic software into production software
 
 ## Security and resource control
 
-> - Most challenging piece
-> - Problem: controlling
-> - Traditional user-role based 
+- Most challenging piece
+- Problem: access control
+- Restrict execution environment
+- Prevent malicious use
+- Control hardware resources
+- Critical aspect of scalability
 
-### Domain specific problems:
+---
 
-> - Use role based security infeasible
-> - Need for arbitrary code execution
-> - Control hardware resources
+## User-role security model
+
+![users](users.png)
+
+### Traditional approach
+
+- Define users and privileges
+- Assign privileges per user
+- Require privileges for each possible action.
+- Only allow a limited set of actions
+- Implement all predefined in application layer
+
+### Problematic for statistics
+
+- Limited use for prescripted actions
+- Users want access to full language lexicon
+- User-role systems explode in complexity
+- Does not solve resource control problem
+
+---
+
+## Alternative: Mandatory Access Control
+
+![tux](tux.png)
+
+- Enforce security policies by process
+- No users or user roles
+- More flexibility
+- Available in Linux, BSD (relatively recent)
+
+### AppArmor
+
+- AppArmor: security module in Linux kernel
+- Restrict file-system, capabilities, signals, network traffic, etc
+- Policies defined in a 'profile'
+- Apply profile to any process
 
 ---
 
@@ -322,11 +358,11 @@ character(0)
 
 Dynamic sandboxing with `eval.secure`:
 
-> 1. Create fork of the current process
-> 2. Apply limits and security profile
-> 3. Evaluate code in fork
-> 4. Copy output to parent proc
-> 5. Kill fork (and children)
+ 1. Create fork of the current process
+ 2. Apply limits and security profile
+ 3. Evaluate code in fork
+ 4. Copy output to parent proc
+ 5. Kill fork (and children)
 
 ---
 
@@ -343,27 +379,25 @@ Dynamic sandboxing with `eval.secure`:
 
 ---
 
-## Data Interchange
+## Part 2: Data Interchange
 
-> - Formats: `JSON`, `XML`, `Protocol Buffers`, etc
-> - Challenge: defining interface structure
-
-### Traditional Approach
-
-> - Tools to read and manipulate I/O data
-> - Schema's and documentation to define structure
-> - Schema languages don't wory very well for loosely defined structures
-> - Scientific computing languages are generally dynamically typed
+![data](data.jpg)
 
 ---
 
-## Alternative solution
+## Data Interchange
 
-### Direct Mapping R <--> JSON
+### The problem
 
-- Simple conventions we can define a mapping between 
+ - Various formats: `CSV`, `JSON`, `XML`, `Protocol Buffers`, etc
+ - Challenge: defining interface structure
+ - Schemas? Documentation?
 
+### Solution: direct mapping
 
+- Direct a mapping between `JSON` data and important R classes
+- Simple, yet effective.
+- More natural for dynamic typed languages
 
 ---
 

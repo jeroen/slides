@@ -105,7 +105,7 @@ library(slidifyLibraries)
 
 <slide class="" id="slide-3" style="background:;">
   <hgroup>
-    <h2>Interoperability</h2>
+    <h2>Increasing Need for Interoperability</h2>
   </hgroup>
   <article data-timings="">
     <!-- 
@@ -355,7 +355,7 @@ Want to turn academic software into production software
 
 <slide class="" id="slide-12" style="background:;">
   <hgroup>
-    <h2>Part 1: Security</h2>
+    <h2>Part 1: Security and Resource Control</h2>
   </hgroup>
   <article data-timings="">
     <p><img src="security-dude.jpg" alt="security-dude"></p>
@@ -369,18 +369,13 @@ Want to turn academic software into production software
     <h2>Security and resource control</h2>
   </hgroup>
   <article data-timings="">
-    <ul class = "build incremental">
+    <ul>
 <li>Most challenging piece</li>
-<li>Problem: controlling</li>
-<li>Traditional user-role based </li>
-</ul>
-
-<h3>Domain specific problems:</h3>
-
-<ul class = "build incremental">
-<li>Use role based security infeasible</li>
-<li>Need for arbitrary code execution</li>
+<li>Problem: access control</li>
+<li>Restrict execution environment</li>
+<li>Prevent malicious use</li>
 <li>Control hardware resources</li>
+<li>Critical aspect of scalability</li>
 </ul>
 
   </article>
@@ -388,6 +383,63 @@ Want to turn academic software into production software
 </slide>
 
 <slide class="" id="slide-14" style="background:;">
+  <hgroup>
+    <h2>User-role security model</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="users.png" alt="users"></p>
+
+<h3>Traditional approach</h3>
+
+<ul>
+<li>Define users and privileges</li>
+<li>Assign privileges per user</li>
+<li>Require privileges for each possible action.</li>
+<li>Only allow a limited set of actions</li>
+<li>Implement all predefined in application layer</li>
+</ul>
+
+<h3>Problematic for statistics</h3>
+
+<ul>
+<li>Limited use for prescripted actions</li>
+<li>Users want access to full language lexicon</li>
+<li>User-role systems explode in complexity</li>
+<li>Does not solve resource control problem</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-15" style="background:;">
+  <hgroup>
+    <h2>Alternative: Mandatory Access Control</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="tux.png" alt="tux"></p>
+
+<ul>
+<li>Enforce security policies by process</li>
+<li>No users or user roles</li>
+<li>More flexibility</li>
+<li>Available in Linux, BSD (relatively recent)</li>
+</ul>
+
+<h3>AppArmor</h3>
+
+<ul>
+<li>AppArmor: security module in Linux kernel</li>
+<li>Restrict file-system, capabilities, signals, network traffic, etc</li>
+<li>Policies defined in a &#39;profile&#39;</li>
+<li>Apply profile to any process</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-16" style="background:;">
   <hgroup>
     <h2>Example security profile</h2>
   </hgroup>
@@ -415,7 +467,7 @@ Want to turn academic software into production software
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-15" style="background:;">
+<slide class="" id="slide-17" style="background:;">
   <hgroup>
     <h2>Mandatory Access Control</h2>
   </hgroup>
@@ -440,7 +492,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-16" style="background:;">
+<slide class="" id="slide-18" style="background:;">
   <hgroup>
     <h2>Dynamic Sanboxing with eval.secure</h2>
   </hgroup>
@@ -457,7 +509,7 @@ character(0)
 
 <p>Dynamic sandboxing with <code>eval.secure</code>:</p>
 
-<ol class = "build incremental">
+<ol>
 <li>Create fork of the current process</li>
 <li>Apply limits and security profile</li>
 <li>Evaluate code in fork</li>
@@ -469,7 +521,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-17" style="background:;">
+<slide class="" id="slide-19" style="background:;">
   <hgroup>
     <h2>Mandatory Access Control</h2>
   </hgroup>
@@ -489,45 +541,43 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-18" style="background:;">
+<slide class="" id="slide-20" style="background:;">
+  <hgroup>
+    <h2>Part 2: Data Interchange</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="data.jpg" alt="data"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
   <hgroup>
     <h2>Data Interchange</h2>
   </hgroup>
   <article data-timings="">
-    <ul class = "build incremental">
-<li>Formats: <code>JSON</code>, <code>XML</code>, <code>Protocol Buffers</code>, etc</li>
-<li>Challenge: defining interface structure</li>
-</ul>
-
-<h3>Traditional Approach</h3>
-
-<ul class = "build incremental">
-<li>Tools to read and manipulate I/O data</li>
-<li>Schema&#39;s and documentation to define structure</li>
-<li>Schema languages don&#39;t wory very well for loosely defined structures</li>
-<li>Scientific computing languages are generally dynamically typed</li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-19" style="background:;">
-  <hgroup>
-    <h2>Alternative solution</h2>
-  </hgroup>
-  <article data-timings="">
-    <h3>Direct Mapping R &lt;--&gt; JSON</h3>
+    <h3>The problem</h3>
 
 <ul>
-<li>Simple conventions we can define a mapping between </li>
+<li>Various formats: <code>CSV</code>, <code>JSON</code>, <code>XML</code>, <code>Protocol Buffers</code>, etc</li>
+<li>Challenge: defining interface structure</li>
+<li>Schemas? Documentation?</li>
+</ul>
+
+<h3>Solution: direct mapping</h3>
+
+<ul>
+<li>Direct a mapping between <code>JSON</code> data and important R classes</li>
+<li>Simple, yet effective.</li>
+<li>More natural for dynamic typed languages</li>
 </ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-20" style="background:;">
+<slide class="" id="slide-22" style="background:;">
   <hgroup>
     <h2>Examples of JSON &lt;--&gt; R</h2>
   </hgroup>
@@ -555,7 +605,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-21" style="background:;">
+<slide class="" id="slide-23" style="background:;">
   <hgroup>
     <h2>Examples of JSON &lt;--&gt; R</h2>
   </hgroup>
@@ -583,7 +633,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-22" style="background:;">
+<slide class="" id="slide-24" style="background:;">
   <hgroup>
     <h2>Limitations</h2>
   </hgroup>
@@ -610,7 +660,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-23" style="background:;">
+<slide class="" id="slide-25" style="background:;">
   <hgroup>
     <h2>Interfacing</h2>
   </hgroup>
@@ -626,7 +676,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-24" style="background:;">
+<slide class="" id="slide-26" style="background:;">
   <article data-timings="">
     <p><img src="screenshot.png" alt="screenshot"></p>
 
@@ -636,7 +686,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-25" style="background:;">
+<slide class="" id="slide-27" style="background:;">
   <hgroup>
     <h1>Conclusion</h1>
   </hgroup>
@@ -669,7 +719,7 @@ $foo
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=3 title='Interoperability'>
+        data-slide=3 title='Increasing Need for Interoperability'>
          3
       </a>
     </li>
@@ -723,7 +773,7 @@ $foo
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=12 title='Part 1: Security'>
+        data-slide=12 title='Part 1: Security and Resource Control'>
          12
       </a>
     </li>
@@ -735,19 +785,19 @@ $foo
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=14 title='Example security profile'>
+        data-slide=14 title='User-role security model'>
          14
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=15 title='Mandatory Access Control'>
+        data-slide=15 title='Alternative: Mandatory Access Control'>
          15
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=16 title='Dynamic Sanboxing with eval.secure'>
+        data-slide=16 title='Example security profile'>
          16
       </a>
     </li>
@@ -759,50 +809,62 @@ $foo
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=18 title='Data Interchange'>
+        data-slide=18 title='Dynamic Sanboxing with eval.secure'>
          18
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=19 title='Alternative solution'>
+        data-slide=19 title='Mandatory Access Control'>
          19
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=20 title='Examples of JSON &lt;--&gt; R'>
+        data-slide=20 title='Part 2: Data Interchange'>
          20
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=21 title='Examples of JSON &lt;--&gt; R'>
+        data-slide=21 title='Data Interchange'>
          21
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=22 title='Limitations'>
+        data-slide=22 title='Examples of JSON &lt;--&gt; R'>
          22
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=23 title='Interfacing'>
+        data-slide=23 title='Examples of JSON &lt;--&gt; R'>
          23
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=24 title=''>
+        data-slide=24 title='Limitations'>
          24
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=25 title='Conclusion'>
+        data-slide=25 title='Interfacing'>
          25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title=''>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='Conclusion'>
+         27
       </a>
     </li>
   </ul>
