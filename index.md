@@ -168,10 +168,10 @@ Want to turn academic software into production software
 
 ### Core problems:
 
-> - Interoperable Interfacing
-> - Security and resource control
-> - Data Interchange
-> - Dependency Versioning
+> 1. Interoperable Interfacing
+> 2. Security and resource control
+> 3. Data Interchange
+> 4. Dependency Versioning
 
 ### For each topic:
 
@@ -182,30 +182,31 @@ Want to turn academic software into production software
 
 ---
 
-## The Four Chapters
-
-<!-- 
-First discuss implementation problems
-Then move towards more high level design choices
--->
-
-![puzzle](puzzle.jpg)
-
-### Core problems:
-
-- <u><b>Interfacing statistical methods</b></u>
-- <u><b>Security and resource control</b></u>
-- Data interchange
-- Version management
-
-### For each topic:
-
-- What?
-- Why is it a fundamental problem?
-- Domain specific aspects
-- My solution
+## This talk
 
 ---
+
+## About R
+
+![rlogo](logo.png)
+
+ - Mature, reliable, flexible
+ - Lingua franca, de-facto standard
+ - Experiences mostly with R
+ - Problems and solutions illustrated in R
+
+### However
+
+ - Purpose is not merely to develop software
+ - Thesis describes general logic of computing
+ - Same problems will appear in other languages
+ - Similar techniques will work for Matlab, Julia, Python
+ - But to study the software, we need an implementation
+ 
+
+---
+
+
 
 ## Security and resource control
 

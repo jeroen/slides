@@ -247,12 +247,12 @@ Want to turn academic software into production software
 
 <h3>Core problems:</h3>
 
-<ul class = "build incremental">
+<ol class = "build incremental">
 <li>Interoperable Interfacing</li>
 <li>Security and resource control</li>
 <li>Data Interchange</li>
 <li>Dependency Versioning</li>
-</ul>
+</ol>
 
 <h3>For each topic:</h3>
 
@@ -269,39 +269,43 @@ Want to turn academic software into production software
 
 <slide class="" id="slide-9" style="background:;">
   <hgroup>
-    <h2>The Four Chapters</h2>
+    <h2>This talk</h2>
   </hgroup>
   <article data-timings="">
-    <!-- 
-First discuss implementation problems
-Then move towards more high level design choices
--->
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
 
-<p><img src="puzzle.jpg" alt="puzzle"></p>
-
-<h3>Core problems:</h3>
+<slide class="" id="slide-10" style="background:;">
+  <hgroup>
+    <h2>About R</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="logo.png" alt="rlogo"></p>
 
 <ul>
-<li><u><b>Interfacing statistical methods</b></u></li>
-<li><u><b>Security and resource control</b></u></li>
-<li>Data interchange</li>
-<li>Version management</li>
+<li>Mature, reliable, flexible</li>
+<li>Lingua franca, de-facto standard</li>
+<li>Experiences mostly with R</li>
+<li>Problems and solutions illustrated in R</li>
 </ul>
 
-<h3>For each topic:</h3>
+<h3>However</h3>
 
 <ul>
-<li>What?</li>
-<li>Why is it a fundamental problem?</li>
-<li>Domain specific aspects</li>
-<li>My solution</li>
+<li>Purpose is not merely to develop software</li>
+<li>Thesis describes general logic of computing</li>
+<li>Same problems will appear in other languages</li>
+<li>Similar techniques will work for Matlab, Julia, Python</li>
+<li>But to study the software, we need an implementation</li>
 </ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-10" style="background:;">
+<slide class="" id="slide-11" style="background:;">
   <hgroup>
     <h2>Security and resource control</h2>
   </hgroup>
@@ -324,7 +328,7 @@ Then move towards more high level design choices
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-11" style="background:;">
+<slide class="" id="slide-12" style="background:;">
   <hgroup>
     <h2>Example security profile</h2>
   </hgroup>
@@ -352,7 +356,7 @@ Then move towards more high level design choices
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-12" style="background:;">
+<slide class="" id="slide-13" style="background:;">
   <hgroup>
     <h2>Mandatory Access Control</h2>
   </hgroup>
@@ -377,7 +381,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-13" style="background:;">
+<slide class="" id="slide-14" style="background:;">
   <hgroup>
     <h2>Dynamic Sanboxing with eval.secure</h2>
   </hgroup>
@@ -406,7 +410,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-14" style="background:;">
+<slide class="" id="slide-15" style="background:;">
   <hgroup>
     <h2>Mandatory Access Control</h2>
   </hgroup>
@@ -426,7 +430,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-15" style="background:;">
+<slide class="" id="slide-16" style="background:;">
   <hgroup>
     <h2>Data Interchange</h2>
   </hgroup>
@@ -449,7 +453,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-16" style="background:;">
+<slide class="" id="slide-17" style="background:;">
   <hgroup>
     <h2>Alternative solution</h2>
   </hgroup>
@@ -464,7 +468,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-17" style="background:;">
+<slide class="" id="slide-18" style="background:;">
   <hgroup>
     <h2>Examples of JSON &lt;--&gt; R</h2>
   </hgroup>
@@ -492,7 +496,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-18" style="background:;">
+<slide class="" id="slide-19" style="background:;">
   <hgroup>
     <h2>Examples of JSON &lt;--&gt; R</h2>
   </hgroup>
@@ -520,7 +524,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-19" style="background:;">
+<slide class="" id="slide-20" style="background:;">
   <hgroup>
     <h2>Limitations</h2>
   </hgroup>
@@ -547,7 +551,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-20" style="background:;">
+<slide class="" id="slide-21" style="background:;">
   <hgroup>
     <h2>Interfacing</h2>
   </hgroup>
@@ -563,7 +567,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-21" style="background:;">
+<slide class="" id="slide-22" style="background:;">
   <hgroup>
     <h1>Conclusion</h1>
   </hgroup>
@@ -632,55 +636,55 @@ $foo
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=9 title='The Four Chapters'>
+        data-slide=9 title='This talk'>
          9
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=10 title='Security and resource control'>
+        data-slide=10 title='About R'>
          10
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=11 title='Example security profile'>
+        data-slide=11 title='Security and resource control'>
          11
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=12 title='Mandatory Access Control'>
+        data-slide=12 title='Example security profile'>
          12
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=13 title='Dynamic Sanboxing with eval.secure'>
+        data-slide=13 title='Mandatory Access Control'>
          13
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=14 title='Mandatory Access Control'>
+        data-slide=14 title='Dynamic Sanboxing with eval.secure'>
          14
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=15 title='Data Interchange'>
+        data-slide=15 title='Mandatory Access Control'>
          15
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=16 title='Alternative solution'>
+        data-slide=16 title='Data Interchange'>
          16
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=17 title='Examples of JSON &lt;--&gt; R'>
+        data-slide=17 title='Alternative solution'>
          17
       </a>
     </li>
@@ -692,20 +696,26 @@ $foo
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=19 title='Limitations'>
+        data-slide=19 title='Examples of JSON &lt;--&gt; R'>
          19
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=20 title='Interfacing'>
+        data-slide=20 title='Limitations'>
          20
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=21 title='Conclusion'>
+        data-slide=21 title='Interfacing'>
          21
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=22 title='Conclusion'>
+         22
       </a>
     </li>
   </ul>
