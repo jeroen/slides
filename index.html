@@ -49,54 +49,61 @@ library(slidify)
 library(slidifyLibraries)
 -->
 
-<h2>The changing role of Statistical Software</h2>
-
 <!-- 
 - fundamental change in the way analysis and vizualization methods get implemented 
 - central: observation that field is rapidly changing
+- traditions based on history. Old field, this works, rise of internet has gone unnoticed.
 -->
 
-<p><img src="gears.jpg" alt="gears"></p>
+<h2>Definition</h2>
 
-<h3>Background and Motivation</h3>
+<h3>Statistical Software as we know it:</h3>
 
-<ul class = "build incremental">
-<li>What and why</li>
-<li>Current Developments</li>
-<li>Implications for Statisticians</li>
+<ul>
+<li>Emphasis on UI</li>
+<li>Interactive</li>
+<li>Local machine</li>
+<li>Single-user</li>
+<li>Trial-and-error</li>
+<li>Copy/paste results</li>
+<li>Inventive, experimental, volatile</li>
 </ul>
-
-<h3>The Research</h3>
-
-<ul class = "build incremental">
-<li>Identify Problems</li>
-<li>Experiment with Approaches</li>
-<li>Suggestions and Recommendations</li>
-</ul>
-
-<!--
----
-
-## Current Developments
-
-
-### Internet
- > - Scientific collaboration
- > - Reproducibility, transparency, eduction
- > - Data management and scaling
- > - Browser-based graphics, UI
- 
-### Growth of the field
- > - Competition
- > - Specialization of software
- 
--->
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
 <slide class="" id="slide-2" style="background:;">
+  <article data-timings="">
+    <!-- 
+- still useful, but also need for:
+- shift to, more emphasis on
+- not black and white, different emphasis
+-->
+
+<h2>Definition</h2>
+
+<p><img src="gears.jpg" alt="gears"></p>
+
+<h3>Embedded Scientific Computing</h3>
+
+<ul>
+<li>Statistical methods as modules</li>
+<li>Applications, pipelines</li>
+<li>Integration</li>
+<li>Interoperability</li>
+<li>Interdisciplinary</li>
+<li>UI &gt; API</li>
+<li>Component Based Engineering</li>
+<li>Separation of Concerns</li>
+<li>Scaling</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
   <hgroup>
     <h2>Interoperability</h2>
   </hgroup>
@@ -107,7 +114,7 @@ library(slidifyLibraries)
 
 <p><img src="gears.jpg" alt="gears"></p>
 
-<ul class = "build incremental">
+<ul>
 <li>Integrate with upcoming technology </li>
 <li>Big data, vizualization</li>
 <li>Specialized applications</li>
@@ -123,7 +130,90 @@ library(slidifyLibraries)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-3" style="background:;">
+<slide class="" id="slide-4" style="background:;">
+  <article data-timings="">
+    <!-- 
+- ggplot2 gui got lots of attention, still mailing about that
+-->
+
+<h2>Motivation</h2>
+
+<h3>How it started</h3>
+
+<p><a href="http://vps.stefvanbuuren.nl/puberty" title="Link"><img src="puberty_small.png" alt="puberty"></a></p>
+
+<ul>
+<li>Basic R webapps in 2008/2009</li>
+<li>Simple but very effective </li>
+<li>Did some more applictions</li>
+<li>Lots of interest</li>
+<li>Bunch of consluting</li>
+<li>GSR for Mobilize</li>
+<li class = '..</li>
+</ul>
+
+ '></article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <article data-timings="">
+    <!-- 
+- anecdote: ggplot2 webapp server crash
+- anecdote: lme4 server keeps getting stuck
+- anecdote: very hard to train people to do this
+Want to turn academic software into production software
+-->
+
+<h2>Motivation</h2>
+
+<h3>Problems</h3>
+
+<ul>
+<li>Unstable (lme4)</li>
+<li>Dependency problems (ggplot2)</li>
+<li>High coupling</li>
+<li>Unsustainable complexity</li>
+<li>Collaboration difficult</li>
+<li>Interdisciplinary disconnect</li>
+<li>Conclusion: doesn&#39;t scale</li>
+<li>Much more difficult than it looks</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <article data-timings="">
+    <!-- 
+- This is actually very difficult.
+- Needs more research
+- problems are underteremined, and complexity is underestimated
+- What are application specific annoyances, and what are core problems?
+-->
+
+<h2>Approach: OpenCPU</h2>
+
+<p><img src="cloudicon.jpg" alt="cloudicon"></p>
+
+<ul>
+<li>Find recurring struggles</li>
+<li>Distill fundamental problems</li>
+<li>Develop general purpose software system</li>
+<li>Solve &#39;hard&#39; problems, and nothing else</li>
+<li>Simple, flexible, extensible</li>
+<li>Language/application agnostic</li>
+<li>Iterative development through trial and error</li>
+<li>Software itself is subject of study</li>
+<li>Pragmatic solutions</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
   <hgroup>
     <h2>Embedded Scientific Computing</h2>
   </hgroup>
@@ -150,7 +240,7 @@ library(slidifyLibraries)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-4" style="background:;">
+<slide class="" id="slide-8" style="background:;">
   <hgroup>
     <h2>The Four Chapters</h2>
   </hgroup>
@@ -179,7 +269,7 @@ library(slidifyLibraries)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-5" style="background:;">
+<slide class="" id="slide-9" style="background:;">
   <hgroup>
     <h2>The Four Chapters</h2>
   </hgroup>
@@ -213,7 +303,7 @@ Then move towards more high level design choices
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-6" style="background:;">
+<slide class="" id="slide-10" style="background:;">
   <hgroup>
     <h2>Security and resource control</h2>
   </hgroup>
@@ -236,7 +326,7 @@ Then move towards more high level design choices
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-7" style="background:;">
+<slide class="" id="slide-11" style="background:;">
   <hgroup>
     <h2>Example security profile</h2>
   </hgroup>
@@ -264,7 +354,7 @@ Then move towards more high level design choices
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-8" style="background:;">
+<slide class="" id="slide-12" style="background:;">
   <hgroup>
     <h2>Mandatory Access Control</h2>
   </hgroup>
@@ -289,7 +379,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-9" style="background:;">
+<slide class="" id="slide-13" style="background:;">
   <hgroup>
     <h2>Dynamic Sanboxing with eval.secure</h2>
   </hgroup>
@@ -318,7 +408,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-10" style="background:;">
+<slide class="" id="slide-14" style="background:;">
   <hgroup>
     <h2>Mandatory Access Control</h2>
   </hgroup>
@@ -338,7 +428,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-11" style="background:;">
+<slide class="" id="slide-15" style="background:;">
   <hgroup>
     <h2>Data Interchange</h2>
   </hgroup>
@@ -361,7 +451,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-12" style="background:;">
+<slide class="" id="slide-16" style="background:;">
   <hgroup>
     <h2>Alternative solution</h2>
   </hgroup>
@@ -376,7 +466,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-13" style="background:;">
+<slide class="" id="slide-17" style="background:;">
   <hgroup>
     <h2>Examples of JSON &lt;--&gt; R</h2>
   </hgroup>
@@ -404,7 +494,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-14" style="background:;">
+<slide class="" id="slide-18" style="background:;">
   <hgroup>
     <h2>Examples of JSON &lt;--&gt; R</h2>
   </hgroup>
@@ -432,7 +522,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-15" style="background:;">
+<slide class="" id="slide-19" style="background:;">
   <hgroup>
     <h2>Limitations</h2>
   </hgroup>
@@ -459,7 +549,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-16" style="background:;">
+<slide class="" id="slide-20" style="background:;">
   <hgroup>
     <h2>Interfacing</h2>
   </hgroup>
@@ -469,6 +559,21 @@ $foo
 <li>Separation of concerns</li>
 <li>HTTP</li>
 <li>State problem</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-21" style="background:;">
+  <hgroup>
+    <h1>Conclusion</h1>
+  </hgroup>
+  <article data-timings="">
+    <ul class = "build incremental">
+<li>Build applications</li>
+<li>Collaborative</li>
+<li>Hope to contribute to socializing data analysis</li>
 </ul>
 
   </article>
@@ -487,92 +592,122 @@ $foo
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='Interoperability'>
+        data-slide=2 title=''>
          2
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=3 title='Embedded Scientific Computing'>
+        data-slide=3 title='Interoperability'>
          3
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=4 title='The Four Chapters'>
+        data-slide=4 title=''>
          4
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=5 title='The Four Chapters'>
+        data-slide=5 title=''>
          5
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=6 title='Security and resource control'>
+        data-slide=6 title=''>
          6
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=7 title='Example security profile'>
+        data-slide=7 title='Embedded Scientific Computing'>
          7
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=8 title='Mandatory Access Control'>
+        data-slide=8 title='The Four Chapters'>
          8
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=9 title='Dynamic Sanboxing with eval.secure'>
+        data-slide=9 title='The Four Chapters'>
          9
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=10 title='Mandatory Access Control'>
+        data-slide=10 title='Security and resource control'>
          10
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=11 title='Data Interchange'>
+        data-slide=11 title='Example security profile'>
          11
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=12 title='Alternative solution'>
+        data-slide=12 title='Mandatory Access Control'>
          12
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=13 title='Examples of JSON &lt;--&gt; R'>
+        data-slide=13 title='Dynamic Sanboxing with eval.secure'>
          13
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=14 title='Examples of JSON &lt;--&gt; R'>
+        data-slide=14 title='Mandatory Access Control'>
          14
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=15 title='Limitations'>
+        data-slide=15 title='Data Interchange'>
          15
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=16 title='Interfacing'>
+        data-slide=16 title='Alternative solution'>
          16
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=17 title='Examples of JSON &lt;--&gt; R'>
+         17
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=18 title='Examples of JSON &lt;--&gt; R'>
+         18
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=19 title='Limitations'>
+         19
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=20 title='Interfacing'>
+         20
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=21 title='Conclusion'>
+         21
       </a>
     </li>
   </ul>

@@ -15,48 +15,50 @@ library(slidify)
 library(slidifyLibraries)
 -->
 
-## The changing role of Statistical Software
-
 <!-- 
 - fundamental change in the way analysis and vizualization methods get implemented 
 - central: observation that field is rapidly changing
+- traditions based on history. Old field, this works, rise of internet has gone unnoticed.
 -->
+
+
+## Definition
+
+### Statistical Software as we know it:
+
+ - Emphasis on UI
+ - Interactive
+ - Local machine
+ - Single-user
+ - Trial-and-error
+ - Copy/paste results
+ - Inventive, experimental, volatile
+
+---
+
+<!-- 
+- still useful, but also need for:
+- shift to, more emphasis on
+- not black and white, different emphasis
+-->
+
+## Definition
 
 ![gears](gears.jpg)
 
-### Background and Motivation
+### Embedded Scientific Computing
 
-> - What and why
-> - Current Developments
-> - Implications for Statisticians
-
-### The Research
-
-> - Identify Problems
-> - Experiment with Approaches
-> - Suggestions and Recommendations
-
-
-<!--
----
-
-## Current Developments
-
-
-### Internet
- > - Scientific collaboration
- > - Reproducibility, transparency, eduction
- > - Data management and scaling
- > - Browser-based graphics, UI
- 
-### Growth of the field
- > - Competition
- > - Specialization of software
- 
--->
+ - Statistical methods as modules
+ - Applications, pipelines
+ - Integration
+ - Interoperability
+ - Interdisciplinary
+ - UI > API
+ - Component Based Engineering
+ - Separation of Concerns
+ - Scaling
 
 ---
-
 
 ## Interoperability
 
@@ -66,17 +68,84 @@ library(slidifyLibraries)
 
 ![gears](gears.jpg)
 
- > - Integrate with upcoming technology 
- > - Big data, vizualization
- > - Specialized applications
- > - Real-time analysis on live data
- > - Internet based data management
- > - Web based scientific collaboration
- > - Online analysis and pipelines
- > - Transparency and reproducibility
- > - Learning and teaching 
+  - Integrate with upcoming technology 
+  - Big data, vizualization
+  - Specialized applications
+  - Real-time analysis on live data
+  - Internet based data management
+  - Web based scientific collaboration
+  - Online analysis and pipelines
+  - Transparency and reproducibility
+  - Learning and teaching 
 
 ---
+
+<!-- 
+- ggplot2 gui got lots of attention, still mailing about that
+-->
+
+## Motivation
+
+### How it started
+
+[![puberty](puberty_small.png)](http://vps.stefvanbuuren.nl/puberty "Link")
+
+- Basic R webapps in 2008/2009
+- Simple but very effective 
+- Did some more applictions
+- Lots of interest
+- Bunch of consluting
+- GSR for Mobilize
+- ...
+
+---
+
+<!-- 
+- anecdote: ggplot2 webapp server crash
+- anecdote: lme4 server keeps getting stuck
+- anecdote: very hard to train people to do this
+Want to turn academic software into production software
+-->
+
+## Motivation
+
+### Problems
+
+- Unstable (lme4)
+- Dependency problems (ggplot2)
+- High coupling
+- Unsustainable complexity
+- Collaboration difficult
+- Interdisciplinary disconnect
+- Conclusion: doesn't scale
+- Fundamental unsolved problems
+
+---
+
+<!-- 
+- This is actually very difficult.
+- Needs more research
+- problems are underteremined, and complexity is underestimated
+- What are application specific annoyances, and what are core problems?
+-->
+
+
+## Approach: OpenCPU
+
+![cloudicon](cloudicon.jpg)
+
+- Find recurring struggles
+- Distill fundamental problems
+- Develop general purpose software system
+- Solve 'hard' problems, and nothing else
+- Simple, flexible, extensible
+- Language/application agnostic
+- Iterative development through trial and error
+- Software itself is subject of study
+- Pragmatic solutions
+
+---
+
 
 ## Embedded Scientific Computing
 
@@ -341,3 +410,12 @@ $foo
 - Separation of concerns
 - HTTP
 - State problem
+
+
+---
+
+# Conclusion
+
+> - Build applications
+> - Collaborative
+> - Hope to contribute to socializing data analysis
