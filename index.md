@@ -118,7 +118,7 @@ Want to turn academic software into production software
 - Collaboration difficult
 - Interdisciplinary disconnect
 - Conclusion: doesn't scale
-- Much more difficult than it looks
+- Fundamental unsolved problems
 
 ---
 
@@ -130,12 +130,27 @@ Want to turn academic software into production software
 -->
 
 
+## Research Goal
+
+### Integrated Statistical Software that is:
+
+ - Reliable
+ - Scalable
+ - Practical
+
+### To do so:
+
+- Find recurring struggles
+- Distill fundamental problems
+- Identify core logic
+- Experiment with solutions
+
+---
+
 ## Approach: OpenCPU
 
 ![cloudicon](cloudicon.jpg)
 
-- Find recurring struggles
-- Distill fundamental problems
 - Develop general purpose software system
 - Solve 'hard' problems, and nothing else
 - Simple, flexible, extensible
@@ -143,44 +158,26 @@ Want to turn academic software into production software
 - Iterative development through trial and error
 - Software itself is subject of study
 - Pragmatic solutions
+- Proof of concept implementation
 
 ---
 
-
-## Embedded Scientific Computing
-
-### Purpose
-
-Integrating statistical methods in third party software in a way that is:
-
-> - Reliable
-> - Scalable
-> - Practical
-
-### Research
-
-> - Identify problems
-> - Experiment with solutions
-> - Suggestions and recommendations
-
----
-
-## The Four Chapters
+## Research: Four Pillars
 
 ![puzzle](puzzle.jpg)
 
 ### Core problems:
 
-> - Interfacing statistical methods
+> - Interoperable Interfacing
 > - Security and resource control
-> - Data interchange
-> - Version management
+> - Data Interchange
+> - Dependency Versioning
 
 ### For each topic:
 
-> - What?
-> - Why is it a fundamental problem?
+> - Identify and delineate problem
 > - Domain specific aspects
+> - Approaches
 > - My solution
 
 ---
