@@ -22,7 +22,7 @@ library(slidifyLibraries)
 -->
 
 
-## Definition
+## Context
 
 ### Statistical Software as we know it:
 
@@ -42,11 +42,9 @@ library(slidifyLibraries)
 - not black and white, different emphasis
 -->
 
-## Definition
+## Embedded Scientific Computing
 
-### Embedded Scientific Computing
-
-![gears](gears.jpg)
+![gears1](gears.jpg)
 
  - Statistical methods as modules
  - Applications, pipelines
@@ -62,11 +60,12 @@ library(slidifyLibraries)
 
 ## Increasing Need for Interoperability
 
+![gears2](gears.jpg)
+
 <!-- 
 - Statistics and statisticians becoming more accessible is accompanied by interoperability of statistical software.
 -->
 
-![gears](gears.jpg)
 
   - Integrate with upcoming technology 
   - Big data, vizualization
@@ -228,6 +227,7 @@ Want to turn academic software into production software
 
  - Mature, reliable, flexible
  - Lingua franca, de-facto standard
+ - Big community
  - Experiences mostly with R
  - Problems and solutions illustrated in R
 
@@ -250,7 +250,10 @@ Want to turn academic software into production software
 
 ## Security and resource control
 
+### The problem
+
 - Most challenging piece
+- UI > API transition
 - Problem: access control
 - Restrict execution environment
 - Prevent malicious use
@@ -540,7 +543,19 @@ Reason for technical problem is cultural
 
 ---
 
-## Interfacing
+## Part 4: The OpenCPU system
+
+![opencpu_website](opencpu_website.png)
+
+---
+
+## Interface
+
+### Interoperability
+
+-API 
+- HTTP
+and Interfacing
 
 - Interoperable
 - Separation of concerns
