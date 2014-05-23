@@ -370,12 +370,12 @@ Dynamic sandboxing with `eval.secure`:
 
 ### Major benefits for scientific computing
 
-> - No need for complex user-role security policies
-> - Separate security concern from computing concerns
-> - Support for arbitrary code execution
-> - Fine grained control over hardware allocation
-> - Scale up to many users without sacrifing reliability
-> - Performance overhead neglectible  
+ - No need for complex user-role security policies
+ - Separate security concern from computing concerns
+ - Support for arbitrary code execution
+ - Fine grained control over hardware allocation
+ - Scale up to many users without sacrifing reliability
+ - Performance overhead neglectible  
 
 ---
 
@@ -473,6 +473,70 @@ $foo
 > all.equal(iris, iris2)
 [1] TRUE
 ```
+
+---
+
+## Part 3: Dependency Management
+
+![cran_network](social_network.png)
+
+---
+
+## What is a dependency?
+
+```no-highlight
+Package: dplyr
+Type: Package
+Title: dplyr: a grammar of data manipulation
+Version: 0.1.1
+Author: Hadley Wickham <h.wickham@gmail.com>, Romain Francois <romain@r-enthusiasts.com>
+Maintainer: Hadley Wickham <h.wickham@gmail.com>
+Description: A fast, consistent tool for working with data frame like objects, both in
+  memory and out of memory.
+URL: https://github.com/hadley/dplyr
+Depends: R (>= 3.0.2)
+Imports: assertthat, utils, methods, Rcpp
+Suggests: hflights, RSQLite, RSQLite.extfuns, RMySQL, RPostgreSQL, data.table, 
+  bigrquery, testthat, Lahman, knitr, microbenchmark, ggplot2, mgcv
+```
+
+---
+
+## Depencency Types:
+
+ - Dependencies between packages: `Depends`, `Imports`, `Suggests`, `Enhances`, `LinkingTo`.
+ - R, Sweave, knitr script depends on package: `library(ggplot2)`
+ - System/application embedded R functionality.
+
+## Dependency Relations
+
+ - Depends
+ - Reverse Depends
+ - Dependency Network (directed graph)
+ - Indirect Dependencies (transitivity)
+
+---
+
+<!--
+Unique: technical problem, but also a social problem
+Reason for technical problem is cultural
+-->
+
+## Dependency Versioning
+
+![totalcount](totalcount.png)
+
+- Problem: versioning dependencies
+- Current policies unsustainable
+- Leads to unstable software
+- Irreproducible results
+
+### Challenges
+
+- Cannot be solved downstream
+- Requires community to modernizing practices
+- I try to make a case for moving to a better dependency system 
+- Turns out to be challenging :-)
 
 ---
 
