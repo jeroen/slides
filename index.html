@@ -765,10 +765,10 @@ Reason for technical problem is cultural
 
 <slide class="" id="slide-30" style="background:;">
   <hgroup>
-    <h2>Interfacing</h2>
+    <h2>Language bridges to R</h2>
   </hgroup>
   <article data-timings="">
-    <h3>Language bridges to R</h3>
+    <p>Bridges to R are available for all popular languages and environments:</p>
 
 <ul>
 <li>RInside (C++)</li>
@@ -778,9 +778,10 @@ Reason for technical problem is cultural
 <li>rApache </li>
 <li>littler </li>
 <li>RServe (socket)</li>
+<li>RDCOM (windows, excel)</li>
 </ul>
 
-<p>However, limited success.</p>
+<p>However, they have limited success.</p>
 
   </article>
   <!-- Presenter Notes -->
@@ -788,20 +789,24 @@ Reason for technical problem is cultural
 
 <slide class="" id="slide-31" style="background:;">
   <hgroup>
-    <h2>Interfacing</h2>
+    <h2>The problem with language bridges</h2>
   </hgroup>
   <article data-timings="">
-    <h3>Why HTTP</h3>
+    <p>An hello-world example from the <code>rserve</code> manual:</p>
+
+<pre><code class="java">RConnection c = new RConnection();
+double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
+</code></pre>
 
 <ul>
-<li>Interoperable</li>
-<li>Many features get buit-in by design</li>
-</ul>
-
-<h2>- Clients widely available</h2>
-
-<ul>
-<li></li>
+<li>Client needs to generate R syntax</li>
+<li>Client needs to read/manipulate interal R data types</li>
+<li>Client needs to manage R processes</li>
+<li>Limited exception handling</li>
+<li>No concurrecy</li>
+<li>Result: high coupling</li>
+<li>Need cross-language expert to get this to work</li>
+<li>Fragmentation of efforts by language/environment</li>
 </ul>
 
   </article>
@@ -810,12 +815,33 @@ Reason for technical problem is cultural
 
 <slide class="" id="slide-32" style="background:;">
   <hgroup>
-    <h2>Interfacing</h2>
+    <h2>Towars a unified interface</h2>
   </hgroup>
   <article data-timings="">
-    <h3>Separation of concerns</h3>
+    <p>Instead of a language specific R bridge, the OpenCPU API layers on the Hypertext Transfer Protocol (HTTP) to provide an interface to R functionality.</p>
+
+<h3>Benefits of HTTP</h3>
 
 <ul>
+<li>Mature, very flexible application protocol</li>
+<li>Interoperable</li>
+<li>Distributed</li>
+<li>Native exception handling (status codes)</li>
+<li>Many features get buit-in by design (caching, encryption, authentication, etc)</li>
+<li>Clients widely available</li>
+<li>Implemented in all browsers</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-33" style="background:;">
+  <hgroup>
+    <h2>Separation of concerns</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
 <li>API describes logic of data analysis</li>
 <li>Independent of application</li>
 </ul>
@@ -826,7 +852,7 @@ Reason for technical problem is cultural
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-33" style="background:;">
+<slide class="" id="slide-34" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -879,7 +905,7 @@ Reason for technical problem is cultural
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-34" style="background:;">
+<slide class="" id="slide-35" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -932,7 +958,7 @@ Reason for technical problem is cultural
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-35" style="background:;">
+<slide class="" id="slide-36" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -976,12 +1002,12 @@ Reason for technical problem is cultural
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-36" style="background:;">
+<slide class="" id="slide-37" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
   <article data-timings="">
-    <h3>Package API</h3>
+    <h3>Package resources</h3>
 
 <table><thead>
 <tr>
@@ -1026,17 +1052,239 @@ Reason for technical problem is cultural
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-37" style="background:;">
+<slide class="" id="slide-38" style="background:;">
+  <hgroup>
+    <h2>The OpenCPU API</h2>
+  </hgroup>
   <article data-timings="">
-    <p><img src="screenshot.png" alt="screenshot"></p>
+    <h3>Session resources</h3>
 
-<h2>Apps</h2>
+<table><thead>
+<tr>
+<th>Path</th>
+<th>What</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>../{key}/</code></td>
+<td>List available output for this session.</td>
+<td><code>/ocpu/tmp/x08384729/</code></td>
+</tr>
+<tr>
+<td><code>../{key}/R/</code></td>
+<td>R objects stored in this session.</td>
+<td><code>/ocpu/tmp/x08384729/R/.val/json</code></td>
+</tr>
+<tr>
+<td><code>../{key}/graphics/</code></td>
+<td>Graphics generated in this session.</td>
+<td><code>/ocpu/tmp/x08384729/graphics/1/png</code></td>
+</tr>
+<tr>
+<td><code>../{key}/source</code></td>
+<td>Input source code for this session.</td>
+<td><code>/ocpu/tmp/x08384729/source</code></td>
+</tr>
+<tr>
+<td><code>../{key}/stdout</code></td>
+<td>Text printed to STDOUT in this session</td>
+<td><code>/ocpu/tmp/x08384729/stdout</code></td>
+</tr>
+<tr>
+<td><code>../{key}/console</code></td>
+<td>Console I/O (combines source and stdout)</td>
+<td><code>/ocpu/tmp/x08384729/console</code></td>
+</tr>
+<tr>
+<td><code>../{key}/zip</code></td>
+<td>Download session as a zip archive.</td>
+<td><code>/ocpu/tmp/x08384729/zip</code></td>
+</tr>
+<tr>
+<td><code>../{key}/tar</code></td>
+<td>Download session as a gzipped tarball.</td>
+<td><code>/ocpu/tmp/x08384729/tar</code></td>
+</tr>
+<tr>
+<td><code>../{key}/files/*</code></td>
+<td>Files in the working directory</td>
+<td><code>/ocpu/tmp/x08384729/files/mydata.csv</code></td>
+</tr>
+</tbody></table>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-38" style="background:;">
+<slide class="" id="slide-39" style="background:;">
+  <hgroup>
+    <h2>The OpenCPU API</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>Content-types</h3>
+
+<table><thead>
+<tr>
+<th>Format</th>
+<th>Content-type</th>
+<th>Encoder (+args)</th>
+<th>Example</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>print</td>
+<td><code>text/plain</code></td>
+<td>base::print</td>
+<td><code>/ocpu/cran/MASS/R/rlm/print</code></td>
+</tr>
+<tr>
+<td>json</td>
+<td><code>application/json</code></td>
+<td>jsonlite::toJSON</td>
+<td><code>/ocpu/cran/MASS/data/cats/json</code></td>
+</tr>
+<tr>
+<td>csv</td>
+<td><code>text/csv</code></td>
+<td>utils::write.csv</td>
+<td><code>/ocpu/cran/MASS/data/cats/csv</code></td>
+</tr>
+<tr>
+<td>tab</td>
+<td><code>text/plain</code></td>
+<td>utils::write.table</td>
+<td><code>/ocpu/cran/MASS/data/cats/tab</code></td>
+</tr>
+<tr>
+<td>rda</td>
+<td><code>application/octet-stream</code></td>
+<td>base::save</td>
+<td><code>/ocpu/cran/MASS/data/cats/rda</code></td>
+</tr>
+<tr>
+<td>rds</td>
+<td><code>application/octet-stream</code></td>
+<td>base::saveRDS</td>
+<td><code>/ocpu/cran/MASS/data/cats/rds</code></td>
+</tr>
+<tr>
+<td>pb</td>
+<td><code>application/x-protobuf</code></td>
+<td>RProtoBuf::serialize_pb</td>
+<td><code>/ocpu/cran/MASS/data/cats/pb</code></td>
+</tr>
+<tr>
+<td>png</td>
+<td><code>image/png</code></td>
+<td>grDevices::png</td>
+<td><code>/ocpu/tmp/{key}/graphics/1/png</code></td>
+</tr>
+<tr>
+<td>pdf</td>
+<td><code>application/pdf</code></td>
+<td>grDevices::pdf</td>
+<td><code>/ocpu/tmp/{key}/graphics/1/pdf</code></td>
+</tr>
+<tr>
+<td>svg</td>
+<td><code>image/svg+xml</code></td>
+<td>grDevices::svg</td>
+<td><code>/ocpu/tmp/{key}/graphics/1/svg</code></td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-40" style="background:;">
+  <hgroup>
+    <h2>The OpenCPU API</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>Executing Scripts</h3>
+
+<table><thead>
+<tr>
+<th>File extension</th>
+<th>Type</th>
+<th>Interpreter</th>
+<th>Arguments</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>file.r</code></td>
+<td>R script</td>
+<td>evaluate::evaluate</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>file.tex</code></td>
+<td>latex</td>
+<td>tools::texi2pdf</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>file.rnw</code></td>
+<td>knitr/sweave</td>
+<td>knitr::knit + tools::texi2pdf</td>
+<td>-</td>
+</tr>
+<tr>
+<td><code>file.md</code></td>
+<td>markdown</td>
+<td>knitr::pandoc</td>
+<td>format (see ?pandoc)</td>
+</tr>
+<tr>
+<td><code>file.rmd</code></td>
+<td>knitr/markdown</td>
+<td>knitr::knit + knitr::pandoc</td>
+<td>format (see ?pandoc)</td>
+</tr>
+<tr>
+<td><code>file.brew</code></td>
+<td>brew</td>
+<td>brew::brew</td>
+<td>output (see ?brew)</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-41" style="background:;">
+  <hgroup>
+    <h2>OpenCPU Apps</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="screenshot.png" alt="screenshot"></p>
+
+<ul>
+<li>App is simply a package with web pages</li>
+<li>Web pages call R functions via Ajax</li>
+</ul>
+
+<pre><code class="javascript">//JavaScript client code
+var ticker = $(&quot;#ticker&quot;).val();    
+var req = $(&quot;#plotdiv&quot;).rplot(&quot;smoothplot&quot;, {
+    ticker : ticker,
+    from : &quot;2013-01-01&quot;
+})
+</code></pre>
+
+<p>Results in:</p>
+
+<pre><code class="r">smoothplot(ticker = ticker, from = &quot;2013-01-01&quot;)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-42" style="background:;">
   <hgroup>
     <h1>Conclusion</h1>
   </hgroup>
@@ -1231,25 +1479,25 @@ Reason for technical problem is cultural
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=30 title='Interfacing'>
+        data-slide=30 title='Language bridges to R'>
          30
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=31 title='Interfacing'>
+        data-slide=31 title='The problem with language bridges'>
          31
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=32 title='Interfacing'>
+        data-slide=32 title='Towars a unified interface'>
          32
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=33 title='The OpenCPU API'>
+        data-slide=33 title='Separation of concerns'>
          33
       </a>
     </li>
@@ -1273,14 +1521,38 @@ Reason for technical problem is cultural
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=37 title=''>
+        data-slide=37 title='The OpenCPU API'>
          37
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=38 title='Conclusion'>
+        data-slide=38 title='The OpenCPU API'>
          38
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=39 title='The OpenCPU API'>
+         39
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=40 title='The OpenCPU API'>
+         40
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=41 title='OpenCPU Apps'>
+         41
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=42 title='Conclusion'>
+         42
       </a>
     </li>
   </ul>

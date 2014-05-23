@@ -549,9 +549,9 @@ Reason for technical problem is cultural
 
 ---
 
-## Interfacing
+## Language bridges to R
 
-### Language bridges to R
+Bridges to R are available for all popular languages and environments:
 
 - RInside (C++)
 - rpy2 (python)
@@ -560,26 +560,49 @@ Reason for technical problem is cultural
 - rApache 
 - littler 
 - RServe (socket)
+- RDCOM (windows, excel)
 
-However, limited success.
+However, they have limited adoption in practice.
 
 ---
 
-## Interfacing
+## The problem with language bridges
 
-### Why HTTP
+An hello-world example from the `rserve` manual:
 
+```{java}
+RConnection c = new RConnection();
+double d[] = c.eval("rnorm(10)").asDoubles();
+```
+
+- Client needs to generate R syntax
+- Client needs to read/manipulate interal R data types
+- Client needs to manage R processes
+- Limited exception handling
+- No concurrecy
+- Result: high coupling
+- Need cross-language expert to get this to work
+- Fragmentation of efforts by language/environment
+
+---
+
+## Towars a unified interface
+
+Instead of a language specific R bridge, the OpenCPU API layers on the Hypertext Transfer Protocol (HTTP) to provide an interface to R functionality.
+
+### Benefits of HTTP
+
+- Mature, very flexible application protocol
 - Interoperable
-- Many features get buit-in by design
+- Distributed
+- Native exception handling (status codes)
+- Many features get buit-in by design (caching, encryption, authentication, etc)
 - Clients widely available
-- 
-- 
+- Implemented in all browsers
 
 ---
 
-## Interfacing
-
-### Separation of concerns
+## Separation of concerns
 
 - API describes logic of data analysis
 - Independent of application
@@ -725,7 +748,7 @@ However, limited success.
 
 ## The OpenCPU API
 
-### Package API
+### Package resources
 
 | Path               | What                                           | Examples                  |
 |--------------------|------------------------------------------------|---------------------------|
@@ -738,10 +761,80 @@ However, limited success.
 
 ---
 
+## The OpenCPU API
+
+### Session resources
+
+| Path               | What                                     | Example                              |
+|--------------------|------------------------------------------|--------------------------------------|
+| `../{key}/`          | List available output for this session.  | `/ocpu/tmp/x08384729/`                 |
+| `../{key}/R/`         | R objects stored in this session.        | `/ocpu/tmp/x08384729/R/.val/json`      |
+| `../{key}/graphics/` | Graphics generated in this session.      | `/ocpu/tmp/x08384729/graphics/1/png`   |
+| `../{key}/source`    | Input source code for this session.      | `/ocpu/tmp/x08384729/source`           |
+| `../{key}/stdout`    | Text printed to STDOUT in this session   | `/ocpu/tmp/x08384729/stdout`           |
+| `../{key}/console`   | Console I/O (combines source and stdout) | `/ocpu/tmp/x08384729/console`          |
+| `../{key}/zip`       | Download session as a zip archive.       | `/ocpu/tmp/x08384729/zip`              |
+| `../{key}/tar`       | Download session as a gzipped tarball.   | `/ocpu/tmp/x08384729/tar`              |
+| `../{key}/files/*`    | Files in the working directory           | `/ocpu/tmp/x08384729/files/mydata.csv` |
+
+
+---
+
+## The OpenCPU API
+
+### Content-types
+
+| Format | Content-type               | Encoder (+args)         | Example                          |
+|--------|----------------------------|-------------------------|----------------------------------|
+| print  | `text/plain`               | base::print             | `/ocpu/cran/MASS/R/rlm/print`    |
+| json   | `application/json`         | jsonlite::toJSON        | `/ocpu/cran/MASS/data/cats/json` |
+| csv    | `text/csv`                 | utils::write.csv        | `/ocpu/cran/MASS/data/cats/csv`  |
+| tab    | `text/plain`               | utils::write.table      | `/ocpu/cran/MASS/data/cats/tab`  |
+| rda    | `application/octet-stream` | base::save              | `/ocpu/cran/MASS/data/cats/rda`  |
+| rds    | `application/octet-stream` | base::saveRDS           | `/ocpu/cran/MASS/data/cats/rds`  |
+| pb     | `application/x-protobuf`   | RProtoBuf::serialize_pb | `/ocpu/cran/MASS/data/cats/pb`   |
+| png    | `image/png`                | grDevices::png          | `/ocpu/tmp/{key}/graphics/1/png` |
+| pdf    | `application/pdf`          | grDevices::pdf          | `/ocpu/tmp/{key}/graphics/1/pdf` |
+| svg    | `image/svg+xml`            | grDevices::svg          | `/ocpu/tmp/{key}/graphics/1/svg` |
+
+---
+
+## The OpenCPU API
+
+### Executing Scripts
+
+| File extension   | Type           | Interpreter                   | Arguments            |
+|------------------|----------------|-------------------------------|----------------------|
+| `file.r`         | R script       | evaluate::evaluate            | -                    |
+| `file.tex`       | latex          | tools::texi2pdf               | -                    |
+| `file.rnw`       | knitr/sweave   | knitr::knit + tools::texi2pdf | -                    |
+| `file.md`        | markdown       | knitr::pandoc                 | format (see ?pandoc) |
+| `file.rmd`       | knitr/markdown | knitr::knit + knitr::pandoc   | format (see ?pandoc) |
+| `file.brew`      | brew           | brew::brew                    | output (see ?brew)   |
+
+---
+
+## OpenCPU Apps
+
 ![screenshot](screenshot.png)
 
-## Apps
+- App is simply a package with web pages
+- Web pages call R functions via Ajax
 
+```{javascript}
+//JavaScript client code
+var ticker = $("#ticker").val();    
+var req = $("#plotdiv").rplot("smoothplot", {
+    ticker : ticker,
+    from : "2013-01-01"
+})
+```
+
+Results in:
+
+```{r, eval=FALSE}
+smoothplot(ticker=ticker, from="2013-01-01")
+```
 ---
 
 # Conclusion
