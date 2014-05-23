@@ -96,7 +96,7 @@ library(slidifyLibraries)
 - Simple but very effective 
 - Did some more applictions
 - Lots of interest
-- Bunch of consluting
+- Consluting
 - GSR for Mobilize
 
 ---
@@ -139,7 +139,7 @@ Want to turn academic software into production software
  - Scalable
  - Practical
 
-### To do so:
+### Steps:
 
 - Find recurring struggles
 - Distill fundamental problems
