@@ -549,19 +549,192 @@ Reason for technical problem is cultural
 
 ---
 
-## Interface
+## Interfacing
 
-### Interoperability
+### Language bridges to R
 
--API 
-- HTTP
-and Interfacing
+- RInside (C++)
+- rpy2 (python)
+- JRI (Java)
+- RinRuby
+- rApache 
+- littler 
+- RServe (socket)
+
+However, limited success.
+
+---
+
+## Interfacing
+
+### Why HTTP
 
 - Interoperable
-- Separation of concerns
-- HTTP
-- State problem
+- Many features get buit-in by design
+- Clients widely available
+- 
+- 
 
+---
+
+## Interfacing
+
+### Separation of concerns
+
+- API describes logic of data analysis
+- Independent of application
+- Independent of language
+- 
+
+---
+
+## The OpenCPU API
+
+### HTTP Methods
+
+<table class="table table-bordered">
+  <thead>
+		<tr>
+			<th>Method</th>
+			<th>Target</th>
+			<th>Action</th>
+			<th>Arguments</th>		  
+			<th>Example</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>GET</code></td>
+			<td>object</td>
+			<td>read object</td>
+			<td>control output format</td>		  
+			<td><code>GET /ocpu/library/datasets/R/mtcars/json</code></td>
+		</tr>
+		<tr>
+			<td><code>POST</code></td>
+			<td>object</td>
+			<td>call function</td>
+			<td>function arguments</td>
+			<td><code>POST /ocpu/library/stats/R/rnorm</code></td>
+		</tr>
+		<tr>
+			<td><code>GET</code></td>
+			<td>file</td>
+			<td>read file</td>
+			<td>-</td>
+			<td><code>GET /ocpu/library/MASS/NEWS</code> <br /> <code>GET /ocpu/library/MASS/scripts/</code></td>
+		</tr>  				 
+		<tr>
+			<td><code>POST</code></td>
+			<td>file</td>
+			<td>run script</td>
+			<td>control interpreter </td>
+			<td><code>POST /ocpu/library/MASS/scripts/ch01.R</code> <br /><code>POST /ocpu/library/knitr/examples/knitr-minimal.Rmd</code></td>
+		</tr>						 
+	</tbody>
+</table>
+
+---
+
+## The OpenCPU API
+
+### HTTP Status Codes
+
+<table class="table table-bordered">
+  <thead>
+		<tr>
+			<th>HTTP Code</th>
+			<th>When</th>
+			<th>Returns</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>200 OK</code></td>
+			<td>On successful GET request</td>
+			<td>Resource content</td>
+		</tr>
+		<tr>
+			<td><code>201 Created</code></td>
+			<td>On successful POST request</td>
+			<td>Output location</td>
+		</tr>
+		<tr>
+			<td><code>302 Found</code></td>
+			<td>Redirect</td>
+			<td>Redirect Location</td>
+		</tr>
+		<tr>
+			<td><code>400 Bad Request</code></td>
+			<td>R raised an error.</td>
+			<td>Error message in <code>text/plain</code></td>
+		</tr>  
+		<tr>
+			<td><code>502 Bad Gateway</code></td>
+			<td>Nginx (opencpu-cache) can't connect to OpenCPU server.</td>
+			<td>(admin needs to look in error logs)</td>
+		</tr>   
+		<tr>
+			<td><code>503 Bad Request</code></td>
+			<td>Serious problem with the server</td>
+			<td>(admin needs to look in error logs)</td>
+		</tr>													
+	</tbody>
+</table>
+
+---
+
+## The OpenCPU API
+
+<table class="table table-bordered">
+  <thead>
+		<tr>
+			<th>Path</th>
+			<th>What</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>/ocpu/library/{pkgname}/</code></td>
+			<td>R packages installed in one of the global libraries on the server.</td>
+		</tr>
+		<tr>
+			<td><code>/ocpu/user/{username}/library/{pkgname}/</code></td>
+			<td>R packages installed in the home library of Linux user <code>{username}</code>.</td>
+		</tr>
+  	<tr>
+			<td><code>/ocpu/cran/{pkgname}/</code></td>
+			<td>Interfaces to the R package <code>{pkgname}</code> that is <i>current</i> on CRAN.</td>
+		</tr>   
+		<tr>
+			<td><code>/ocpu/bioc/{pkgname}/</code></td>
+			<td>Interfaces to the R package <code>{pkgname}</code> that is <i>current</i> on BioConductor.</td>
+		</tr>  
+		<tr>
+			<td><code>/ocpu/github/{gituser}/{pkgname}/</code></td>
+			<td>R package <code>{pkgname}</code> in the <i>master branch</i> of the identically named repository from github user <code>{gituser}</code>.</td>
+		</tr>   
+		<tr>
+			<td><code>/ocpu/tmp/{key}/</code></td>
+			<td>Temporary sessions, which hold outputs from a function/script RPC.</td>
+		</tr>
+	</tbody>
+</table>
+
+---
+
+## The OpenCPU API
+
+### Package API
+
+| Path               | What                                           | Examples                  |
+|--------------------|------------------------------------------------|---------------------------|
+| `../{pkgname}/`       | Package Information                            | `/ocpu/cran/MASS/`          |
+| `../{pkgname}/R/`    | Exported R objects                             | `/ocpu/cran/MASS/R/rlm`     |
+| `../{pkgname}/data/` | Data included with this package.               | `/ocpu/cran/MASS/data/cats` |
+| `../{pkgname}/man/`  | Manuals (help pages) included in this package. | `/ocpu/cran/MASS/man/rlm`   |
+| `../{pkgname}/*`     | Files in package installation directory        | `/ocpu/cran/MASS/NEWS`      |
+|                      |                                                | `/ocpu/cran/MASS/scripts/`  |
 
 ---
 

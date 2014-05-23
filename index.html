@@ -765,21 +765,268 @@ Reason for technical problem is cultural
 
 <slide class="" id="slide-30" style="background:;">
   <hgroup>
-    <h2>Interoperability and Interfacing</h2>
+    <h2>Interfacing</h2>
   </hgroup>
   <article data-timings="">
-    <ul>
-<li>Interoperable</li>
-<li>Separation of concerns</li>
-<li>HTTP</li>
-<li>State problem</li>
+    <h3>Language bridges to R</h3>
+
+<ul>
+<li>RInside (C++)</li>
+<li>rpy2 (python)</li>
+<li>JRI (Java)</li>
+<li>RinRuby</li>
+<li>rApache </li>
+<li>littler </li>
+<li>RServe (socket)</li>
 </ul>
+
+<p>However, limited success.</p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
 <slide class="" id="slide-31" style="background:;">
+  <hgroup>
+    <h2>Interfacing</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>Why HTTP</h3>
+
+<ul>
+<li>Interoperable</li>
+<li>Many features get buit-in by design</li>
+</ul>
+
+<h2>- Clients widely available</h2>
+
+<ul>
+<li></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-32" style="background:;">
+  <hgroup>
+    <h2>Interfacing</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>Separation of concerns</h3>
+
+<ul>
+<li>API describes logic of data analysis</li>
+<li>Independent of application</li>
+</ul>
+
+<h2>- Independent of language</h2>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-33" style="background:;">
+  <hgroup>
+    <h2>The OpenCPU API</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>HTTP Methods</h3>
+
+<table class="table table-bordered">
+  <thead>
+        <tr>
+            <th>Method</th>
+            <th>Target</th>
+            <th>Action</th>
+            <th>Arguments</th>        
+            <th>Example</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>GET</code></td>
+            <td>object</td>
+            <td>read object</td>
+            <td>control output format</td>        
+            <td><code>GET /ocpu/library/datasets/R/mtcars/json</code></td>
+        </tr>
+        <tr>
+            <td><code>POST</code></td>
+            <td>object</td>
+            <td>call function</td>
+            <td>function arguments</td>
+            <td><code>POST /ocpu/library/stats/R/rnorm</code></td>
+        </tr>
+        <tr>
+            <td><code>GET</code></td>
+            <td>file</td>
+            <td>read file</td>
+            <td>-</td>
+            <td><code>GET /ocpu/library/MASS/NEWS</code> <br /> <code>GET /ocpu/library/MASS/scripts/</code></td>
+        </tr>                
+        <tr>
+            <td><code>POST</code></td>
+            <td>file</td>
+            <td>run script</td>
+            <td>control interpreter </td>
+            <td><code>POST /ocpu/library/MASS/scripts/ch01.R</code> <br /><code>POST /ocpu/library/knitr/examples/knitr-minimal.Rmd</code></td>
+        </tr>                        
+    </tbody>
+</table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-34" style="background:;">
+  <hgroup>
+    <h2>The OpenCPU API</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>HTTP Status Codes</h3>
+
+<table class="table table-bordered">
+  <thead>
+        <tr>
+            <th>HTTP Code</th>
+            <th>When</th>
+            <th>Returns</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>200 OK</code></td>
+            <td>On successful GET request</td>
+            <td>Resource content</td>
+        </tr>
+        <tr>
+            <td><code>201 Created</code></td>
+            <td>On successful POST request</td>
+            <td>Output location</td>
+        </tr>
+        <tr>
+            <td><code>302 Found</code></td>
+            <td>Redirect</td>
+            <td>Redirect Location</td>
+        </tr>
+        <tr>
+            <td><code>400 Bad Request</code></td>
+            <td>R raised an error.</td>
+            <td>Error message in <code>text/plain</code></td>
+        </tr>  
+        <tr>
+            <td><code>502 Bad Gateway</code></td>
+            <td>Nginx (opencpu-cache) can't connect to OpenCPU server.</td>
+            <td>(admin needs to look in error logs)</td>
+        </tr>   
+        <tr>
+            <td><code>503 Bad Request</code></td>
+            <td>Serious problem with the server</td>
+            <td>(admin needs to look in error logs)</td>
+        </tr>                                                   
+    </tbody>
+</table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-35" style="background:;">
+  <hgroup>
+    <h2>The OpenCPU API</h2>
+  </hgroup>
+  <article data-timings="">
+    <table class="table table-bordered">
+  <thead>
+        <tr>
+            <th>Path</th>
+            <th>What</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>/ocpu/library/{pkgname}/</code></td>
+            <td>R packages installed in one of the global libraries on the server.</td>
+        </tr>
+        <tr>
+            <td><code>/ocpu/user/{username}/library/{pkgname}/</code></td>
+            <td>R packages installed in the home library of Linux user <code>{username}</code>.</td>
+        </tr>
+    <tr>
+            <td><code>/ocpu/cran/{pkgname}/</code></td>
+            <td>Interfaces to the R package <code>{pkgname}</code> that is <i>current</i> on CRAN.</td>
+        </tr>   
+        <tr>
+            <td><code>/ocpu/bioc/{pkgname}/</code></td>
+            <td>Interfaces to the R package <code>{pkgname}</code> that is <i>current</i> on BioConductor.</td>
+        </tr>  
+        <tr>
+            <td><code>/ocpu/github/{gituser}/{pkgname}/</code></td>
+            <td>R package <code>{pkgname}</code> in the <i>master branch</i> of the identically named repository from github user <code>{gituser}</code>.</td>
+        </tr>   
+        <tr>
+            <td><code>/ocpu/tmp/{key}/</code></td>
+            <td>Temporary sessions, which hold outputs from a function/script RPC.</td>
+        </tr>
+    </tbody>
+</table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-36" style="background:;">
+  <hgroup>
+    <h2>The OpenCPU API</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>Package API</h3>
+
+<table><thead>
+<tr>
+<th>Path</th>
+<th>What</th>
+<th>Examples</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>../{pkgname}/</code></td>
+<td>Package Information</td>
+<td><code>/ocpu/cran/MASS/</code></td>
+</tr>
+<tr>
+<td><code>../{pkgname}/R/</code></td>
+<td>Exported R objects</td>
+<td><code>/ocpu/cran/MASS/R/rlm</code></td>
+</tr>
+<tr>
+<td><code>../{pkgname}/data/</code></td>
+<td>Data included with this package.</td>
+<td><code>/ocpu/cran/MASS/data/cats</code></td>
+</tr>
+<tr>
+<td><code>../{pkgname}/man/</code></td>
+<td>Manuals (help pages) included in this package.</td>
+<td><code>/ocpu/cran/MASS/man/rlm</code></td>
+</tr>
+<tr>
+<td><code>../{pkgname}/*</code></td>
+<td>Files in package installation directory</td>
+<td><code>/ocpu/cran/MASS/NEWS</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td><code>/ocpu/cran/MASS/scripts/</code></td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-37" style="background:;">
   <article data-timings="">
     <p><img src="screenshot.png" alt="screenshot"></p>
 
@@ -789,7 +1036,7 @@ Reason for technical problem is cultural
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-32" style="background:;">
+<slide class="" id="slide-38" style="background:;">
   <hgroup>
     <h1>Conclusion</h1>
   </hgroup>
@@ -984,20 +1231,56 @@ Reason for technical problem is cultural
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=30 title='Interoperability and Interfacing'>
+        data-slide=30 title='Interfacing'>
          30
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=31 title=''>
+        data-slide=31 title='Interfacing'>
          31
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=32 title='Conclusion'>
+        data-slide=32 title='Interfacing'>
          32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='The OpenCPU API'>
+         33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='The OpenCPU API'>
+         34
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=35 title='The OpenCPU API'>
+         35
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=36 title='The OpenCPU API'>
+         36
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=37 title=''>
+         37
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=38 title='Conclusion'>
+         38
       </a>
     </li>
   </ul>
