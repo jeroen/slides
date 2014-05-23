@@ -112,16 +112,22 @@ library(slidifyLibraries)
 - Statistics and statisticians becoming more accessible is accompanied by interoperability of statistical software.
 -->
 
+<h3>Current developments:</h3>
+
 <ul>
 <li>Integrate with upcoming technology </li>
 <li>Big data, vizualization</li>
 <li>Specialized applications</li>
-<li>Real-time analysis on live data</li>
+<li>Real time analysis and pipelines</li>
+</ul>
+
+<h3>Near future</h3>
+
+<ul>
 <li>Internet based data management</li>
-<li>Web based scientific collaboration</li>
-<li>Online analysis and pipelines</li>
+<li>Scientific collaboration</li>
 <li>Transparency and reproducibility</li>
-<li>Learning and teaching </li>
+<li>Learning and teaching</li>
 </ul>
 
   </article>
@@ -147,10 +153,9 @@ library(slidifyLibraries)
 <li>Lots of interest</li>
 <li>Bunch of consluting</li>
 <li>GSR for Mobilize</li>
-<li class = '..</li>
 </ul>
 
- '></article>
+  </article>
   <!-- Presenter Notes -->
 </slide>
 
@@ -535,8 +540,8 @@ character(0)
 <li>Separate security concern from computing concerns</li>
 <li>Support for arbitrary code execution</li>
 <li>Fine grained control over hardware allocation</li>
-<li>Scale up to many users without sacrifing reliability</li>
-<li>Performance overhead neglectible<br></li>
+<li>Scale up to many users without sacrificing reliability</li>
+<li>Performance overhead negligible<br></li>
 </ul>
 
   </article>
@@ -722,37 +727,66 @@ Suggests: hflights, RSQLite, RSQLite.extfuns, RMySQL, RPostgreSQL, data.table,
 </slide>
 
 <slide class="" id="slide-28" style="background:;">
+  <hgroup>
+    <h2>CRAN Policy</h2>
+  </hgroup>
   <article data-timings="">
-    <!--
-Unique: technical problem, but also a social problem
-Reason for technical problem is cultural
--->
-
-<h2>Dependency Versioning</h2>
-
-<p><img src="totalcount.png" alt="totalcount"></p>
-
-<ul>
-<li>Problem: versioning dependencies</li>
-<li>Current policies unsustainable</li>
-<li>Leads to unstable software</li>
-<li>Irreproducible results</li>
-</ul>
-
-<h3>Challenges</h3>
-
-<ul>
-<li>Cannot be solved downstream</li>
-<li>Requires community to modernizing practices</li>
-<li>I try to make a case for moving to a better dependency system </li>
-<li>Turns out to be challenging :-)</li>
-</ul>
+    <p><q> For a package update, please check that any packages depending on this one still pass R CMD check: it is especially expected that you will have checked your own packages. A listing of the reverse dependencies of the current version can be found on the CRAN web page for the package.</q></p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
 <slide class="" id="slide-29" style="background:;">
+  <hgroup>
+    <h2>Policy Implications</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="reversecount.png" alt="totalcount"></p>
+
+<ul>
+<li>Package author responsible</li>
+<li>Basically forbids any breaking changes / refactoring / cleanup</li>
+<li>The more reverse dependencies a package accumulates, the harder it gets</li>
+<li>Packages accumulating more legacy code</li>
+<li>Popular packages get stuck completely</li>
+<li>Does not solve the actual problem</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-30" style="background:;">
+  <article data-timings="">
+    <!--
+Unique: technical problem, but also a social problem
+Reason for technical problem is cultural
+-->
+
+<h2>Problems</h2>
+
+<p><img src="totalcount.png" alt="totalcount"></p>
+
+<ul>
+<li>Packages break due to changing dependencies</li>
+<li>R/Sweave/Knitr scripts unreliable</li>
+<li>Building software on R very difficult</li>
+<li>Reproducible research nearly impossible</li>
+</ul>
+
+<h2>Suggested Solutions</h2>
+
+<ol>
+<li>Staged Distributions</li>
+<li>Versioning Dependency Relations</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-31" style="background:;">
   <hgroup>
     <h2>Part 4: The OpenCPU system</h2>
   </hgroup>
@@ -763,7 +797,7 @@ Reason for technical problem is cultural
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-30" style="background:;">
+<slide class="" id="slide-32" style="background:;">
   <hgroup>
     <h2>Language bridges to R</h2>
   </hgroup>
@@ -781,13 +815,13 @@ Reason for technical problem is cultural
 <li>RDCOM (windows, excel)</li>
 </ul>
 
-<p>However, they have limited success.</p>
+<p>However, they have limited adoption in practice.</p>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-31" style="background:;">
+<slide class="" id="slide-33" style="background:;">
   <hgroup>
     <h2>The problem with language bridges</h2>
   </hgroup>
@@ -800,10 +834,10 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
 
 <ul>
 <li>Client needs to generate R syntax</li>
-<li>Client needs to read/manipulate interal R data types</li>
+<li>Client needs to read/manipulate internal R data types</li>
 <li>Client needs to manage R processes</li>
 <li>Limited exception handling</li>
-<li>No concurrecy</li>
+<li>No concurrency</li>
 <li>Result: high coupling</li>
 <li>Need cross-language expert to get this to work</li>
 <li>Fragmentation of efforts by language/environment</li>
@@ -813,7 +847,7 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-32" style="background:;">
+<slide class="" id="slide-34" style="background:;">
   <hgroup>
     <h2>Towars a unified interface</h2>
   </hgroup>
@@ -827,7 +861,7 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
 <li>Interoperable</li>
 <li>Distributed</li>
 <li>Native exception handling (status codes)</li>
-<li>Many features get buit-in by design (caching, encryption, authentication, etc)</li>
+<li>Many features get built-in by design (caching, encryption, authentication, etc)</li>
 <li>Clients widely available</li>
 <li>Implemented in all browsers</li>
 </ul>
@@ -836,7 +870,7 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-33" style="background:;">
+<slide class="" id="slide-35" style="background:;">
   <hgroup>
     <h2>Separation of concerns</h2>
   </hgroup>
@@ -844,20 +878,60 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
     <ul>
 <li>API describes logic of data analysis</li>
 <li>Independent of application</li>
-</ul>
+<li>Independent of computational language</li>
+<li>Some important API concepts:
 
-<h2>- Independent of language</h2>
+<ul>
+<li>Objects</li>
+<li>Graphics</li>
+<li>Data</li>
+<li>Manuals</li>
+<li>Namespaces</li>
+<li>Libraries</li>
+<li>Function calls</li>
+</ul></li>
+</ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-34" style="background:;">
+<slide class="" id="slide-36" style="background:;">
+  <hgroup>
+    <h2>An example: basic JSON RPC</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="bash">curl http://public.opencpu.org/ocpu/library/stats/R/rnorm/json \
+-H &quot;Content-Type: application/json&quot; -d &#39;{&quot;n&quot;:3, &quot;mean&quot;: 10, &quot;sd&quot;:10}&#39;
+
+[4.9829, 6.3104, 11.411]
+</code></pre>
+
+<p>This performs the following procedure</p>
+
+<pre><code class="r">library(jsonlite)
+args &lt;- fromJSON(&#39;{&quot;n&quot;:3, &quot;mean&quot;: 10, &quot;sd&quot;:10}&#39;)
+output &lt;- do.call(stats::rnorm, args)
+toJSON(output)
+</code></pre>
+
+<p>Which is equivalent to</p>
+
+<pre><code class="r">rnorm(n = 3, mean = 10, sd = 10)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-37" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
   <article data-timings="">
     <h3>HTTP Methods</h3>
+
+<p>Current API uses GET and POST methods. Get is for retrieving objects, POST is for RPC.</p>
 
 <table class="table table-bordered">
   <thead>
@@ -875,7 +949,7 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
             <td>object</td>
             <td>read object</td>
             <td>control output format</td>        
-            <td><code>GET /ocpu/library/datasets/R/mtcars/json</code></td>
+            <td><code>GET /ocpu/cran/MASS/data/cats/json</code></td>
         </tr>
         <tr>
             <td><code>POST</code></td>
@@ -889,14 +963,14 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
             <td>file</td>
             <td>read file</td>
             <td>-</td>
-            <td><code>GET /ocpu/library/MASS/NEWS</code> <br /> <code>GET /ocpu/library/MASS/scripts/</code></td>
+            <td><code>GET /ocpu/cran/MASS/NEWS</code> <br /> <code>GET /ocpu/cran/MASS/scripts/</code></td>
         </tr>                
         <tr>
             <td><code>POST</code></td>
             <td>file</td>
             <td>run script</td>
             <td>control interpreter </td>
-            <td><code>POST /ocpu/library/MASS/scripts/ch01.R</code> <br /><code>POST /ocpu/library/knitr/examples/knitr-minimal.Rmd</code></td>
+            <td><code>POST /ocpu/cran/MASS/scripts/ch01.R</code> <br /><code>POST /ocpu/cran/knitr/examples/minimal.Rmd</code></td>
         </tr>                        
     </tbody>
 </table>
@@ -905,7 +979,7 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-35" style="background:;">
+<slide class="" id="slide-38" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -958,51 +1032,7 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-36" style="background:;">
-  <hgroup>
-    <h2>The OpenCPU API</h2>
-  </hgroup>
-  <article data-timings="">
-    <table class="table table-bordered">
-  <thead>
-        <tr>
-            <th>Path</th>
-            <th>What</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><code>/ocpu/library/{pkgname}/</code></td>
-            <td>R packages installed in one of the global libraries on the server.</td>
-        </tr>
-        <tr>
-            <td><code>/ocpu/user/{username}/library/{pkgname}/</code></td>
-            <td>R packages installed in the home library of Linux user <code>{username}</code>.</td>
-        </tr>
-    <tr>
-            <td><code>/ocpu/cran/{pkgname}/</code></td>
-            <td>Interfaces to the R package <code>{pkgname}</code> that is <i>current</i> on CRAN.</td>
-        </tr>   
-        <tr>
-            <td><code>/ocpu/bioc/{pkgname}/</code></td>
-            <td>Interfaces to the R package <code>{pkgname}</code> that is <i>current</i> on BioConductor.</td>
-        </tr>  
-        <tr>
-            <td><code>/ocpu/github/{gituser}/{pkgname}/</code></td>
-            <td>R package <code>{pkgname}</code> in the <i>master branch</i> of the identically named repository from github user <code>{gituser}</code>.</td>
-        </tr>   
-        <tr>
-            <td><code>/ocpu/tmp/{key}/</code></td>
-            <td>Temporary sessions, which hold outputs from a function/script RPC.</td>
-        </tr>
-    </tbody>
-</table>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-37" style="background:;">
+<slide class="" id="slide-39" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -1052,7 +1082,7 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-38" style="background:;">
+<slide class="" id="slide-40" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -1117,7 +1147,7 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-39" style="background:;">
+<slide class="" id="slide-41" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -1198,7 +1228,7 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-40" style="background:;">
+<slide class="" id="slide-42" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -1255,14 +1285,56 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-41" style="background:;">
+<slide class="" id="slide-43" style="background:;">
+  <hgroup>
+    <h2>Libraries</h2>
+  </hgroup>
+  <article data-timings="">
+    <table class="table table-bordered">
+  <thead>
+    <tr>
+            <th>Path</th>
+            <th>What</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>/ocpu/library/{pkgname}/</code></td>
+            <td>R packages installed in one of the global libraries on the server.</td>
+        </tr>
+        <tr>
+            <td><code>/ocpu/user/{username}/library/{pkgname}/</code></td>
+            <td>R packages installed in the home library of Linux user <code>{username}</code>.</td>
+        </tr>
+    <tr>
+            <td><code>/ocpu/cran/{pkgname}/</code></td>
+            <td>Interfaces to the R package <code>{pkgname}</code> that is <i>current</i> on CRAN.</td>
+        </tr>   
+        <tr>
+            <td><code>/ocpu/bioc/{pkgname}/</code></td>
+            <td>Interfaces to the R package <code>{pkgname}</code> that is <i>current</i> on BioConductor.</td>
+        </tr>  
+        <tr>
+            <td><code>/ocpu/github/{gituser}/{pkgname}/</code></td>
+            <td>R package <code>{pkgname}</code> in the <i>master branch</i> of the identically named repository from github user <code>{gituser}</code>.</td>
+        </tr>   
+        <tr>
+            <td><code>/ocpu/tmp/{key}/</code></td>
+            <td>Temporary sessions, which hold outputs from a function/script RPC.</td>
+        </tr>
+    </tbody>
+</table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-44" style="background:;">
   <hgroup>
     <h2>OpenCPU Apps</h2>
   </hgroup>
   <article data-timings="">
-    <p><img src="screenshot.png" alt="screenshot"></p>
-
-<ul>
+    <ul>
 <li>App is simply a package with web pages</li>
 <li>Web pages call R functions via Ajax</li>
 </ul>
@@ -1280,19 +1352,63 @@ var req = $(&quot;#plotdiv&quot;).rplot(&quot;smoothplot&quot;, {
 <pre><code class="r">smoothplot(ticker = ticker, from = &quot;2013-01-01&quot;)
 </code></pre>
 
+<p>Which is the basis of the <a href="https://demo.ocpu.io/stocks/www/">stocks</a> app.</p>
+
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-42" style="background:;">
+<slide class="" id="slide-45" style="background:;">
   <hgroup>
-    <h1>Conclusion</h1>
+    <h2>Conclusion</h2>
   </hgroup>
   <article data-timings="">
-    <ul class = "build incremental">
-<li>Build applications</li>
-<li>Collaborative</li>
-<li>Hope to contribute to socializing data analysis</li>
+    <p><img src="puzzle.jpg" alt="puzzle"></p>
+
+<h3>Four cornerstones:</h3>
+
+<ol>
+<li>Interoperable Interfacing</li>
+<li>Security and resource control</li>
+<li>Data Interchange</li>
+<li>Dependency Versioning</li>
+</ol>
+
+<h3>For each topic:</h3>
+
+<ul>
+<li>Identified problem</li>
+<li>Explored various approaches</li>
+<li>Suggestions, recommendations</li>
+<li>Example implementation for R</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-46" style="background:;">
+  <hgroup>
+    <h2>Conclusion</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>Hope for Near Future</h3>
+
+<ul>
+<li>Unify efforts in this area</li>
+<li>Make statistical methods more accessible</li>
+<li>Start to see wider adoption of R in production setting</li>
+</ul>
+
+<h3>Hope for the Distant Future</h3>
+
+<ul>
+<li>Online data management, sharing and analysis platforms</li>
+<li>Sharing code, data and results as part of scientific publication process</li>
+<li>Statistical methods implemented as online modules</li>
+<li>Scientific collaboration through social network</li>
+<li>Peer review, teaching and learning by sharing code, data and results</li>
+<li>Reproducibility by design</li>
 </ul>
 
   </article>
@@ -1467,55 +1583,55 @@ var req = $(&quot;#plotdiv&quot;).rplot(&quot;smoothplot&quot;, {
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=28 title=''>
+        data-slide=28 title='CRAN Policy'>
          28
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=29 title='Part 4: The OpenCPU system'>
+        data-slide=29 title='Policy Implications'>
          29
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=30 title='Language bridges to R'>
+        data-slide=30 title=''>
          30
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=31 title='The problem with language bridges'>
+        data-slide=31 title='Part 4: The OpenCPU system'>
          31
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=32 title='Towars a unified interface'>
+        data-slide=32 title='Language bridges to R'>
          32
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=33 title='Separation of concerns'>
+        data-slide=33 title='The problem with language bridges'>
          33
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=34 title='The OpenCPU API'>
+        data-slide=34 title='Towars a unified interface'>
          34
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=35 title='The OpenCPU API'>
+        data-slide=35 title='Separation of concerns'>
          35
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=36 title='The OpenCPU API'>
+        data-slide=36 title='An example: basic JSON RPC'>
          36
       </a>
     </li>
@@ -1545,14 +1661,38 @@ var req = $(&quot;#plotdiv&quot;).rplot(&quot;smoothplot&quot;, {
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=41 title='OpenCPU Apps'>
+        data-slide=41 title='The OpenCPU API'>
          41
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=42 title='Conclusion'>
+        data-slide=42 title='The OpenCPU API'>
          42
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=43 title='Libraries'>
+         43
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=44 title='OpenCPU Apps'>
+         44
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=45 title='Conclusion'>
+         45
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=46 title='Conclusion'>
+         46
       </a>
     </li>
   </ul>

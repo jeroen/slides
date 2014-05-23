@@ -66,16 +66,19 @@ library(slidifyLibraries)
 - Statistics and statisticians becoming more accessible is accompanied by interoperability of statistical software.
 -->
 
+### Current developments:
 
   - Integrate with upcoming technology 
   - Big data, vizualization
   - Specialized applications
-  - Real-time analysis on live data
+  - Real time analysis and pipelines
+  
+### Near future
+
   - Internet based data management
-  - Web based scientific collaboration
-  - Online analysis and pipelines
+  - Scientific collaboration
   - Transparency and reproducibility
-  - Learning and teaching 
+  - Learning and teaching
 
 ---
 
@@ -95,7 +98,6 @@ library(slidifyLibraries)
 - Lots of interest
 - Bunch of consluting
 - GSR for Mobilize
-- ...
 
 ---
 
@@ -381,8 +383,8 @@ Dynamic sandboxing with `eval.secure`:
  - Separate security concern from computing concerns
  - Support for arbitrary code execution
  - Fine grained control over hardware allocation
- - Scale up to many users without sacrifing reliability
- - Performance overhead neglectible  
+ - Scale up to many users without sacrificing reliability
+ - Performance overhead negligible  
 
 ---
 
@@ -529,26 +531,43 @@ Suggests: hflights, RSQLite, RSQLite.extfuns, RMySQL, RPostgreSQL, data.table,
 
 ---
 
+## CRAN Policy
+
+<q> For a package update, please check that any packages depending on this one still pass R CMD check: it is especially expected that you will have checked your own packages. A listing of the reverse dependencies of the current version can be found on the CRAN web page for the package.</q>
+
+---
+
+## Policy Implications
+
+![totalcount](reversecount.png)
+
+ - Package author responsible
+ - Basically forbids any breaking changes / refactoring / cleanup
+ - The more reverse dependencies a package accumulates, the harder it gets
+ - Packages accumulating more legacy code
+ - Popular packages get stuck completely
+ - Does not solve the actual problem
+
+---
+
 <!--
 Unique: technical problem, but also a social problem
 Reason for technical problem is cultural
 -->
 
-## Dependency Versioning
+## Problems
 
 ![totalcount](totalcount.png)
 
-- Problem: versioning dependencies
-- Current policies unsustainable
-- Leads to unstable software
-- Irreproducible results
+ - Packages break due to changing dependencies
+ - R/Sweave/Knitr scripts unreliable
+ - Building software on R very difficult
+ - Reproducible research nearly impossible
 
-### Challenges
+## Suggested Solutions
 
-- Cannot be solved downstream
-- Requires community to modernizing practices
-- I try to make a case for moving to a better dependency system 
-- Turns out to be challenging :-)
+ 1. Staged Distributions
+ 2. Versioning Dependency Relations
 
 ---
 
@@ -571,7 +590,7 @@ Bridges to R are available for all popular languages and environments:
 - RServe (socket)
 - RDCOM (windows, excel)
 
-However, they have limited success.
+However, they have limited adoption in practice.
 
 ---
 
@@ -585,10 +604,10 @@ double d[] = c.eval("rnorm(10)").asDoubles();
 ```
 
 - Client needs to generate R syntax
-- Client needs to read/manipulate interal R data types
+- Client needs to read/manipulate internal R data types
 - Client needs to manage R processes
 - Limited exception handling
-- No concurrecy
+- No concurrency
 - Result: high coupling
 - Need cross-language expert to get this to work
 - Fragmentation of efforts by language/environment
@@ -605,7 +624,7 @@ Instead of a language specific R bridge, the OpenCPU API layers on the Hypertext
 - Interoperable
 - Distributed
 - Native exception handling (status codes)
-- Many features get buit-in by design (caching, encryption, authentication, etc)
+- Many features get built-in by design (caching, encryption, authentication, etc)
 - Clients widely available
 - Implemented in all browsers
 
@@ -615,14 +634,53 @@ Instead of a language specific R bridge, the OpenCPU API layers on the Hypertext
 
 - API describes logic of data analysis
 - Independent of application
-- Independent of language
-- 
+- Independent of computational language
+- Some important API concepts:
+  - Objects
+  - Graphics
+  - Data
+  - Manuals
+  - Namespaces
+  - Libraries
+  - Function calls
+
+---
+
+## An example: basic JSON RPC 
+
+```{bash}
+curl http://public.opencpu.org/ocpu/library/stats/R/rnorm/json \
+-H "Content-Type: application/json" -d '{"n":3, "mean": 10, "sd":10}'
+
+[4.9829, 6.3104, 11.411]
+```
+
+This performs the following procedure
+
+
+```r
+library(jsonlite)
+args <- fromJSON('{"n":3, "mean": 10, "sd":10}')
+output <- do.call(stats::rnorm, args)
+toJSON(output)
+```
+
+
+Which is equivalent to
+
+
+```r
+rnorm(n = 3, mean = 10, sd = 10)
+```
+
 
 ---
 
 ## The OpenCPU API
 
 ### HTTP Methods
+
+Current API uses GET and POST methods. Get is for retrieving objects, POST is for RPC.
 
 <table class="table table-bordered">
   <thead>
@@ -640,7 +698,7 @@ Instead of a language specific R bridge, the OpenCPU API layers on the Hypertext
 			<td>object</td>
 			<td>read object</td>
 			<td>control output format</td>		  
-			<td><code>GET /ocpu/library/datasets/R/mtcars/json</code></td>
+			<td><code>GET /ocpu/cran/MASS/data/cats/json</code></td>
 		</tr>
 		<tr>
 			<td><code>POST</code></td>
@@ -654,14 +712,14 @@ Instead of a language specific R bridge, the OpenCPU API layers on the Hypertext
 			<td>file</td>
 			<td>read file</td>
 			<td>-</td>
-			<td><code>GET /ocpu/library/MASS/NEWS</code> <br /> <code>GET /ocpu/library/MASS/scripts/</code></td>
+			<td><code>GET /ocpu/cran/MASS/NEWS</code> <br /> <code>GET /ocpu/cran/MASS/scripts/</code></td>
 		</tr>  				 
 		<tr>
 			<td><code>POST</code></td>
 			<td>file</td>
 			<td>run script</td>
 			<td>control interpreter </td>
-			<td><code>POST /ocpu/library/MASS/scripts/ch01.R</code> <br /><code>POST /ocpu/library/knitr/examples/knitr-minimal.Rmd</code></td>
+			<td><code>POST /ocpu/cran/MASS/scripts/ch01.R</code> <br /><code>POST /ocpu/cran/knitr/examples/minimal.Rmd</code></td>
 		</tr>						 
 	</tbody>
 </table>
@@ -711,45 +769,6 @@ Instead of a language specific R bridge, the OpenCPU API layers on the Hypertext
 			<td>Serious problem with the server</td>
 			<td>(admin needs to look in error logs)</td>
 		</tr>													
-	</tbody>
-</table>
-
----
-
-## The OpenCPU API
-
-<table class="table table-bordered">
-  <thead>
-		<tr>
-			<th>Path</th>
-			<th>What</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<td><code>/ocpu/library/{pkgname}/</code></td>
-			<td>R packages installed in one of the global libraries on the server.</td>
-		</tr>
-		<tr>
-			<td><code>/ocpu/user/{username}/library/{pkgname}/</code></td>
-			<td>R packages installed in the home library of Linux user <code>{username}</code>.</td>
-		</tr>
-  	<tr>
-			<td><code>/ocpu/cran/{pkgname}/</code></td>
-			<td>Interfaces to the R package <code>{pkgname}</code> that is <i>current</i> on CRAN.</td>
-		</tr>   
-		<tr>
-			<td><code>/ocpu/bioc/{pkgname}/</code></td>
-			<td>Interfaces to the R package <code>{pkgname}</code> that is <i>current</i> on BioConductor.</td>
-		</tr>  
-		<tr>
-			<td><code>/ocpu/github/{gituser}/{pkgname}/</code></td>
-			<td>R package <code>{pkgname}</code> in the <i>master branch</i> of the identically named repository from github user <code>{gituser}</code>.</td>
-		</tr>   
-		<tr>
-			<td><code>/ocpu/tmp/{key}/</code></td>
-			<td>Temporary sessions, which hold outputs from a function/script RPC.</td>
-		</tr>
 	</tbody>
 </table>
 
@@ -823,9 +842,46 @@ Instead of a language specific R bridge, the OpenCPU API layers on the Hypertext
 
 ---
 
-## OpenCPU Apps
+## Libraries
 
-![screenshot](screenshot.png)
+<table class="table table-bordered">
+  <thead>
+  	<tr>
+			<th>Path</th>
+			<th>What</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>/ocpu/library/{pkgname}/</code></td>
+			<td>R packages installed in one of the global libraries on the server.</td>
+		</tr>
+		<tr>
+			<td><code>/ocpu/user/{username}/library/{pkgname}/</code></td>
+			<td>R packages installed in the home library of Linux user <code>{username}</code>.</td>
+		</tr>
+  	<tr>
+			<td><code>/ocpu/cran/{pkgname}/</code></td>
+			<td>Interfaces to the R package <code>{pkgname}</code> that is <i>current</i> on CRAN.</td>
+		</tr>   
+		<tr>
+			<td><code>/ocpu/bioc/{pkgname}/</code></td>
+			<td>Interfaces to the R package <code>{pkgname}</code> that is <i>current</i> on BioConductor.</td>
+		</tr>  
+		<tr>
+			<td><code>/ocpu/github/{gituser}/{pkgname}/</code></td>
+			<td>R package <code>{pkgname}</code> in the <i>master branch</i> of the identically named repository from github user <code>{gituser}</code>.</td>
+		</tr>   
+		<tr>
+			<td><code>/ocpu/tmp/{key}/</code></td>
+			<td>Temporary sessions, which hold outputs from a function/script RPC.</td>
+		</tr>
+	</tbody>
+</table>
+
+---
+
+## OpenCPU Apps
 
 - App is simply a package with web pages
 - Web pages call R functions via Ajax
@@ -846,10 +902,44 @@ Results in:
 smoothplot(ticker = ticker, from = "2013-01-01")
 ```
 
+
+Which is the basis of the [stocks](https://demo.ocpu.io/stocks/www/) app.
+
 ---
 
-# Conclusion
+## Conclusion 
 
-> - Build applications
-> - Collaborative
-> - Hope to contribute to socializing data analysis
+![puzzle](puzzle.jpg)
+
+### Four cornerstones:
+
+ 1. Interoperable Interfacing
+ 2. Security and resource control
+ 3. Data Interchange
+ 4. Dependency Versioning
+
+### For each topic:
+
+ - Identified problem
+ - Explored various approaches
+ - Suggestions, recommendations
+ - Example implementation for R
+
+---
+
+## Conclusion
+
+### Hope for Near Future
+
+ - Unify efforts in this area
+ - Make statistical methods more accessible
+ - Start to see wider adoption of R in production setting
+ 
+### Hope for the Distant Future
+
+ - Online data management, sharing and analysis platforms
+ - Sharing code, data and results as part of scientific publication process
+ - Statistical methods implemented as online modules
+ - Scientific collaboration through social network
+ - Peer review, teaching and learning by sharing code, data and results
+ - Reproducibility by design
