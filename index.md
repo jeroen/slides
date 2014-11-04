@@ -139,14 +139,14 @@ Now find myself doing programming all day.
 
 ---
 
-## Conclusion
+## Challenges (4) Domain Logic
 
  - Not much overlap between statisticians and application developers
  - Simple cross language bindings are unreliable, unscalable
  - High coupling also makes development very difficult
  - Need separation of concerns between application and analysis 
  - Need for middle layer
- - Framework: API, Data IO, Resourcse, Scheduling, Auth, etc.
+ - Frameworks: API, Data IO, Resourcse, Scheduling, Auth, etc.
 
 ---
 
@@ -227,20 +227,17 @@ shinyUI(fluidPage(
 
 ## Frameworks: OpenCPU
 
+![cloudicon](cloudicon.jpg)
 
-
-- Develop general purpose software system
+- Clean API that captures domain logic
 - Solve 'hard' problems, and nothing else
-- Use natural mechanics from R language 
-- Packages, namespaces, 
+- Implement with natural mechanics of R language 
+- Packages, functions, namespaces, lazyloading 
 - Simple, flexible, extensible
 - Language/application agnostic
 - Iterative development through trial and error
-- Software itself is subject of study
 - Pragmatic solutions
-- Proof of concept implementation
-
-![cloudicon](cloudicon.jpg)
+- Optimize implementations without breaking API.
 
 ---
 
@@ -345,7 +342,7 @@ shinyUI(fluidPage(
 
 ---
 
-## User-role security model
+## Traditional user-role security model
 
 ![users](users.png)
 
@@ -433,14 +430,13 @@ character(0)
 
 
 ```r
-#Sandboxed evaluation
+# Sandboxed arbitrary code execution
 > eval.secure({
-  #arbitrary code
   x <- rnorm(3)
-  mean(x)
-#With restrictions  
+  mean(x)  
 }, profile="my_secure_profile", rlimit_as = 100 * 1024 * 1024, rlimit_nproc = 4)
-[1] 0.01563452
+
+> [1] 0.01563452
 ```
 
 Dynamic sandboxing with `eval.secure`:
@@ -494,6 +490,7 @@ Dynamic sandboxing with `eval.secure`:
  - Various formats: `CSV`, `JSON`, `XML`, `Protocol Buffers`, etc
  - Challenge: defining interface structure
  - Schemas? Documentation?
+ - Overly formal for Scientific computing
 
 ### Solution: direct mapping
 

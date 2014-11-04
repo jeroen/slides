@@ -221,7 +221,7 @@ Now find myself doing programming all day.
 
 <slide class="" id="slide-8" style="background:;">
   <hgroup>
-    <h2>Conclusion</h2>
+    <h2>Challenges (4) Domain Logic</h2>
   </hgroup>
   <article data-timings="">
     <ul>
@@ -230,7 +230,7 @@ Now find myself doing programming all day.
 <li>High coupling also makes development very difficult</li>
 <li>Need separation of concerns between application and analysis </li>
 <li>Need for middle layer</li>
-<li>Framework: API, Data IO, Resourcse, Scheduling, Auth, etc.</li>
+<li>Frameworks: API, Data IO, Resourcse, Scheduling, Auth, etc.</li>
 </ul>
 
   </article>
@@ -337,20 +337,19 @@ shinyUI(fluidPage(
     <h2>Frameworks: OpenCPU</h2>
   </hgroup>
   <article data-timings="">
-    <ul>
-<li>Develop general purpose software system</li>
+    <p><img src="cloudicon.jpg" alt="cloudicon"></p>
+
+<ul>
+<li>Clean API that captures domain logic</li>
 <li>Solve &#39;hard&#39; problems, and nothing else</li>
-<li>Use natural mechanics from R language </li>
-<li>Packages, namespaces, </li>
+<li>Implement with natural mechanics of R language </li>
+<li>Packages, functions, namespaces, lazyloading </li>
 <li>Simple, flexible, extensible</li>
 <li>Language/application agnostic</li>
 <li>Iterative development through trial and error</li>
-<li>Software itself is subject of study</li>
 <li>Pragmatic solutions</li>
-<li>Proof of concept implementation</li>
+<li>Optimize implementations without breaking API.</li>
 </ul>
-
-<p><img src="cloudicon.jpg" alt="cloudicon"></p>
 
   </article>
   <!-- Presenter Notes -->
@@ -506,7 +505,7 @@ shinyUI(fluidPage(
 
 <slide class="" id="slide-20" style="background:;">
   <hgroup>
-    <h2>User-role security model</h2>
+    <h2>Traditional user-role security model</h2>
   </hgroup>
   <article data-timings="">
     <p><img src="users.png" alt="users"></p>
@@ -618,14 +617,13 @@ character(0)
     <h2>Dynamic Sanboxing with eval.secure</h2>
   </hgroup>
   <article data-timings="">
-    <pre><code class="r">#Sandboxed evaluation
+    <pre><code class="r"># Sandboxed arbitrary code execution
 &gt; eval.secure({
-  #arbitrary code
   x &lt;- rnorm(3)
-  mean(x)
-#With restrictions  
+  mean(x)  
 }, profile=&quot;my_secure_profile&quot;, rlimit_as = 100 * 1024 * 1024, rlimit_nproc = 4)
-[1] 0.01563452
+
+&gt; [1] 0.01563452
 </code></pre>
 
 <p>Dynamic sandboxing with <code>eval.secure</code>:</p>
@@ -706,6 +704,7 @@ character(0)
 <li>Various formats: <code>CSV</code>, <code>JSON</code>, <code>XML</code>, <code>Protocol Buffers</code>, etc</li>
 <li>Challenge: defining interface structure</li>
 <li>Schemas? Documentation?</li>
+<li>Overly formal for Scientific computing</li>
 </ul>
 
 <h3>Solution: direct mapping</h3>
@@ -1599,7 +1598,7 @@ var req = $(&quot;#plotdiv&quot;).rplot(&quot;smoothplot&quot;, {
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=8 title='Conclusion'>
+        data-slide=8 title='Challenges (4) Domain Logic'>
          8
       </a>
     </li>
@@ -1671,7 +1670,7 @@ var req = $(&quot;#plotdiv&quot;).rplot(&quot;smoothplot&quot;, {
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=20 title='User-role security model'>
+        data-slide=20 title='Traditional user-role security model'>
          20
       </a>
     </li>
