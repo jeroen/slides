@@ -34,7 +34,7 @@
         <slide class="title-slide segue nobackground">
   <hgroup class="auto-fadein">
     <h1>Embedded Scientific Computing</h1>
-    <h2>A reliable, scalable and reproducible approach to statistical software for data-driven business and open science</h2>
+    <h2>A scalable, social and reproducible approach to statistical software for data-driven business and open science</h2>
     <p>Jeroen Ooms<br/>UCLA Statistics</p>
   </hgroup>
   <article></article>  
@@ -55,11 +55,43 @@ library(slidifyLibraries)
 - traditions based on history. Old field, this works, rise of internet has gone unnoticed.
 -->
 
-<h2>Context</h2>
+<h2>About Me</h2>
 
-<h3>Statistical Software as we know it:</h3>
+<!-- 
+start out with ID, got fascinated with cognication and switched over to psych and ID,
+turns out cognition is complex and messy, statistics more elegant
+Came to UCLA statistics. Computational, home of JSS
+Now find myself doing programming all day.
+-->
+
+<p><img src="frink.png" alt="frink"></p>
 
 <ul>
+<li>PostDoc in Statistics at UCLA (2014)</li>
+<li>Interdisciplinary! ID -&gt; Psychology, AI (BSc) -&gt; Methodology for Social Sciences (MSc) -&gt; Statistics (PhD) -&gt; Computing</li>
+<li>Current research in embedded scientific computing</li>
+<li>Author of the OpenCPU system</li>
+<li>Maintainer of several R packages (jsonlite, RAppArmor)</li>
+<li>Consultant in web development with R</li>
+<li>Favorite Languages: R (data), JavaScript (gui, viz), C (fast)</li>
+<li>Use a lot: HTTP, Linux, MongoDB </li>
+<li>Organiser of LA R user group, UseR! 2014</li>
+<li>More: <a href="http://jeroenooms.github.io">http://jeroenooms.github.io</a></li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Statistical Software</h2>
+  </hgroup>
+  <article data-timings="">
+    <h3>Where we come from:</h3>
+
+<ul>
+<li>SPSS, Excel, SAS, R</li>
 <li>Emphasis on UI</li>
 <li>Interactive</li>
 <li>Local machine</li>
@@ -73,7 +105,7 @@ library(slidifyLibraries)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-2" style="background:;">
+<slide class="" id="slide-3" style="background:;">
   <article data-timings="">
     <!-- 
 - still useful, but also need for:
@@ -81,27 +113,26 @@ library(slidifyLibraries)
 - not black and white, different emphasis
 -->
 
-<h2>Embedded Scientific Computing</h2>
+<h2>Where we are going</h2>
 
 <p><img src="gears.jpg" alt="gears1"></p>
 
 <ul>
 <li>Statistical methods as modules</li>
-<li>Applications, pipelines</li>
+<li>Applications, systems, pipelines</li>
 <li>Integration</li>
 <li>Interoperability</li>
 <li>Interdisciplinary</li>
 <li>UI &gt; API</li>
 <li>Component Based Engineering</li>
 <li>Separation of Concerns</li>
-<li>Scaling</li>
 </ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-3" style="background:;">
+<slide class="" id="slide-4" style="background:;">
   <hgroup>
     <h2>Increasing Need for Interoperability</h2>
   </hgroup>
@@ -125,7 +156,8 @@ library(slidifyLibraries)
 
 <ul>
 <li>Internet based data management</li>
-<li>Scientific collaboration</li>
+<li>Socializing data analysis</li>
+<li>Domain specific applications</li>
 <li>Transparency and reproducibility</li>
 <li>Learning and teaching</li>
 </ul>
@@ -134,41 +166,74 @@ library(slidifyLibraries)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-4" style="background:;">
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Challenges (1): Interfacing data</h2>
+  </hgroup>
   <article data-timings="">
-    <!-- 
-- ggplot2 gui got lots of attention, still mailing about that
--->
-
-<h2>Motivation</h2>
-
-<h3>How it started</h3>
-
-<p><a href="http://vps.stefvanbuuren.nl/puberty" title="Link"><img src="puberty_small.png" alt="puberty"></a></p>
-
-<ul>
-<li>Basic R webapps in 2008/2009</li>
-<li>Simple but very effective </li>
-<li>Did some more applictions</li>
-<li>Lots of interest</li>
-<li>Consluting</li>
-<li>GSR for Mobilize</li>
+    <ul>
+<li>Data come in all shapes and sizes</li>
+<li>No nice data structures or tables (SQL)</li>
+<li>Content of data is unknown</li>
+<li>Very hard to write robust code</li>
+<li>No clear separation users and developers</li>
+<li>Missing values</li>
+<li>Numeric properties</li>
 </ul>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-5" style="background:;">
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Challenges (2): Unpredictable behavior</h2>
+  </hgroup>
   <article data-timings="">
-    <!-- 
-- anecdote: ggplot2 webapp server crash
-- anecdote: lme4 server keeps getting stuck
-- anecdote: very hard to train people to do this
-Want to turn academic software into production software
--->
+    <ul>
+<li>Algorithms often non deterministic</li>
+<li>Non-convergence, local optima</li>
+<li>MCMC methods: completley random</li>
+<li>Can lead to excessive use of resources (mem, cpu)</li>
+<li>Need interactive error handling</li>
+<li>Statistics is a lot of <strong>data debugging</strong></li>
+</ul>
 
-<h2>Motivation</h2>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-7" style="background:;">
+  <hgroup>
+    <h2>Challenges (3): Managing experimental software</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Scientific computen often involves inventive, volatile software.</li>
+<li>Written by academics / grad students</li>
+<li>Software might not work out-of-the box on any data</li>
+<li>Traditionally no notion of production in data analysis</li>
+<li>Software is designed for interactive use</li>
+<li>Dependency versioning not considered an issue.</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-8" style="background:;">
+  <hgroup>
+    <h2>Challenges (4): High coupling</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Not much overlap between statisticians and application developers</li>
+<li>Simple cross language bindings result in high coupling</li>
+<li>Need conceptual separation of concerns</li>
+<li></li>
+</ul>
+
+<h2>Scaling up...</h2>
 
 <h3>Problems</h3>
 
@@ -187,39 +252,17 @@ Want to turn academic software into production software
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-6" style="background:;">
+<slide class="" id="slide-9" style="background:;">
+  <hgroup>
+    <h2>Frameworks</h2>
+  </hgroup>
   <article data-timings="">
-    <!-- 
-- This is actually very difficult.
-- Needs more research
-- problems are underteremined, and complexity is underestimated
-- What are application specific annoyances, and what are core problems?
--->
-
-<h2>Research Goal</h2>
-
-<h3>Integrated Statistical Software that is:</h3>
-
-<ul>
-<li>Reliable</li>
-<li>Scalable</li>
-<li>Practical</li>
-</ul>
-
-<h3>Steps:</h3>
-
-<ul>
-<li>Find recurring struggles</li>
-<li>Distill fundamental problems</li>
-<li>Identify core logic</li>
-<li>Experiment with solutions</li>
-</ul>
-
+    
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-7" style="background:;">
+<slide class="" id="slide-10" style="background:;">
   <hgroup>
     <h2>Approach: OpenCPU</h2>
   </hgroup>
@@ -241,7 +284,7 @@ Want to turn academic software into production software
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-8" style="background:;">
+<slide class="" id="slide-11" style="background:;">
   <hgroup>
     <h2>Research: Four cornerstones</h2>
   </hgroup>
@@ -270,7 +313,7 @@ Want to turn academic software into production software
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-9" style="background:;">
+<slide class="" id="slide-12" style="background:;">
   <hgroup>
     <h2>Research: Four cornerstones</h2>
   </hgroup>
@@ -299,7 +342,7 @@ Want to turn academic software into production software
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-10" style="background:;">
+<slide class="" id="slide-13" style="background:;">
   <hgroup>
     <h2>Research: Four cornerstones</h2>
   </hgroup>
@@ -328,7 +371,7 @@ Want to turn academic software into production software
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-11" style="background:;">
+<slide class="" id="slide-14" style="background:;">
   <hgroup>
     <h2>About R</h2>
   </hgroup>
@@ -357,7 +400,7 @@ Want to turn academic software into production software
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-12" style="background:;">
+<slide class="" id="slide-15" style="background:;">
   <hgroup>
     <h2>Part 1: Security and Resource Control</h2>
   </hgroup>
@@ -368,7 +411,7 @@ Want to turn academic software into production software
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-13" style="background:;">
+<slide class="" id="slide-16" style="background:;">
   <hgroup>
     <h2>Security and resource control</h2>
   </hgroup>
@@ -389,7 +432,7 @@ Want to turn academic software into production software
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-14" style="background:;">
+<slide class="" id="slide-17" style="background:;">
   <hgroup>
     <h2>User-role security model</h2>
   </hgroup>
@@ -419,7 +462,7 @@ Want to turn academic software into production software
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-15" style="background:;">
+<slide class="" id="slide-18" style="background:;">
   <hgroup>
     <h2>Alternative: Mandatory Access Control</h2>
   </hgroup>
@@ -446,7 +489,7 @@ Want to turn academic software into production software
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-16" style="background:;">
+<slide class="" id="slide-19" style="background:;">
   <hgroup>
     <h2>Example security profile</h2>
   </hgroup>
@@ -474,7 +517,7 @@ Want to turn academic software into production software
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-17" style="background:;">
+<slide class="" id="slide-20" style="background:;">
   <hgroup>
     <h2>Mandatory Access Control</h2>
   </hgroup>
@@ -499,7 +542,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-18" style="background:;">
+<slide class="" id="slide-21" style="background:;">
   <hgroup>
     <h2>Dynamic Sanboxing with eval.secure</h2>
   </hgroup>
@@ -528,7 +571,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-19" style="background:;">
+<slide class="" id="slide-22" style="background:;">
   <hgroup>
     <h2>Mandatory Access Control</h2>
   </hgroup>
@@ -548,7 +591,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-20" style="background:;">
+<slide class="" id="slide-23" style="background:;">
   <hgroup>
     <h2>Part 2: Data Interchange</h2>
   </hgroup>
@@ -559,7 +602,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-21" style="background:;">
+<slide class="" id="slide-24" style="background:;">
   <hgroup>
     <h2>Data Interchange</h2>
   </hgroup>
@@ -584,7 +627,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-22" style="background:;">
+<slide class="" id="slide-25" style="background:;">
   <hgroup>
     <h2>Examples of JSON &lt;--&gt; R</h2>
   </hgroup>
@@ -612,7 +655,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-23" style="background:;">
+<slide class="" id="slide-26" style="background:;">
   <hgroup>
     <h2>Examples of JSON &lt;--&gt; R</h2>
   </hgroup>
@@ -640,7 +683,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-24" style="background:;">
+<slide class="" id="slide-27" style="background:;">
   <hgroup>
     <h2>Limitations</h2>
   </hgroup>
@@ -667,7 +710,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-25" style="background:;">
+<slide class="" id="slide-28" style="background:;">
   <hgroup>
     <h2>Part 3: Dependency Management</h2>
   </hgroup>
@@ -678,7 +721,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-26" style="background:;">
+<slide class="" id="slide-29" style="background:;">
   <hgroup>
     <h2>What is a dependency?</h2>
   </hgroup>
@@ -702,7 +745,7 @@ Suggests: hflights, RSQLite, RSQLite.extfuns, RMySQL, RPostgreSQL, data.table,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-27" style="background:;">
+<slide class="" id="slide-30" style="background:;">
   <hgroup>
     <h2>Depencency Types:</h2>
   </hgroup>
@@ -726,7 +769,7 @@ Suggests: hflights, RSQLite, RSQLite.extfuns, RMySQL, RPostgreSQL, data.table,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-28" style="background:;">
+<slide class="" id="slide-31" style="background:;">
   <hgroup>
     <h2>CRAN Policy</h2>
   </hgroup>
@@ -737,7 +780,7 @@ Suggests: hflights, RSQLite, RSQLite.extfuns, RMySQL, RPostgreSQL, data.table,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-29" style="background:;">
+<slide class="" id="slide-32" style="background:;">
   <hgroup>
     <h2>Policy Implications</h2>
   </hgroup>
@@ -757,7 +800,7 @@ Suggests: hflights, RSQLite, RSQLite.extfuns, RMySQL, RPostgreSQL, data.table,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-30" style="background:;">
+<slide class="" id="slide-33" style="background:;">
   <article data-timings="">
     <!--
 Unique: technical problem, but also a social problem
@@ -786,7 +829,7 @@ Reason for technical problem is cultural
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-31" style="background:;">
+<slide class="" id="slide-34" style="background:;">
   <hgroup>
     <h2>Part 4: The OpenCPU system</h2>
   </hgroup>
@@ -797,7 +840,7 @@ Reason for technical problem is cultural
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-32" style="background:;">
+<slide class="" id="slide-35" style="background:;">
   <hgroup>
     <h2>Language bridges to R</h2>
   </hgroup>
@@ -821,7 +864,7 @@ Reason for technical problem is cultural
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-33" style="background:;">
+<slide class="" id="slide-36" style="background:;">
   <hgroup>
     <h2>The problem with language bridges</h2>
   </hgroup>
@@ -847,7 +890,7 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-34" style="background:;">
+<slide class="" id="slide-37" style="background:;">
   <hgroup>
     <h2>Towars a unified interface</h2>
   </hgroup>
@@ -870,7 +913,7 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-35" style="background:;">
+<slide class="" id="slide-38" style="background:;">
   <hgroup>
     <h2>Separation of concerns</h2>
   </hgroup>
@@ -896,7 +939,7 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-36" style="background:;">
+<slide class="" id="slide-39" style="background:;">
   <hgroup>
     <h2>An example: basic JSON RPC</h2>
   </hgroup>
@@ -917,14 +960,14 @@ toJSON(output)
 
 <p>Which is equivalent to</p>
 
-<pre><code class="r">rnorm(n = 3, mean = 10, sd = 10)
+<pre><code class="r">rnorm(n=3, mean=10, sd=10)
 </code></pre>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-37" style="background:;">
+<slide class="" id="slide-40" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -979,7 +1022,7 @@ toJSON(output)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-38" style="background:;">
+<slide class="" id="slide-41" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -1032,7 +1075,7 @@ toJSON(output)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-39" style="background:;">
+<slide class="" id="slide-42" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -1082,7 +1125,7 @@ toJSON(output)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-40" style="background:;">
+<slide class="" id="slide-43" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -1147,7 +1190,7 @@ toJSON(output)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-41" style="background:;">
+<slide class="" id="slide-44" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -1228,7 +1271,7 @@ toJSON(output)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-42" style="background:;">
+<slide class="" id="slide-45" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -1285,7 +1328,7 @@ toJSON(output)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-43" style="background:;">
+<slide class="" id="slide-46" style="background:;">
   <hgroup>
     <h2>Libraries</h2>
   </hgroup>
@@ -1329,7 +1372,7 @@ toJSON(output)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-44" style="background:;">
+<slide class="" id="slide-47" style="background:;">
   <hgroup>
     <h2>OpenCPU Apps</h2>
   </hgroup>
@@ -1349,7 +1392,7 @@ var req = $(&quot;#plotdiv&quot;).rplot(&quot;smoothplot&quot;, {
 
 <p>Results in:</p>
 
-<pre><code class="r">smoothplot(ticker = ticker, from = &quot;2013-01-01&quot;)
+<pre><code class="r">smoothplot(ticker=ticker, from=&quot;2013-01-01&quot;)
 </code></pre>
 
 <p>Which is the basis of the <a href="https://demo.ocpu.io/stocks/www/">stocks</a> app.</p>
@@ -1358,7 +1401,7 @@ var req = $(&quot;#plotdiv&quot;).rplot(&quot;smoothplot&quot;, {
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-45" style="background:;">
+<slide class="" id="slide-48" style="background:;">
   <hgroup>
     <h2>Conclusion</h2>
   </hgroup>
@@ -1387,7 +1430,7 @@ var req = $(&quot;#plotdiv&quot;).rplot(&quot;smoothplot&quot;, {
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-46" style="background:;">
+<slide class="" id="slide-49" style="background:;">
   <hgroup>
     <h2>Conclusion</h2>
   </hgroup>
@@ -1427,229 +1470,229 @@ var req = $(&quot;#plotdiv&quot;).rplot(&quot;smoothplot&quot;, {
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title=''>
+        data-slide=2 title='Statistical Software'>
          2
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=3 title='Increasing Need for Interoperability'>
+        data-slide=3 title=''>
          3
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=4 title=''>
+        data-slide=4 title='Increasing Need for Interoperability'>
          4
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=5 title=''>
+        data-slide=5 title='Challenges (1): Interfacing data'>
          5
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=6 title=''>
+        data-slide=6 title='Challenges (2): Unpredictable behavior'>
          6
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=7 title='Approach: OpenCPU'>
+        data-slide=7 title='Challenges (3): Managing experimental software'>
          7
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=8 title='Research: Four cornerstones'>
+        data-slide=8 title='Challenges (4): High coupling'>
          8
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=9 title='Research: Four cornerstones'>
+        data-slide=9 title='Frameworks'>
          9
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=10 title='Research: Four cornerstones'>
+        data-slide=10 title='Approach: OpenCPU'>
          10
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=11 title='About R'>
+        data-slide=11 title='Research: Four cornerstones'>
          11
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=12 title='Part 1: Security and Resource Control'>
+        data-slide=12 title='Research: Four cornerstones'>
          12
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=13 title='Security and resource control'>
+        data-slide=13 title='Research: Four cornerstones'>
          13
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=14 title='User-role security model'>
+        data-slide=14 title='About R'>
          14
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=15 title='Alternative: Mandatory Access Control'>
+        data-slide=15 title='Part 1: Security and Resource Control'>
          15
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=16 title='Example security profile'>
+        data-slide=16 title='Security and resource control'>
          16
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=17 title='Mandatory Access Control'>
+        data-slide=17 title='User-role security model'>
          17
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=18 title='Dynamic Sanboxing with eval.secure'>
+        data-slide=18 title='Alternative: Mandatory Access Control'>
          18
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=19 title='Mandatory Access Control'>
+        data-slide=19 title='Example security profile'>
          19
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=20 title='Part 2: Data Interchange'>
+        data-slide=20 title='Mandatory Access Control'>
          20
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=21 title='Data Interchange'>
+        data-slide=21 title='Dynamic Sanboxing with eval.secure'>
          21
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=22 title='Examples of JSON &lt;--&gt; R'>
+        data-slide=22 title='Mandatory Access Control'>
          22
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=23 title='Examples of JSON &lt;--&gt; R'>
+        data-slide=23 title='Part 2: Data Interchange'>
          23
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=24 title='Limitations'>
+        data-slide=24 title='Data Interchange'>
          24
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=25 title='Part 3: Dependency Management'>
+        data-slide=25 title='Examples of JSON &lt;--&gt; R'>
          25
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=26 title='What is a dependency?'>
+        data-slide=26 title='Examples of JSON &lt;--&gt; R'>
          26
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=27 title='Depencency Types:'>
+        data-slide=27 title='Limitations'>
          27
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=28 title='CRAN Policy'>
+        data-slide=28 title='Part 3: Dependency Management'>
          28
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=29 title='Policy Implications'>
+        data-slide=29 title='What is a dependency?'>
          29
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=30 title=''>
+        data-slide=30 title='Depencency Types:'>
          30
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=31 title='Part 4: The OpenCPU system'>
+        data-slide=31 title='CRAN Policy'>
          31
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=32 title='Language bridges to R'>
+        data-slide=32 title='Policy Implications'>
          32
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=33 title='The problem with language bridges'>
+        data-slide=33 title=''>
          33
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=34 title='Towars a unified interface'>
+        data-slide=34 title='Part 4: The OpenCPU system'>
          34
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=35 title='Separation of concerns'>
+        data-slide=35 title='Language bridges to R'>
          35
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=36 title='An example: basic JSON RPC'>
+        data-slide=36 title='The problem with language bridges'>
          36
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=37 title='The OpenCPU API'>
+        data-slide=37 title='Towars a unified interface'>
          37
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=38 title='The OpenCPU API'>
+        data-slide=38 title='Separation of concerns'>
          38
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=39 title='The OpenCPU API'>
+        data-slide=39 title='An example: basic JSON RPC'>
          39
       </a>
     </li>
@@ -1673,26 +1716,44 @@ var req = $(&quot;#plotdiv&quot;).rplot(&quot;smoothplot&quot;, {
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=43 title='Libraries'>
+        data-slide=43 title='The OpenCPU API'>
          43
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=44 title='OpenCPU Apps'>
+        data-slide=44 title='The OpenCPU API'>
          44
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=45 title='Conclusion'>
+        data-slide=45 title='The OpenCPU API'>
          45
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=46 title='Conclusion'>
+        data-slide=46 title='Libraries'>
          46
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=47 title='OpenCPU Apps'>
+         47
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=48 title='Conclusion'>
+         48
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=49 title='Conclusion'>
+         49
       </a>
     </li>
   </ul>

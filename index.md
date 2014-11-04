@@ -1,6 +1,6 @@
 ---
 title       : Embedded Scientific Computing
-subtitle    : A reliable, scalable and reproducible approach to statistical software for data-driven business and open science
+subtitle    : A scalable, social and reproducible approach to statistical software for data-driven business and open science
 author      : Jeroen Ooms
 job         : UCLA Statistics
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
@@ -8,6 +8,7 @@ highlighter : highlight.js  # {highlight.js, prettify, highlight}
 hitheme     : tomorrow      # 
 widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides #Needed for rstudio
 ---
 
 <!-- 
@@ -21,11 +22,35 @@ library(slidifyLibraries)
 - traditions based on history. Old field, this works, rise of internet has gone unnoticed.
 -->
 
+## About Me
 
-## Context
+<!-- 
+start out with ID, got fascinated with cognication and switched over to psych and ID,
+turns out cognition is complex and messy, statistics more elegant
+Came to UCLA statistics. Computational, home of JSS
+Now find myself doing programming all day.
+-->
 
-### Statistical Software as we know it:
+![frink](frink.png)
 
+ - PostDoc in Statistics at UCLA (2014)
+ - Interdisciplinary! ID -> Psychology, AI (BSc) -> Methodology for Social Sciences (MSc) -> Statistics (PhD) -> Computing
+ - Current research in embedded scientific computing
+ - Author of the OpenCPU system
+ - Maintainer of several R packages (jsonlite, RAppArmor)
+ - Consultant in web development with R
+ - Favorite Languages: R (data), JavaScript (gui, viz), C (fast)
+ - Use a lot: HTTP, Linux, MongoDB 
+ - Organiser of LA R user group, UseR! 2014
+ - More: http://jeroenooms.github.io
+
+---
+
+## Statistical Software
+
+### Where we come from:
+
+ - SPSS, Excel, SAS, R
  - Emphasis on UI
  - Interactive
  - Local machine
@@ -42,19 +67,18 @@ library(slidifyLibraries)
 - not black and white, different emphasis
 -->
 
-## Embedded Scientific Computing
+## Where we are going
 
 ![gears1](gears.jpg)
 
  - Statistical methods as modules
- - Applications, pipelines
+ - Applications, systems, pipelines
  - Integration
  - Interoperability
  - Interdisciplinary
  - UI > API
  - Component Based Engineering
  - Separation of Concerns
- - Scaling
 
 ---
 
@@ -76,39 +100,55 @@ library(slidifyLibraries)
 ### Near future
 
   - Internet based data management
-  - Scientific collaboration
+  - Socializing data analysis
+  - Domain specific applications
   - Transparency and reproducibility
   - Learning and teaching
 
 ---
 
-<!-- 
-- ggplot2 gui got lots of attention, still mailing about that
--->
+## Challenges (1): Interfacing data
 
-## Motivation
-
-### How it started
-
-[![puberty](puberty_small.png)](http://vps.stefvanbuuren.nl/puberty "Link")
-
-- Basic R webapps in 2008/2009
-- Simple but very effective 
-- Did some more applictions
-- Lots of interest
-- Consluting
-- GSR for Mobilize
+ - Data come in all shapes and sizes
+ - No nice data structures or tables (SQL)
+ - Content of data is unknown
+ - Very hard to write robust code
+ - No clear separation users and developers
+ - Missing values
+ - Numeric properties
 
 ---
 
-<!-- 
-- anecdote: ggplot2 webapp server crash
-- anecdote: lme4 server keeps getting stuck
-- anecdote: very hard to train people to do this
-Want to turn academic software into production software
--->
+## Challenges (2): Unpredictable behavior
 
-## Motivation
+ - Algorithms often non deterministic
+ - Non-convergence, local optima
+ - MCMC methods: completley random
+ - Can lead to excessive use of resources (mem, cpu)
+ - Need interactive error handling
+ - Statistics is a lot of <strong>data debugging</strong>
+
+---
+
+## Challenges (3): Managing experimental software
+
+ - Scientific computen often involves inventive, volatile software.
+ - Written by academics / grad students
+ - Software might not work out-of-the box on any data
+ - Traditionally no notion of production in data analysis
+ - Software is designed for interactive use
+ - Dependency versioning not considered an issue.
+
+---
+
+## Challenges (4): High coupling
+
+ - Not much overlap between statisticians and application developers
+ - Simple cross language bindings result in high coupling
+ - Need conceptual separation of concerns
+ - 
+
+## Scaling up...
 
 ### Problems
 
@@ -123,30 +163,12 @@ Want to turn academic software into production software
 
 ---
 
-<!-- 
-- This is actually very difficult.
-- Needs more research
-- problems are underteremined, and complexity is underestimated
-- What are application specific annoyances, and what are core problems?
--->
+## Frameworks
 
-
-## Research Goal
-
-### Integrated Statistical Software that is:
-
- - Reliable
- - Scalable
- - Practical
-
-### Steps:
-
-- Find recurring struggles
-- Distill fundamental problems
-- Identify core logic
-- Experiment with solutions
 
 ---
+
+
 
 ## Approach: OpenCPU
 
@@ -347,7 +369,6 @@ RAppArmor: bindings security methods in `Linux`:
 character(0)
 ```
 
-
 ---
 
 ## Dynamic Sanboxing with eval.secure
@@ -363,7 +384,6 @@ character(0)
 }, profile="my_secure_profile", rlimit_as = 100 * 1024 * 1024, rlimit_nproc = 4)
 [1] 0.01563452
 ```
-
 
 Dynamic sandboxing with `eval.secure`:
 
@@ -415,7 +435,6 @@ Dynamic sandboxing with `eval.secure`:
 
 
 
-
 ```r
 #Random object
 x <- list(foo = matrix(1:8, nrow=2))
@@ -435,7 +454,6 @@ $foo
 [1,]    1    3    5    7
 [2,]    2    4    6    8
 ```
-
 
 ---
 
@@ -462,7 +480,6 @@ $foo
 ]
 ```
 
-
 ---
 
 ## Limitations
@@ -486,7 +503,6 @@ $foo
 > all.equal(iris, iris2)
 [1] TRUE
 ```
-
 
 ---
 
@@ -665,14 +681,12 @@ output <- do.call(stats::rnorm, args)
 toJSON(output)
 ```
 
-
 Which is equivalent to
 
 
 ```r
-rnorm(n = 3, mean = 10, sd = 10)
+rnorm(n=3, mean=10, sd=10)
 ```
-
 
 ---
 
@@ -899,9 +913,8 @@ Results in:
 
 
 ```r
-smoothplot(ticker = ticker, from = "2013-01-01")
+smoothplot(ticker=ticker, from="2013-01-01")
 ```
-
 
 Which is the basis of the [stocks](https://demo.ocpu.io/stocks/www/) app.
 
