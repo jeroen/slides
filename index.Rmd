@@ -37,7 +37,7 @@ Now find myself doing programming all day.
  - Interdisciplinary! ID -> Psychology, AI (BSc) -> Methodology for Social Sciences (MSc) -> Statistics (PhD) -> Computing
  - Current research in embedded scientific computing
  - Author of the OpenCPU system
- - Maintainer of several R packages (jsonlite, RAppArmor)
+ - Maintainer of several R packages (jsonlite, webutils, ...)
  - Consultant in web development with R
  - Favorite Languages: R (data), JavaScript (gui, viz), C (fast)
  - Use a lot: HTTP, Linux, MongoDB 
@@ -152,15 +152,17 @@ Now find myself doing programming all day.
 
 ---
 
-## Frameworks (1) Revolution DeployR
+## Frameworks (1) DeployR 
 
- - Developed by Revo, since 2009
+![revo](revo.png)
+
+ - Developed by Revolution Analytics (2009)
  - Targets mostly BI tools
  - Integrates with other Revo products
  - Java Stack, wraps around Rserve.
  - XML/JSON APIs
  - Eval code and scripts
- - Repository to manage object, users, privileges, etc
+ - Repositories, object, users, privileges, etc
  - More enterprisy stuff
  - Recently open sourced
 
@@ -168,14 +170,16 @@ Now find myself doing programming all day.
 
 ## Frameworks (2) RStudio Shiny
 
- - Fun, write simple webapps in R
+![rstudio](rstudio.png)
+
+ - Fun, write interactive webapps in R
  - Reactive programming framework
+ - Built-in widgets, no webdev needed.
+ - Not very interoperable
  - Single R process per session
  - Free single-user server
  - Pro server for multiple users
  - Some enterprise features
- - Great for non web developers
- - Not very interoperable
 
 ---
 
@@ -223,16 +227,20 @@ shinyUI(fluidPage(
 
 ## Frameworks: OpenCPU
 
-![cloudicon](cloudicon.jpg)
+
 
 - Develop general purpose software system
 - Solve 'hard' problems, and nothing else
+- Use natural mechanics from R language 
+- Packages, namespaces, 
 - Simple, flexible, extensible
 - Language/application agnostic
 - Iterative development through trial and error
 - Software itself is subject of study
 - Pragmatic solutions
 - Proof of concept implementation
+
+![cloudicon](cloudicon.jpg)
 
 ---
 
@@ -340,8 +348,6 @@ shinyUI(fluidPage(
 ## User-role security model
 
 ![users](users.png)
-
-### Traditional approach
 
 - Define users and privileges
 - Assign privileges per user
@@ -460,13 +466,16 @@ Dynamic sandboxing with `eval.secure`:
 
 ## Alternative: Docker
 
+![docker](docker.png)
+
  - Lightweight Containers
  - Builds on Linux LXC, cgroups
  - Run process in temporary VM
- - Isolate file system, HW resources 
+ - Very fast (start/stop vm in milliseconds)
+ - Isolates file system, HW resources 
  - Create images, fork from images
- - Used by Shiny Server
- - Also used for reproducible research
+ - Used by Shiny Server for sandboxing
+ - Also great for reproducible research
 
 ---
 

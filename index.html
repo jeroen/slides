@@ -71,7 +71,7 @@ Now find myself doing programming all day.
 <li>Interdisciplinary! ID -&gt; Psychology, AI (BSc) -&gt; Methodology for Social Sciences (MSc) -&gt; Statistics (PhD) -&gt; Computing</li>
 <li>Current research in embedded scientific computing</li>
 <li>Author of the OpenCPU system</li>
-<li>Maintainer of several R packages (jsonlite, RAppArmor)</li>
+<li>Maintainer of several R packages (jsonlite, webutils, ...)</li>
 <li>Consultant in web development with R</li>
 <li>Favorite Languages: R (data), JavaScript (gui, viz), C (fast)</li>
 <li>Use a lot: HTTP, Linux, MongoDB </li>
@@ -241,17 +241,19 @@ Now find myself doing programming all day.
 
 <slide class="" id="slide-9" style="background:;">
   <hgroup>
-    <h2>Frameworks (1) Revolution DeployR</h2>
+    <h2>Frameworks (1) DeployR</h2>
   </hgroup>
   <article data-timings="">
-    <ul>
-<li>Developed by Revo, since 2009</li>
+    <p><img src="revo.png" alt="revo"></p>
+
+<ul>
+<li>Developed by Revolution Analytics (2009)</li>
 <li>Targets mostly BI tools</li>
 <li>Integrates with other Revo products</li>
 <li>Java Stack, wraps around Rserve.</li>
 <li>XML/JSON APIs</li>
 <li>Eval code and scripts</li>
-<li>Repository to manage object, users, privileges, etc</li>
+<li>Repositories, object, users, privileges, etc</li>
 <li>More enterprisy stuff</li>
 <li>Recently open sourced</li>
 </ul>
@@ -265,15 +267,17 @@ Now find myself doing programming all day.
     <h2>Frameworks (2) RStudio Shiny</h2>
   </hgroup>
   <article data-timings="">
-    <ul>
-<li>Fun, write simple webapps in R</li>
+    <p><img src="rstudio.png" alt="rstudio"></p>
+
+<ul>
+<li>Fun, write interactive webapps in R</li>
 <li>Reactive programming framework</li>
+<li>Built-in widgets, no webdev needed.</li>
+<li>Not very interoperable</li>
 <li>Single R process per session</li>
 <li>Free single-user server</li>
 <li>Pro server for multiple users</li>
 <li>Some enterprise features</li>
-<li>Great for non web developers</li>
-<li>Not very interoperable</li>
 </ul>
 
   </article>
@@ -335,11 +339,11 @@ shinyUI(fluidPage(
     <h2>Frameworks: OpenCPU</h2>
   </hgroup>
   <article data-timings="">
-    <p><img src="cloudicon.jpg" alt="cloudicon"></p>
-
-<ul>
+    <ul>
 <li>Develop general purpose software system</li>
 <li>Solve &#39;hard&#39; problems, and nothing else</li>
+<li>Use natural mechanics from R language </li>
+<li>Packages, namespaces, </li>
 <li>Simple, flexible, extensible</li>
 <li>Language/application agnostic</li>
 <li>Iterative development through trial and error</li>
@@ -347,6 +351,8 @@ shinyUI(fluidPage(
 <li>Pragmatic solutions</li>
 <li>Proof of concept implementation</li>
 </ul>
+
+<p><img src="cloudicon.jpg" alt="cloudicon"></p>
 
   </article>
   <!-- Presenter Notes -->
@@ -507,8 +513,6 @@ shinyUI(fluidPage(
   <article data-timings="">
     <p><img src="users.png" alt="users"></p>
 
-<h3>Traditional approach</h3>
-
 <ul>
 <li>Define users and privileges</li>
 <li>Assign privileges per user</li>
@@ -665,14 +669,17 @@ character(0)
     <h2>Alternative: Docker</h2>
   </hgroup>
   <article data-timings="">
-    <ul>
+    <p><img src="docker.png" alt="docker"></p>
+
+<ul>
 <li>Lightweight Containers</li>
 <li>Builds on Linux LXC, cgroups</li>
 <li>Run process in temporary VM</li>
-<li>Isolate file system, HW resources </li>
+<li>Very fast (start/stop vm in milliseconds)</li>
+<li>Isolates file system, HW resources </li>
 <li>Create images, fork from images</li>
-<li>Used by Shiny Server</li>
-<li>Also used for reproducible research</li>
+<li>Used by Shiny Server for sandboxing</li>
+<li>Also great for reproducible research</li>
 </ul>
 
   </article>
@@ -1600,7 +1607,7 @@ var req = $(&quot;#plotdiv&quot;).rplot(&quot;smoothplot&quot;, {
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=9 title='Frameworks (1) Revolution DeployR'>
+        data-slide=9 title='Frameworks (1) DeployR'>
          9
       </a>
     </li>
