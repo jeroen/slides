@@ -168,10 +168,13 @@ Now find myself doing programming all day.
     <h2>Challenges (1): Interfacing data</h2>
   </hgroup>
   <article data-timings="">
-    <ul>
+    <p><img src="error.gif" alt="error"></p>
+
+<ul>
 <li>Embedded scientific computing is hard!</li>
 <li>Data come in all shapes and sizes</li>
 <li>No nice data structures or tables (SQL)</li>
+<li>Little type safety</li>
 <li>Content of data is unknown</li>
 <li>Very hard to write robust code</li>
 <li>No clear separation users and developers</li>
@@ -188,11 +191,15 @@ Now find myself doing programming all day.
     <h2>Challenges (2): Unpredictable behavior</h2>
   </hgroup>
   <article data-timings="">
-    <ul>
+    <p><img src="502.jpg" alt="error502"></p>
+
+<ul>
 <li>Algorithms often non deterministic</li>
 <li>Non-convergence, local optima</li>
-<li>MCMC methods: completley random</li>
-<li>Can lead to excessive use of resources (mem, cpu)</li>
+<li>MCMC methods: random by design</li>
+<li>Excessive use of resources (memory, cpu)</li>
+<li>Timeouts, crashes</li>
+<li>lme4 application example</li>
 <li>Need interactive error handling</li>
 <li>Statistics is a lot of <strong>data debugging</strong></li>
 </ul>
@@ -1548,7 +1555,7 @@ var req = $(&quot;#plotdiv&quot;).rplot(&quot;smoothplot&quot;, {
 <li>Data versioning</li>
 <li>Reproducibility</li>
 <li>Socialize analysis process</li>
-<li>Support for &quot;playing with data&quot;</li>
+<li>Real support for &quot;playing with data&quot;</li>
 </ul>
 
   </article>

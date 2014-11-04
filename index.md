@@ -106,23 +106,31 @@ Now find myself doing programming all day.
 
 ## Challenges (1): Interfacing data
 
+![error](error.gif)
+
  - Embedded scientific computing is hard!
  - Data come in all shapes and sizes
  - No nice data structures or tables (SQL)
+ - Little type safety
  - Content of data is unknown
  - Very hard to write robust code
  - No clear separation users and developers
  - Missing values
  - Numeric properties
+ 
 
 ---
 
 ## Challenges (2): Unpredictable behavior
 
+![error502](502.jpg)
+
  - Algorithms often non deterministic
  - Non-convergence, local optima
- - MCMC methods: completley random
- - Can lead to excessive use of resources (mem, cpu)
+ - MCMC methods: random by design
+ - Excessive use of resources (memory, cpu)
+ - Timeouts, crashes
+ - lme4 application example
  - Need interactive error handling
  - Statistics is a lot of <strong>data debugging</strong>
 
@@ -1026,4 +1034,4 @@ Which is the basis of the [stocks](https://demo.ocpu.io/stocks/www/) app.
 - Data versioning
 - Reproducibility
 - Socialize analysis process
-- Support for "playing with data"
+- Real support for "playing with data"
