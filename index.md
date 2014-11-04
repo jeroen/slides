@@ -239,7 +239,7 @@ shinyUI(fluidPage(
 - Language/application agnostic
 - Iterative development through trial and error
 - Pragmatic solutions
-- Optimize implementations without breaking API.
+- Define optimizable API, independent of implementation(s)
 
 ---
 
