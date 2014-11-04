@@ -1002,19 +1002,20 @@ Which is the basis of the [stocks](https://demo.ocpu.io/stocks/www/) app.
 
 ---
 
-## Conclusion
+![paperclip](paperclip.gif)
 
-### Hope for Near Future
+#### Where we are going:
+- Facebook of data.
+- Socialize data, analysis, results
+- Simplify Peer review, teaching, transparency, collaboration.
 
- - Unify efforts in this area
- - Make statistical methods more accessible
- - Start to see wider adoption of R in production setting
- 
-### Hope for the Distant Future
+#### What everyone does:
+- Scaling bigger data
+- Analysis as a service
+- GUIs, interactive graphics
 
- - Online data management, sharing and analysis platforms
- - Sharing code, data and results as part of scientific publication process
- - Statistical methods implemented as online modules
- - Scientific collaboration through social network
- - Peer review, teaching and learning by sharing code, data and results
- - Reproducibility by design
+#### What is needed:
+- Data versioning
+- Reproducibility
+- Socialize analysis process
+- Real support for "playing with data"
