@@ -48,6 +48,8 @@ Now find myself doing programming all day.
 
 ## Statistical Software
 
+![spss](spss.jpg)
+
 ### Where we come from:
 
  - SPSS, Excel, SAS, R
@@ -83,8 +85,6 @@ Now find myself doing programming all day.
 ---
 
 ## Increasing Need for Interoperability
-
-![gears2](gears.jpg)
 
 <!-- 
 - Statistics and statisticians becoming more accessible is accompanied by interoperability of statistical software.
@@ -141,36 +141,89 @@ Now find myself doing programming all day.
 
 ---
 
-## Challenges (4): High coupling
+## Conclusion
 
  - Not much overlap between statisticians and application developers
- - Simple cross language bindings result in high coupling
- - Need conceptual separation of concerns
- - 
-
-## Scaling up...
-
-### Problems
-
-- Unstable (lme4)
-- Dependency problems (ggplot2)
-- High coupling
-- Unsustainable complexity
-- Collaboration difficult
-- Interdisciplinary disconnect
-- Conclusion: doesn't scale
-- Fundamental unsolved problems
+ - Simple cross language bindings are unreliable, unscalable
+ - High coupling also makes development very difficult
+ - Need separation of concerns between application and analysis 
+ - Need for middle layer
+ - Framework: API, Data IO, Resourcse, Scheduling, Auth, etc.
 
 ---
 
-## Frameworks
+## Frameworks (1) Revolution DeployR
 
+ - Developed by Revo, since 2009
+ - Targets mostly BI tools
+ - Integrates with other Revo products
+ - Java Stack, wraps around Rserve.
+ - XML/JSON APIs
+ - Eval code and scripts
+ - Repository to manage object, users, privileges, etc
+ - More enterprisy stuff
+ - Recently open sourced
 
 ---
 
+## Frameworks (2) RStudio Shiny
+
+ - Fun, write simple webapps in R
+ - Reactive programming framework
+ - Single R process per session
+ - Free single-user server
+ - Pro server for multiple users
+ - Some enterprise features
+ - Great for non web developers
+ - Not very interoperable
+
+---
+
+## Shiny hello world
 
 
-## Approach: OpenCPU
+```r
+library(shiny)
+
+# Define server logic required to draw a histogram
+shinyServer(function(input, output) {
+  output$distPlot <- renderPlot({
+    x    <- faithful[, 2]  # Old Faithful Geyser data
+    bins <- seq(min(x), max(x), length.out = input$bins + 1)
+
+    # draw the histogram with the specified number of bins
+    hist(x, breaks = bins, col = 'darkgray', border = 'white')
+  })
+})
+```
+
+---
+
+## Shiny hello world
+
+
+```r
+# Define UI for application that draws a histogram
+shinyUI(fluidPage(
+  titlePanel("Hello Shiny!"),
+
+  # Sidebar with a slider input for the number of bins
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput("bins", "Number of bins:",
+        min = 1, max = 50, value = 30)
+    ),
+
+    # Show a plot of the generated distribution
+    mainPanel(
+      plotOutput("distPlot")
+    ))
+))
+```
+
+---
+
+## Frameworks: OpenCPU
 
 ![cloudicon](cloudicon.jpg)
 
@@ -297,6 +350,7 @@ Now find myself doing programming all day.
 - Require privileges for each possible action.
 - Only allow a limited set of actions
 - Implement all predefined in application layer
+- RevoDeployR
 
 ### Problematic for statistics
 
@@ -405,6 +459,18 @@ Dynamic sandboxing with `eval.secure`:
  - Fine grained control over hardware allocation
  - Scale up to many users without sacrificing reliability
  - Performance overhead negligible  
+
+---
+
+## Alternative: Docker
+
+ - Lightweight Containers
+ - Builds on Linux LXC, cgroups
+ - Run process in temporary VM
+ - Isolate file system, HW resources 
+ - Create images, fork from images
+ - Used by Shiny Server
+ - Also used for reproducible research
 
 ---
 

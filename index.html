@@ -88,7 +88,9 @@ Now find myself doing programming all day.
     <h2>Statistical Software</h2>
   </hgroup>
   <article data-timings="">
-    <h3>Where we come from:</h3>
+    <p><img src="spss.jpg" alt="spss"></p>
+
+<h3>Where we come from:</h3>
 
 <ul>
 <li>SPSS, Excel, SAS, R</li>
@@ -137,9 +139,7 @@ Now find myself doing programming all day.
     <h2>Increasing Need for Interoperability</h2>
   </hgroup>
   <article data-timings="">
-    <p><img src="gears.jpg" alt="gears2"></p>
-
-<!-- 
+    <!-- 
 - Statistics and statisticians becoming more accessible is accompanied by interoperability of statistical software.
 -->
 
@@ -223,29 +223,16 @@ Now find myself doing programming all day.
 
 <slide class="" id="slide-8" style="background:;">
   <hgroup>
-    <h2>Challenges (4): High coupling</h2>
+    <h2>Conclusion</h2>
   </hgroup>
   <article data-timings="">
     <ul>
 <li>Not much overlap between statisticians and application developers</li>
-<li>Simple cross language bindings result in high coupling</li>
-<li>Need conceptual separation of concerns</li>
-<li></li>
-</ul>
-
-<h2>Scaling up...</h2>
-
-<h3>Problems</h3>
-
-<ul>
-<li>Unstable (lme4)</li>
-<li>Dependency problems (ggplot2)</li>
-<li>High coupling</li>
-<li>Unsustainable complexity</li>
-<li>Collaboration difficult</li>
-<li>Interdisciplinary disconnect</li>
-<li>Conclusion: doesn&#39;t scale</li>
-<li>Fundamental unsolved problems</li>
+<li>Simple cross language bindings are unreliable, unscalable</li>
+<li>High coupling also makes development very difficult</li>
+<li>Need separation of concerns between application and analysis </li>
+<li>Need for middle layer</li>
+<li>Framework: API, Data IO, Resourcse, Scheduling, Auth, etc.</li>
 </ul>
 
   </article>
@@ -254,17 +241,98 @@ Now find myself doing programming all day.
 
 <slide class="" id="slide-9" style="background:;">
   <hgroup>
-    <h2>Frameworks</h2>
+    <h2>Frameworks (1) Revolution DeployR</h2>
   </hgroup>
   <article data-timings="">
-    
+    <ul>
+<li>Developed by Revo, since 2009</li>
+<li>Targets mostly BI tools</li>
+<li>Integrates with other Revo products</li>
+<li>Java Stack, wraps around Rserve.</li>
+<li>XML/JSON APIs</li>
+<li>Eval code and scripts</li>
+<li>Repository to manage object, users, privileges, etc</li>
+<li>More enterprisy stuff</li>
+<li>Recently open sourced</li>
+</ul>
+
   </article>
   <!-- Presenter Notes -->
 </slide>
 
 <slide class="" id="slide-10" style="background:;">
   <hgroup>
-    <h2>Approach: OpenCPU</h2>
+    <h2>Frameworks (2) RStudio Shiny</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Fun, write simple webapps in R</li>
+<li>Reactive programming framework</li>
+<li>Single R process per session</li>
+<li>Free single-user server</li>
+<li>Pro server for multiple users</li>
+<li>Some enterprise features</li>
+<li>Great for non web developers</li>
+<li>Not very interoperable</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-11" style="background:;">
+  <hgroup>
+    <h2>Shiny hello world</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">library(shiny)
+
+# Define server logic required to draw a histogram
+shinyServer(function(input, output) {
+  output$distPlot &lt;- renderPlot({
+    x    &lt;- faithful[, 2]  # Old Faithful Geyser data
+    bins &lt;- seq(min(x), max(x), length.out = input$bins + 1)
+
+    # draw the histogram with the specified number of bins
+    hist(x, breaks = bins, col = &#39;darkgray&#39;, border = &#39;white&#39;)
+  })
+})
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-12" style="background:;">
+  <hgroup>
+    <h2>Shiny hello world</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r"># Define UI for application that draws a histogram
+shinyUI(fluidPage(
+  titlePanel(&quot;Hello Shiny!&quot;),
+
+  # Sidebar with a slider input for the number of bins
+  sidebarLayout(
+    sidebarPanel(
+      sliderInput(&quot;bins&quot;, &quot;Number of bins:&quot;,
+        min = 1, max = 50, value = 30)
+    ),
+
+    # Show a plot of the generated distribution
+    mainPanel(
+      plotOutput(&quot;distPlot&quot;)
+    ))
+))
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-13" style="background:;">
+  <hgroup>
+    <h2>Frameworks: OpenCPU</h2>
   </hgroup>
   <article data-timings="">
     <p><img src="cloudicon.jpg" alt="cloudicon"></p>
@@ -284,7 +352,7 @@ Now find myself doing programming all day.
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-11" style="background:;">
+<slide class="" id="slide-14" style="background:;">
   <hgroup>
     <h2>Research: Four cornerstones</h2>
   </hgroup>
@@ -313,7 +381,7 @@ Now find myself doing programming all day.
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-12" style="background:;">
+<slide class="" id="slide-15" style="background:;">
   <hgroup>
     <h2>Research: Four cornerstones</h2>
   </hgroup>
@@ -342,7 +410,7 @@ Now find myself doing programming all day.
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-13" style="background:;">
+<slide class="" id="slide-16" style="background:;">
   <hgroup>
     <h2>Research: Four cornerstones</h2>
   </hgroup>
@@ -371,7 +439,7 @@ Now find myself doing programming all day.
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-14" style="background:;">
+<slide class="" id="slide-17" style="background:;">
   <hgroup>
     <h2>About R</h2>
   </hgroup>
@@ -400,7 +468,7 @@ Now find myself doing programming all day.
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-15" style="background:;">
+<slide class="" id="slide-18" style="background:;">
   <hgroup>
     <h2>Part 1: Security and Resource Control</h2>
   </hgroup>
@@ -411,7 +479,7 @@ Now find myself doing programming all day.
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-16" style="background:;">
+<slide class="" id="slide-19" style="background:;">
   <hgroup>
     <h2>Security and resource control</h2>
   </hgroup>
@@ -432,7 +500,7 @@ Now find myself doing programming all day.
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-17" style="background:;">
+<slide class="" id="slide-20" style="background:;">
   <hgroup>
     <h2>User-role security model</h2>
   </hgroup>
@@ -447,6 +515,7 @@ Now find myself doing programming all day.
 <li>Require privileges for each possible action.</li>
 <li>Only allow a limited set of actions</li>
 <li>Implement all predefined in application layer</li>
+<li>RevoDeployR</li>
 </ul>
 
 <h3>Problematic for statistics</h3>
@@ -462,7 +531,7 @@ Now find myself doing programming all day.
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-18" style="background:;">
+<slide class="" id="slide-21" style="background:;">
   <hgroup>
     <h2>Alternative: Mandatory Access Control</h2>
   </hgroup>
@@ -489,7 +558,7 @@ Now find myself doing programming all day.
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-19" style="background:;">
+<slide class="" id="slide-22" style="background:;">
   <hgroup>
     <h2>Example security profile</h2>
   </hgroup>
@@ -517,7 +586,7 @@ Now find myself doing programming all day.
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-20" style="background:;">
+<slide class="" id="slide-23" style="background:;">
   <hgroup>
     <h2>Mandatory Access Control</h2>
   </hgroup>
@@ -542,7 +611,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-21" style="background:;">
+<slide class="" id="slide-24" style="background:;">
   <hgroup>
     <h2>Dynamic Sanboxing with eval.secure</h2>
   </hgroup>
@@ -571,7 +640,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-22" style="background:;">
+<slide class="" id="slide-25" style="background:;">
   <hgroup>
     <h2>Mandatory Access Control</h2>
   </hgroup>
@@ -591,7 +660,26 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-23" style="background:;">
+<slide class="" id="slide-26" style="background:;">
+  <hgroup>
+    <h2>Alternative: Docker</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Lightweight Containers</li>
+<li>Builds on Linux LXC, cgroups</li>
+<li>Run process in temporary VM</li>
+<li>Isolate file system, HW resources </li>
+<li>Create images, fork from images</li>
+<li>Used by Shiny Server</li>
+<li>Also used for reproducible research</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-27" style="background:;">
   <hgroup>
     <h2>Part 2: Data Interchange</h2>
   </hgroup>
@@ -602,7 +690,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-24" style="background:;">
+<slide class="" id="slide-28" style="background:;">
   <hgroup>
     <h2>Data Interchange</h2>
   </hgroup>
@@ -627,7 +715,7 @@ character(0)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-25" style="background:;">
+<slide class="" id="slide-29" style="background:;">
   <hgroup>
     <h2>Examples of JSON &lt;--&gt; R</h2>
   </hgroup>
@@ -655,7 +743,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-26" style="background:;">
+<slide class="" id="slide-30" style="background:;">
   <hgroup>
     <h2>Examples of JSON &lt;--&gt; R</h2>
   </hgroup>
@@ -683,7 +771,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-27" style="background:;">
+<slide class="" id="slide-31" style="background:;">
   <hgroup>
     <h2>Limitations</h2>
   </hgroup>
@@ -710,7 +798,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-28" style="background:;">
+<slide class="" id="slide-32" style="background:;">
   <hgroup>
     <h2>Part 3: Dependency Management</h2>
   </hgroup>
@@ -721,7 +809,7 @@ $foo
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-29" style="background:;">
+<slide class="" id="slide-33" style="background:;">
   <hgroup>
     <h2>What is a dependency?</h2>
   </hgroup>
@@ -745,7 +833,7 @@ Suggests: hflights, RSQLite, RSQLite.extfuns, RMySQL, RPostgreSQL, data.table,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-30" style="background:;">
+<slide class="" id="slide-34" style="background:;">
   <hgroup>
     <h2>Depencency Types:</h2>
   </hgroup>
@@ -769,7 +857,7 @@ Suggests: hflights, RSQLite, RSQLite.extfuns, RMySQL, RPostgreSQL, data.table,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-31" style="background:;">
+<slide class="" id="slide-35" style="background:;">
   <hgroup>
     <h2>CRAN Policy</h2>
   </hgroup>
@@ -780,7 +868,7 @@ Suggests: hflights, RSQLite, RSQLite.extfuns, RMySQL, RPostgreSQL, data.table,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-32" style="background:;">
+<slide class="" id="slide-36" style="background:;">
   <hgroup>
     <h2>Policy Implications</h2>
   </hgroup>
@@ -800,7 +888,7 @@ Suggests: hflights, RSQLite, RSQLite.extfuns, RMySQL, RPostgreSQL, data.table,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-33" style="background:;">
+<slide class="" id="slide-37" style="background:;">
   <article data-timings="">
     <!--
 Unique: technical problem, but also a social problem
@@ -829,7 +917,7 @@ Reason for technical problem is cultural
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-34" style="background:;">
+<slide class="" id="slide-38" style="background:;">
   <hgroup>
     <h2>Part 4: The OpenCPU system</h2>
   </hgroup>
@@ -840,7 +928,7 @@ Reason for technical problem is cultural
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-35" style="background:;">
+<slide class="" id="slide-39" style="background:;">
   <hgroup>
     <h2>Language bridges to R</h2>
   </hgroup>
@@ -864,7 +952,7 @@ Reason for technical problem is cultural
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-36" style="background:;">
+<slide class="" id="slide-40" style="background:;">
   <hgroup>
     <h2>The problem with language bridges</h2>
   </hgroup>
@@ -890,7 +978,7 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-37" style="background:;">
+<slide class="" id="slide-41" style="background:;">
   <hgroup>
     <h2>Towars a unified interface</h2>
   </hgroup>
@@ -913,7 +1001,7 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-38" style="background:;">
+<slide class="" id="slide-42" style="background:;">
   <hgroup>
     <h2>Separation of concerns</h2>
   </hgroup>
@@ -939,7 +1027,7 @@ double d[] = c.eval(&quot;rnorm(10)&quot;).asDoubles();
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-39" style="background:;">
+<slide class="" id="slide-43" style="background:;">
   <hgroup>
     <h2>An example: basic JSON RPC</h2>
   </hgroup>
@@ -967,7 +1055,7 @@ toJSON(output)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-40" style="background:;">
+<slide class="" id="slide-44" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -1022,7 +1110,7 @@ toJSON(output)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-41" style="background:;">
+<slide class="" id="slide-45" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -1075,7 +1163,7 @@ toJSON(output)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-42" style="background:;">
+<slide class="" id="slide-46" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -1125,7 +1213,7 @@ toJSON(output)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-43" style="background:;">
+<slide class="" id="slide-47" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -1190,7 +1278,7 @@ toJSON(output)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-44" style="background:;">
+<slide class="" id="slide-48" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -1271,7 +1359,7 @@ toJSON(output)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-45" style="background:;">
+<slide class="" id="slide-49" style="background:;">
   <hgroup>
     <h2>The OpenCPU API</h2>
   </hgroup>
@@ -1328,7 +1416,7 @@ toJSON(output)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-46" style="background:;">
+<slide class="" id="slide-50" style="background:;">
   <hgroup>
     <h2>Libraries</h2>
   </hgroup>
@@ -1372,7 +1460,7 @@ toJSON(output)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-47" style="background:;">
+<slide class="" id="slide-51" style="background:;">
   <hgroup>
     <h2>OpenCPU Apps</h2>
   </hgroup>
@@ -1401,7 +1489,7 @@ var req = $(&quot;#plotdiv&quot;).rplot(&quot;smoothplot&quot;, {
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-48" style="background:;">
+<slide class="" id="slide-52" style="background:;">
   <hgroup>
     <h2>Conclusion</h2>
   </hgroup>
@@ -1430,7 +1518,7 @@ var req = $(&quot;#plotdiv&quot;).rplot(&quot;smoothplot&quot;, {
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-49" style="background:;">
+<slide class="" id="slide-53" style="background:;">
   <hgroup>
     <h2>Conclusion</h2>
   </hgroup>
@@ -1506,217 +1594,217 @@ var req = $(&quot;#plotdiv&quot;).rplot(&quot;smoothplot&quot;, {
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=8 title='Challenges (4): High coupling'>
+        data-slide=8 title='Conclusion'>
          8
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=9 title='Frameworks'>
+        data-slide=9 title='Frameworks (1) Revolution DeployR'>
          9
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=10 title='Approach: OpenCPU'>
+        data-slide=10 title='Frameworks (2) RStudio Shiny'>
          10
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=11 title='Research: Four cornerstones'>
+        data-slide=11 title='Shiny hello world'>
          11
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=12 title='Research: Four cornerstones'>
+        data-slide=12 title='Shiny hello world'>
          12
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=13 title='Research: Four cornerstones'>
+        data-slide=13 title='Frameworks: OpenCPU'>
          13
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=14 title='About R'>
+        data-slide=14 title='Research: Four cornerstones'>
          14
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=15 title='Part 1: Security and Resource Control'>
+        data-slide=15 title='Research: Four cornerstones'>
          15
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=16 title='Security and resource control'>
+        data-slide=16 title='Research: Four cornerstones'>
          16
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=17 title='User-role security model'>
+        data-slide=17 title='About R'>
          17
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=18 title='Alternative: Mandatory Access Control'>
+        data-slide=18 title='Part 1: Security and Resource Control'>
          18
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=19 title='Example security profile'>
+        data-slide=19 title='Security and resource control'>
          19
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=20 title='Mandatory Access Control'>
+        data-slide=20 title='User-role security model'>
          20
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=21 title='Dynamic Sanboxing with eval.secure'>
+        data-slide=21 title='Alternative: Mandatory Access Control'>
          21
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=22 title='Mandatory Access Control'>
+        data-slide=22 title='Example security profile'>
          22
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=23 title='Part 2: Data Interchange'>
+        data-slide=23 title='Mandatory Access Control'>
          23
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=24 title='Data Interchange'>
+        data-slide=24 title='Dynamic Sanboxing with eval.secure'>
          24
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=25 title='Examples of JSON &lt;--&gt; R'>
+        data-slide=25 title='Mandatory Access Control'>
          25
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=26 title='Examples of JSON &lt;--&gt; R'>
+        data-slide=26 title='Alternative: Docker'>
          26
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=27 title='Limitations'>
+        data-slide=27 title='Part 2: Data Interchange'>
          27
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=28 title='Part 3: Dependency Management'>
+        data-slide=28 title='Data Interchange'>
          28
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=29 title='What is a dependency?'>
+        data-slide=29 title='Examples of JSON &lt;--&gt; R'>
          29
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=30 title='Depencency Types:'>
+        data-slide=30 title='Examples of JSON &lt;--&gt; R'>
          30
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=31 title='CRAN Policy'>
+        data-slide=31 title='Limitations'>
          31
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=32 title='Policy Implications'>
+        data-slide=32 title='Part 3: Dependency Management'>
          32
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=33 title=''>
+        data-slide=33 title='What is a dependency?'>
          33
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=34 title='Part 4: The OpenCPU system'>
+        data-slide=34 title='Depencency Types:'>
          34
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=35 title='Language bridges to R'>
+        data-slide=35 title='CRAN Policy'>
          35
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=36 title='The problem with language bridges'>
+        data-slide=36 title='Policy Implications'>
          36
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=37 title='Towars a unified interface'>
+        data-slide=37 title=''>
          37
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=38 title='Separation of concerns'>
+        data-slide=38 title='Part 4: The OpenCPU system'>
          38
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=39 title='An example: basic JSON RPC'>
+        data-slide=39 title='Language bridges to R'>
          39
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=40 title='The OpenCPU API'>
+        data-slide=40 title='The problem with language bridges'>
          40
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=41 title='The OpenCPU API'>
+        data-slide=41 title='Towars a unified interface'>
          41
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=42 title='The OpenCPU API'>
+        data-slide=42 title='Separation of concerns'>
          42
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=43 title='The OpenCPU API'>
+        data-slide=43 title='An example: basic JSON RPC'>
          43
       </a>
     </li>
@@ -1734,26 +1822,50 @@ var req = $(&quot;#plotdiv&quot;).rplot(&quot;smoothplot&quot;, {
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=46 title='Libraries'>
+        data-slide=46 title='The OpenCPU API'>
          46
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=47 title='OpenCPU Apps'>
+        data-slide=47 title='The OpenCPU API'>
          47
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=48 title='Conclusion'>
+        data-slide=48 title='The OpenCPU API'>
          48
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=49 title='Conclusion'>
+        data-slide=49 title='The OpenCPU API'>
          49
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=50 title='Libraries'>
+         50
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=51 title='OpenCPU Apps'>
+         51
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=52 title='Conclusion'>
+         52
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=53 title='Conclusion'>
+         53
       </a>
     </li>
   </ul>
