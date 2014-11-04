@@ -136,25 +136,19 @@ Now find myself doing programming all day.
 
 ---
 
-## Challenges (3): Managing experimental software
+## Challenges (3): Domain Logic
 
- - Scientific computen often involves inventive, volatile software.
+ - Scientific computing involves inventive, volatile software.
  - Written by academics / grad students
  - Software might not work out-of-the box on any data
  - Traditionally no notion of production in data analysis
  - Software is designed for interactive use
  - Dependency versioning not considered an issue.
-
----
-
-## Challenges (4) Domain Logic
-
  - Not much overlap between statisticians and application developers
  - Simple cross language bindings are unreliable, unscalable
  - High coupling also makes development very difficult
  - Need separation of concerns between application and analysis 
  - Need for middle layer
- - Frameworks: API, Data IO, Resourcse, Scheduling, Auth, etc.
 
 ---
 
