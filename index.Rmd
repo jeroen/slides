@@ -84,24 +84,21 @@ Now find myself doing programming all day.
 
 ---
 
-## Increasing Need for Interoperability
+## Trends
 
-<!-- 
-- Statistics and statisticians becoming more accessible is accompanied by interoperability of statistical software.
--->
+![bart](bart.jpg)
 
 ### Current developments:
 
   - Integrate with upcoming technology 
   - Big data, vizualization
-  - Specialized applications
+  - Domain specific applications
   - Real time analysis and pipelines
   
 ### Near future
 
   - Internet based data management
   - Socializing data analysis
-  - Domain specific applications
   - Transparency and reproducibility
   - Learning and teaching
 
@@ -109,6 +106,7 @@ Now find myself doing programming all day.
 
 ## Challenges (1): Interfacing data
 
+ - Embedded scientific computing is hard!
  - Data come in all shapes and sizes
  - No nice data structures or tables (SQL)
  - Content of data is unknown
