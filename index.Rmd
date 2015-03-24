@@ -37,7 +37,7 @@ Now find myself doing programming all day.
  - Interdisciplinary! ID -> Psychology, AI (BSc) -> Methodology for Social Sciences (MSc) -> Statistics (PhD) -> Computing
  - Current research in embedded scientific computing
  - Author of the OpenCPU system
- - Maintainer of several R packages (jsonlite, webutils, ...)
+ - R Packages: jsonlite, curl, openssl, V8, mongolite, RMySQL, RAppArmor, RProtoBuf, webutils, js, rjade, ...
  - Consultant in web development with R
  - Favorite Languages: R (data), JavaScript (gui, viz), C (fast)
  - Use a lot: HTTP, Linux, MongoDB 
@@ -152,80 +152,7 @@ Now find myself doing programming all day.
 
 ---
 
-## Frameworks (1) DeployR 
-
-![revo](revo.png)
-
- - Developed by Revolution Analytics (2009)
- - Targets mostly BI tools
- - Integrates with other Revo products
- - Java Stack, wraps around Rserve.
- - XML/JSON APIs
- - Eval code and scripts
- - Repositories, object, users, privileges, etc
- - More enterprisy stuff
- - Recently open sourced
-
----
-
-## Frameworks (2) RStudio Shiny
-
-![rstudio](rstudio.png)
-
- - Fun, write interactive webapps in R
- - Reactive programming framework
- - Built-in widgets, no webdev needed.
- - Not very interoperable
- - Single R process per session
- - Free single-user server
- - Pro server for multiple users
- - Some enterprise features
-
----
-
-## Shiny hello world
-
-```{r eval=FALSE}
-library(shiny)
-
-# Define server logic required to draw a histogram
-shinyServer(function(input, output) {
-  output$distPlot <- renderPlot({
-    x    <- faithful[, 2]  # Old Faithful Geyser data
-    bins <- seq(min(x), max(x), length.out = input$bins + 1)
-
-    # draw the histogram with the specified number of bins
-    hist(x, breaks = bins, col = 'darkgray', border = 'white')
-  })
-})
-```
-
----
-
-## Shiny hello world
-
-```{r eval=FALSE}
-# Define UI for application that draws a histogram
-shinyUI(fluidPage(
-  titlePanel("Hello Shiny!"),
-
-  # Sidebar with a slider input for the number of bins
-  sidebarLayout(
-    sidebarPanel(
-      sliderInput("bins", "Number of bins:",
-        min = 1, max = 50, value = 30)
-    ),
-
-    # Show a plot of the generated distribution
-    mainPanel(
-      plotOutput("distPlot")
-    ))
-))
-```
-
----
-
-## Frameworks: OpenCPU
+## OpenCPU
 
 ![cloudicon](cloudicon.jpg)
 
@@ -241,7 +168,7 @@ shinyUI(fluidPage(
 
 ---
 
-## Research: Four cornerstones
+## Research: Four pieces
 
 ![puzzle](puzzle.jpg)
 
@@ -261,7 +188,7 @@ shinyUI(fluidPage(
 
 ---
 
-## Research: Four cornerstones
+## Research: Four pieces
 
 ![puzzle](puzzle.jpg)
 
@@ -281,7 +208,7 @@ shinyUI(fluidPage(
 
 ---
 
-## Research: Four cornerstones
+## Research: Four pieces
 
 ![puzzle](puzzle.jpg)
 
@@ -988,7 +915,7 @@ Which is the basis of the [stocks](https://demo.ocpu.io/stocks/www/) app.
 
 ![puzzle](puzzle.jpg)
 
-### Four cornerstones:
+### Four pieces:
 
  1. Interoperable Interfacing
  2. Security and resource control
